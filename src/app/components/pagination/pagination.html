@@ -1,0 +1,28 @@
+<div class="p-4 border-t border-gray-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500">
+  <div>
+    Showing {{ from }} to {{ to }} of {{ total }}
+  </div>
+  <div class="flex items-center gap-2">
+    <select [ngModel]="limit" (ngModelChange)="onLimitChange($event)"
+      class="border border-gray-300 dark:border-white/10 rounded-lg text-sm px-2 py-1.5 bg-white dark:bg-black/20 text-gray-900 dark:text-white">
+      <option [ngValue]="10">10</option>
+      <option [ngValue]="25">25</option>
+      <option [ngValue]="50">50</option>
+    </select>
+    <button type="button" (click)="goTo(page - 1)" [disabled]="page <= 1"
+      class="px-3 py-1.5 border border-gray-300 dark:border-white/10 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 disabled:opacity-50">
+      Previous
+    </button>
+    @for (item of pages; track item) {
+      <button type="button" (click)="goTo(item)"
+        class="px-3 py-1.5 border rounded-lg font-medium"
+        [ngClass]="item === page ? 'border-blue-200 bg-blue-50 text-blue-600' : 'border-gray-300 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5'">
+        {{ item }}
+      </button>
+    }
+    <button type="button" (click)="goTo(page + 1)" [disabled]="page >= totalPages"
+      class="px-3 py-1.5 border border-gray-300 dark:border-white/10 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 disabled:opacity-50">
+      Next
+    </button>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+@use '../../../../styles/mixins' as *;
+
+:host {
+  display: block;
+  @include page-enter;
+}
+
+.admin-login-card {
+  animation: page-enter 420ms ease both;
+}

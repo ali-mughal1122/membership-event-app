@@ -1,0 +1,240 @@
+<div class="min-h-screen bg-gray-50/30 py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute top-0 right-0 w-[40rem] h-[40rem] bg-blue-600/10 rounded-full blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3 mix-blend-multiply"></div>
+  <div class="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-emerald-600/10 rounded-full blur-3xl pointer-events-none -translate-x-1/3 translate-y-1/3 mix-blend-multiply"></div>
+
+  <div class="max-w-5xl mx-auto relative z-10">
+    <div class="text-left mb-12">
+      <h2 class="text-4xl font-black text-gray-900 tracking-tight">Your Profile</h2>
+      <p class="text-gray-500 font-medium mt-2 text-lg">Manage your account settings and security preferences.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Profile Information -->
+      <div class="lg:col-span-1 space-y-8">
+        <div class="bg-white rounded-[2rem] shadow-sm hover:shadow-xl hover:shadow-gray-200/50 border border-gray-100 p-8 transition-shadow duration-300">
+          <h3 class="text-xl font-black text-gray-900 mb-6">Profile Photo</h3>
+          
+          <div class="flex flex-col items-center">
+            <div class="relative group mb-6">
+              <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-50 relative z-10">
+                <img [src]="newImageUrl || profileImage" alt="Profile avatar" class="w-full h-full object-cover">
+                @if (isUploadingPhoto) {
+                  <div class="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                  </div>
+                }
+              </div>
+              <div class="absolute inset-0 rounded-full border border-gray-200 scale-110 -z-10 transition-colors"></div>
+            </div>
+
+            <div class="w-full space-y-3">
+              <button type="button" (click)="fileInput.click()" [disabled]="isUploadingPhoto" class="w-full bg-blue-50 text-blue-600 font-bold px-4 py-3 rounded-xl hover:bg-blue-100 focus:outline-none transition-colors border border-blue-100">
+                Change Photo
+              </button>
+              <input type="file" #fileInput class="hidden" accept="image/png, image/jpeg, image/jpg, image/webp" (change)="onFileSelected($event)">
+              
+              <button type="button" (click)="removePhoto()" [disabled]="isUploadingPhoto" class="w-full bg-white text-red-500 font-semibold px-4 py-3 rounded-xl hover:bg-red-50 focus:outline-none transition-colors border border-gray-200 hover:border-red-100">
+                Remove Photo
+              </button>
+            </div>
+            <p class="text-xs text-gray-400 font-medium mt-4 text-center">JPG, PNG or WebP under 2MB.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-[2rem] shadow-sm hover:shadow-xl hover:shadow-gray-200/50 border border-gray-100 p-8 transition-shadow duration-300">
+          <h3 class="text-xl font-black text-gray-900 mb-6">Current Plan</h3>
+          
+          @if (membershipState.loading()) {
+            <div class="flex justify-center py-4">
+              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            </div>
+          } @else if (membershipState.error()) {
+            <p class="text-red-500 font-medium text-sm">Failed to load membership.</p>
+          } @else if (membershipState.data(); as membership) {
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-gray-900 text-lg">{{ membership.plan.name }}</span>
+                <span class="px-2.5 py-1 text-xs font-bold rounded-lg uppercase tracking-wider" 
+                      [ngClass]="{
+                        'bg-emerald-50 text-emerald-600': membership.displayStatus === 'ACTIVE',
+                        'bg-amber-50 text-amber-700': membership.displayStatus === 'PENDING',
+                        'bg-gray-100 text-gray-600': membership.displayStatus === 'CANCELLED',
+                        'bg-red-50 text-red-600': membership.displayStatus === 'EXPIRED' || membership.displayStatus === 'PAYMENT_FAILED' || (membership.displayStatus !== 'ACTIVE' && membership.displayStatus !== 'PENDING' && membership.displayStatus !== 'CANCELLED')
+                      }">
+                  {{ membership.displayStatus }}
+                </span>
+              </div>
+              
+              <div class="space-y-1">
+                <p class="text-sm font-semibold text-gray-900">{{ membership.plan.price }} DKK / {{ membership.plan.durationMonths === 12 ? 'year' : 'month' }}</p>
+                <p class="text-sm text-gray-500">Started: {{ membership.startDate | date:'d MMMM yyyy' }}</p>
+                <p class="text-sm text-gray-500">
+                  <span *ngIf="membership.displayStatus === 'ACTIVE'">Next renewal: </span>
+                  <span *ngIf="membership.displayStatus !== 'ACTIVE'">Expired on: </span>
+                  {{ membership.endDate | date:'d MMMM yyyy' }}
+                </p>
+              </div>
+
+              <div class="mt-4 pt-4 border-t border-gray-100">
+                <p class="font-bold text-lg" 
+                   [ngClass]="{
+                     'text-emerald-600': membership.remainingDays > 7, 
+                     'text-orange-500': membership.remainingDays > 0 && membership.remainingDays <= 7,
+                     'text-red-500': membership.remainingDays === 0
+                   }">
+                   @if (membership.remainingDays > 1) {
+                     {{ membership.remainingDays }} days remaining
+                   } @else if (membership.remainingDays === 1) {
+                     1 day remaining
+                   } @else if (membership.remainingDays === 0 && membership.displayStatus === 'ACTIVE') {
+                     Expires today
+                   } @else {
+                     Expired
+                   }
+                </p>
+              </div>
+
+              <a routerLink="/memberships" class="block w-full mt-4 bg-gray-900 text-white font-bold px-4 py-3 rounded-xl hover:bg-gray-800 transition-colors text-center">
+                Manage / Renew
+              </a>
+            </div>
+          } @else {
+            <div class="text-center py-4">
+              <p class="text-gray-500 font-medium mb-4">No Active Membership</p>
+              <button routerLink="/memberships" class="w-full bg-blue-50 text-blue-600 font-bold px-4 py-3 rounded-xl hover:bg-blue-100 transition-colors border border-blue-100">
+                View Membership Plans
+              </button>
+            </div>
+          }
+        </div>
+
+        <div class="bg-white rounded-[2rem] shadow-sm hover:shadow-xl hover:shadow-gray-200/50 border border-gray-100 p-8 transition-shadow duration-300">
+          <h3 class="text-xl font-black text-gray-900 mb-6">Account Details</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-bold text-gray-400 uppercase tracking-wide mb-1">Email Address</label>
+              <p class="text-gray-900 font-semibold text-lg bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">{{ email }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security / Change Password -->
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-[2rem] shadow-sm hover:shadow-xl hover:shadow-gray-200/50 border border-gray-100 p-8 lg:p-10 transition-shadow duration-300">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-gray-900">Change Password</h3>
+              <p class="text-gray-500 font-medium mt-1">Ensure your account is using a strong password.</p>
+            </div>
+          </div>
+          
+          <form (submit)="$event.preventDefault(); submitChangePassword()" class="space-y-6">
+            <!-- Current Password -->
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-2">Current Password</label>
+              <div class="relative">
+                <input [type]="showCurrentPassword ? 'text' : 'password'" [(ngModel)]="currentPassword" name="currentPassword" 
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all font-medium pr-12">
+                <button type="button" (click)="showCurrentPassword = !showCurrentPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                  <svg *ngIf="!showCurrentPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                  <svg *ngIf="showCurrentPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- New Password -->
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-2">New Password</label>
+              <div class="relative">
+                <input [type]="showNewPassword ? 'text' : 'password'" [(ngModel)]="newPassword" name="newPassword" 
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all font-medium pr-12">
+                <button type="button" (click)="showNewPassword = !showNewPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                  <svg *ngIf="!showNewPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                  <svg *ngIf="showNewPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                </button>
+              </div>
+
+              <!-- Real-time Password Rules -->
+              <div class="mt-4 bg-gray-50 border border-gray-100 rounded-xl p-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-medium">
+                <div class="flex items-center" [ngClass]="passwordValidations.length ? 'text-emerald-600' : 'text-gray-500'">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                  At least 8 characters
+                </div>
+                <div class="flex items-center" [ngClass]="passwordValidations.uppercase ? 'text-emerald-600' : 'text-gray-500'">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                  Uppercase letter
+                </div>
+                <div class="flex items-center" [ngClass]="passwordValidations.lowercase ? 'text-emerald-600' : 'text-gray-500'">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                  Lowercase letter
+                </div>
+                <div class="flex items-center" [ngClass]="passwordValidations.number ? 'text-emerald-600' : 'text-gray-500'">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                  At least 1 number
+                </div>
+                <div class="flex items-center" [ngClass]="passwordValidations.special ? 'text-emerald-600' : 'text-gray-500'">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                  Special character
+                </div>
+                <div class="flex items-center" [ngClass]="passwordValidations.noSpaces ? 'text-emerald-600' : 'text-gray-500'">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                  No leading/trailing spaces
+                </div>
+                <div class="flex items-center" [ngClass]="passwordValidations.notSame ? 'text-emerald-600' : 'text-gray-500'">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                  Different from current
+                </div>
+              </div>
+            </div>
+
+            <!-- Confirm New Password -->
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-2">Confirm New Password</label>
+              <div class="relative">
+                <input [type]="showConfirmPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="confirmPassword" 
+                  class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all font-medium pr-12">
+                <button type="button" (click)="showConfirmPassword = !showConfirmPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                  <svg *ngIf="!showConfirmPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                  <svg *ngIf="showConfirmPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                </button>
+              </div>
+              <p *ngIf="confirmPassword.length > 0 && newPassword !== confirmPassword" class="text-red-500 text-sm font-medium mt-2 flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                Passwords do not match.
+              </p>
+            </div>
+            
+            <div class="pt-4 border-t border-gray-100">
+              <button type="submit" [disabled]="isSubmittingPassword || !isPasswordFormValid" class="w-full sm:w-auto bg-gray-900 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-all shadow-md hover:shadow-lg flex items-center justify-center min-w-[200px]">
+                <span *ngIf="isSubmittingPassword" class="flex items-center gap-2">
+                  <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  Updating...
+                </span>
+                <span *ngIf="!isSubmittingPassword">Update Password</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Danger Zone / Sign Out -->
+    <div class="mt-12 bg-red-50/50 rounded-[2rem] p-8 border border-red-100">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-lg font-bold text-red-700 mb-1">Sign Out of MemEvents</h3>
+          <p class="text-red-600/80 font-medium text-sm">You will need to log back in to access your profile and tickets.</p>
+        </div>
+        <button type="button" (click)="logout()" class="w-full sm:w-auto bg-white text-red-600 font-bold px-8 py-3 rounded-xl hover:bg-red-50 hover:text-red-700 focus:outline-none transition-all shadow-sm border border-red-200 whitespace-nowrap">
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

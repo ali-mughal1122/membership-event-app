@@ -1,0 +1,115 @@
+@use './styles/variables' as *;
+@use './styles/mixins' as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #{$color-primary};
+  --color-accent: #{$color-accent};
+  --color-ink: #{$color-ink};
+  --radius-xl: #{$radius-xl};
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: $font-sans;
+    background:
+      radial-gradient(circle at 15% 50%, rgba(238, 242, 255, 1) 0%, rgba(255, 255, 255, 1) 100%),
+      radial-gradient(circle at 85% 30%, rgba(240, 253, 250, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    background-attachment: fixed;
+    color: $color-ink;
+  }
+
+  .dark body,
+  .dark {
+    background:
+      radial-gradient(circle at 15% 50%, rgba(9, 9, 11, 1) 0%, rgba(24, 24, 27, 1) 100%),
+      radial-gradient(circle at 85% 30%, rgba(17, 24, 39, 1) 0%, rgba(30, 27, 75, 0.4) 100%);
+    background-attachment: fixed;
+  }
+
+  a,
+  button {
+    @include focus-ring;
+  }
+}
+
+@layer components {
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border;
+  }
+
+  .status-badge--pending {
+    @apply bg-amber-50 border-amber-100 text-amber-700 dark:bg-amber-500/10 dark:border-amber-500/20 dark:text-amber-300;
+  }
+
+  .status-badge--approved,
+  .status-badge--active {
+    @apply bg-emerald-50 border-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:border-emerald-500/20 dark:text-emerald-300;
+  }
+
+  .status-badge--rejected,
+  .status-badge--expired {
+    @apply bg-red-50 border-red-100 text-red-700 dark:bg-red-500/10 dark:border-red-500/20 dark:text-red-300;
+  }
+
+  .empty-state {
+    @apply py-16 text-center bg-white dark:bg-zinc-900/50 rounded-[2rem] shadow-sm border border-gray-100 dark:border-white/5;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/60 dark:bg-zinc-900/60 backdrop-blur-2xl border border-white/60 dark:border-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)];
+  }
+
+  .modern-card {
+    @apply bg-white/80 dark:bg-zinc-900/50 backdrop-blur-xl rounded-3xl border border-white dark:border-white/5 shadow-[0_8px_32px_-4px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_32px_-4px_rgba(0,0,0,0.2)] hover:shadow-[0_16px_48px_-8px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_16px_48px_-8px_rgba(0,0,0,0.3)] dark:hover:border-white/10 transition-all duration-300 hover:-translate-y-1.5;
+  }
+
+  .modern-input {
+    @apply w-full rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white/50 dark:bg-zinc-800/50 px-4 py-3.5 text-sm font-medium transition-all shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] focus:bg-white dark:focus:bg-zinc-800 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] focus:border-blue-500 outline-none placeholder-gray-400 dark:text-white dark:placeholder-gray-500;
+  }
+
+  .modern-button {
+    @apply inline-flex items-center justify-center rounded-2xl px-6 py-3 text-sm font-bold tracking-wide transition-all duration-300 active:scale-[0.97];
+  }
+
+  .modern-button-primary {
+    @apply modern-button bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 border border-white/10;
+  }
+
+  .page-shell {
+    @include page-enter;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-zinc-600 rounded-full hover:bg-gray-400 dark:hover:bg-zinc-500 transition-colors;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

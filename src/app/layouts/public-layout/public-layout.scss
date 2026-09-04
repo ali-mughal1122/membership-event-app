@@ -1,0 +1,22 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+:host {
+  display: block;
+}
+
+header {
+  transition: box-shadow $transition-med, background-color $transition-med;
+}
+
+nav a {
+  @include focus-ring;
+}
+
+.profile-dropdown-container img {
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: scale(1.04);
+  }
+}

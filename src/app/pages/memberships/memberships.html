@@ -1,0 +1,122 @@
+<div class="bg-gray-50/30 min-h-screen">
+  <!-- Page Header -->
+  <div class="relative bg-gray-950 py-24 mb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 to-transparent"></div>
+    <div class="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-b from-blue-600/30 to-purple-600/30 blur-3xl mix-blend-screen"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 shadow-xl mx-auto">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
+        <span class="text-sm font-semibold text-blue-100 tracking-wide uppercase">Premium Access</span>
+      </div>
+      <h1 class="text-5xl md:text-7xl font-black text-white tracking-tight mb-6 leading-[1.1]">
+        Membership <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 drop-shadow-sm">Plans</span>.
+      </h1>
+      <p class="mt-4 text-xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed">
+        Choose the perfect plan for your professional journey. Unlock exclusive benefits and join our community today.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+    <div [ngClass]="(plansState.data()?.length === 1) ? 'flex justify-center max-w-lg mx-auto' : 'grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch'">
+      @if (plansState.loading()) {
+      <div class="w-full md:col-span-3 py-20 text-center text-gray-500">
+        <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto"></div>
+        <p class="mt-4 font-medium text-lg">Loading plans...</p>
+      </div>
+      } @else if (plansState.error()) {
+      <div class="w-full md:col-span-3 py-20 text-center">
+        <div class="bg-red-50 text-red-600 px-6 py-4 rounded-2xl border border-red-100 inline-block font-semibold shadow-sm">
+          Failed to load plans: {{ plansState.error() }}
+        </div>
+      </div>
+      } @else {
+      @for (plan of plansState.data(); track plan.name) {
+      <div class="plan-card bg-white rounded-[2rem] p-1 flex flex-col relative group transition-all duration-300 border border-gray-100 shadow-lg hover:shadow-2xl hover:shadow-blue-500/10 h-full"
+        [ngClass]="(plansState.data()?.length === 1 || plan.name === 'Gold') ? 'md:-translate-y-4 shadow-xl shadow-blue-500/20 bg-gradient-to-b from-blue-500 to-emerald-500 border-transparent z-10 scale-105' : 'hover:-translate-y-2'">
+        
+        <div class="bg-white rounded-[1.9rem] flex flex-col h-full relative overflow-hidden">
+          @if (plansState.data()?.length === 1 || plan.name === 'Gold') {
+          <div class="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent z-0"></div>
+          <div class="absolute top-6 right-6 bg-gradient-to-r from-blue-600 to-emerald-500 text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg shadow-blue-500/30 z-10 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            Premium
+          </div>
+          }
+
+          <div class="p-10 flex flex-col flex-grow relative z-10">
+            <h3 class="text-3xl font-black text-gray-900 tracking-tight">{{plan.name}}</h3>
+            <p class="text-gray-500 mt-3 font-medium leading-relaxed min-h-[3rem]">{{plan.description}}</p>
+            
+            <div class="mt-8 flex items-baseline text-6xl font-black text-gray-900 tracking-tighter">
+              ${{plan.price}}
+              <span class="ml-2 text-xl font-bold text-gray-400 tracking-normal">/{{plan.interval}}</span>
+            </div>
+            
+            <div class="w-full h-px bg-gray-100 my-8"></div>
+            
+            <ul role="list" class="space-y-5 flex-grow">
+              @for (feature of plan.features; track feature) {
+              <li class="flex items-start group/item">
+                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-50 flex items-center justify-center mr-4 group-hover/item:bg-emerald-100 transition-colors">
+                  <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span class="text-gray-700 font-medium leading-relaxed">{{feature}}</span>
+              </li>
+              }
+            </ul>
+          </div>
+          <div class="p-10 pt-0 mt-auto relative z-10">
+            <button (click)="openSubscribeModal(plan)" 
+              class="w-full inline-flex items-center justify-center px-8 py-4 font-bold text-lg transition-all duration-200 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2"
+              [ngClass]="(plansState.data()?.length === 1 || plan.name === 'Gold') ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-600 shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-1' : 'bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-200 hover:-translate-y-1'">
+              Subscribe Now
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+      }
+    </div>
+  </div>
+</div>
+
+<app-modal [isOpen]="isSubscribeModalOpen()" [title]="'Subscribe to ' + selectedPlan?.name"
+  [confirmText]="'Complete Subscription'" (closeEvent)="closeSubscribeModal()" (confirmEvent)="submitSubscription()">
+  <div class="space-y-4">
+    @if (!authService.isLoggedIn()) {
+      <div class="mb-4">
+        <p class="text-sm text-gray-500 mb-4">You need an account to subscribe. Please fill out your details below:</p>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Full Name</label>
+        <input type="text" [(ngModel)]="registerData.name" class="modern-input mt-1">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Email Address</label>
+        <input type="email" [(ngModel)]="registerData.email" class="modern-input mt-1">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" [(ngModel)]="registerData.password" class="modern-input mt-1">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+        <input type="tel" [(ngModel)]="registerData.phone" class="modern-input mt-1">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Address</label>
+        <input type="text" [(ngModel)]="registerData.address" class="modern-input mt-1">
+      </div>
+    } @else {
+      <div class="text-center py-4">
+        <p class="text-gray-700">You are logged in and ready to subscribe to the <strong>{{ selectedPlan?.name }}</strong> plan!</p>
+        <p class="text-sm text-gray-500 mt-2">By clicking confirm, your subscription will be activated immediately.</p>
+      </div>
+    }
+  </div>
+</app-modal>

@@ -1,0 +1,15 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+aside {
+  transition: width $transition-med, transform $transition-med;
+}
+
+nav a {
+  @include focus-ring;
+}

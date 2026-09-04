@@ -1,0 +1,10 @@
+@use '../../../styles/mixins' as *;
+
+:host {
+  display: block;
+  @include page-enter;
+}
+
+.event-card {
+  @include card-hover;
+}

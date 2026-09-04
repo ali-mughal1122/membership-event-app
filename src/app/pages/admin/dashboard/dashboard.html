@@ -1,0 +1,90 @@
+<div class="p-4 sm:p-6 max-w-[1400px] mx-auto">
+  <div class="relative bg-slate-900 rounded-[2rem] overflow-hidden mb-8 sm:mb-10 min-h-[11rem] shadow-md">
+    <img
+      src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay" />
+    <div class="absolute inset-0 bg-gradient-to-r from-teal-900/90 to-slate-900/40"></div>
+    <div class="relative h-full flex flex-col justify-center p-6 sm:p-10">
+      <p class="text-teal-200 text-sm font-semibold uppercase tracking-wider mb-1">Admin overview</p>
+      <h1 class="text-3xl sm:text-4xl font-black text-white mb-2 tracking-tight">Hello, Admin</h1>
+      <p class="text-teal-100 font-medium max-w-xl">Review memberships, publish events, and approve registrations from one place.</p>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="py-20 text-center text-gray-500">
+      <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto"></div>
+      <p class="mt-4 font-medium">Loading dashboard...</p>
+    </div>
+  } @else {
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+    <div class="lg:col-span-2 space-y-8">
+      <div>
+        <h2 class="text-2xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">Stats</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div class="stat-card bg-white dark:bg-zinc-900/50 p-6 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-white/5">
+            <p class="text-sm font-semibold text-gray-500 mb-4">Total members</p>
+            <span class="text-3xl font-black text-gray-900 dark:text-white">{{ totalMembers() }}</span>
+          </div>
+          <div class="stat-card bg-white dark:bg-zinc-900/50 p-6 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-white/5">
+            <p class="text-sm font-semibold text-gray-500 mb-4">Published events</p>
+            <span class="text-3xl font-black text-gray-900 dark:text-white">{{ publishedEvents() }}</span>
+          </div>
+          <div class="stat-card bg-white dark:bg-zinc-900/50 p-6 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-white/5">
+            <p class="text-sm font-semibold text-gray-500 mb-4">Upcoming events</p>
+            <span class="text-3xl font-black text-gray-900 dark:text-white">{{ upcomingEvents() }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <a routerLink="/admin/events" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-gray-900 text-white font-bold text-sm hover:bg-blue-600 transition-colors">Approve event requests</a>
+        <a routerLink="/admin/members" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-white border border-gray-200 text-gray-900 font-bold text-sm hover:bg-gray-50 transition-colors">Manage members</a>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-zinc-900/50 p-6 rounded-[1.5rem] shadow-sm border border-gray-100 dark:border-white/5 h-fit">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-black text-gray-900 dark:text-white">Recent registrations</h3>
+        @if (pendingRegistrations() > 0) {
+          <span class="status-badge status-badge--pending">{{ pendingRegistrations() }} pending</span>
+        }
+      </div>
+
+      <div class="space-y-3">
+        @for (reg of recentRegistrations(); track reg.id || reg.timestamp || $index) {
+        <div class="flex gap-3 p-4 rounded-2xl border border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-white/5">
+          <div class="w-9 h-9 rounded-full bg-teal-900 text-teal-100 flex items-center justify-center shrink-0 font-bold text-xs">
+            {{ (reg.name || 'U').charAt(0).toUpperCase() }}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex justify-between items-start gap-2">
+              <p class="font-semibold text-gray-900 dark:text-white text-sm truncate">{{ reg.name }}</p>
+              <span class="text-xs text-gray-400 whitespace-nowrap">{{ getTimeAgo(reg.timestamp) }}</span>
+            </div>
+            <p class="text-xs text-gray-500 mt-0.5 truncate">{{ reg.eventName }}</p>
+            <div class="mt-2 flex flex-wrap items-center gap-2">
+              <span class="status-badge" [ngClass]="{
+                'status-badge--pending': reg.status === 'PENDING',
+                'status-badge--approved': reg.status === 'APPROVED',
+                'status-badge--rejected': reg.status === 'REJECTED'
+              }">{{ registrationLabel(reg.status) }}</span>
+              @if (reg.status === 'PENDING' && reg.id && reg.eventId) {
+                <button (click)="approveRegistration(reg)" [disabled]="updatingRegId() === reg.id" class="text-xs font-bold text-emerald-600 hover:text-emerald-800 disabled:opacity-50">Approve</button>
+                <button (click)="rejectRegistration(reg)" [disabled]="updatingRegId() === reg.id" class="text-xs font-bold text-red-600 hover:text-red-800 disabled:opacity-50">Reject</button>
+              }
+            </div>
+          </div>
+        </div>
+        } @empty {
+        <div class="empty-state py-10 px-4">
+          <p class="text-sm font-semibold text-gray-900 dark:text-white mb-1">All caught up</p>
+          <p class="text-xs text-gray-500">No new event registrations yet.</p>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

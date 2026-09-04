@@ -1,0 +1,10 @@
+@use '../../../../styles/mixins' as *;
+
+:host {
+  display: block;
+  @include page-enter;
+}
+
+.stat-card {
+  @include card-hover;
+}

@@ -1,0 +1,199 @@
+<div class="min-h-screen relative z-0 bg-gray-50/30">
+  <!-- Page Header -->
+  <div class="relative bg-gray-950 py-24 mb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 to-transparent"></div>
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-b from-blue-600/30 to-emerald-600/30 blur-3xl mix-blend-screen"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-end gap-8">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 shadow-xl">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <span class="text-sm font-semibold text-emerald-100 tracking-wide uppercase">Live & Upcoming</span>
+          </div>
+          <h1 class="text-5xl md:text-6xl font-black text-white tracking-tight mb-4">
+            Discover <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Incredible</span> Events.
+          </h1>
+          <p class="text-xl text-gray-300 leading-relaxed font-medium">
+            Join the world's leading minds. Register for exclusive conferences, workshops, and high-impact meetups.
+          </p>
+        </div>
+        
+        <div class="w-full md:w-auto relative group z-10">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-blue-400 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <input type="text" placeholder="Search events..." [(ngModel)]="searchQuery" (ngModelChange)="applySearch()"
+            class="pl-11 pr-4 py-3.5 border border-white/20 bg-white/10 backdrop-blur-md rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 outline-none w-full md:w-80 shadow-lg transition-all font-medium">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+    <div class="space-y-16">
+      @if (eventsState.loading()) {
+        <div class="py-20 text-center text-gray-500">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <p class="mt-4 font-medium">Loading events...</p>
+        </div>
+      } @else if (eventsState.error()) {
+        <div class="py-20 text-center text-red-500 bg-red-50 rounded-[2rem] border border-red-100">
+          <p class="font-medium">Failed to load events: {{ eventsState.error() }}</p>
+        </div>
+      } @else {
+        
+        <!-- Upcoming Events Section -->
+        <section>
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-black text-gray-900 tracking-tight">Upcoming Events</h2>
+            <div class="h-px bg-gray-200 flex-grow ml-6"></div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @for (event of upcomingEvents; track event.id) {
+            <div [routerLink]="event.slug" class="event-card group bg-white rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 border border-gray-100 hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-2 flex flex-col cursor-pointer overflow-hidden relative">
+              <div class="relative h-56 overflow-hidden">
+                <div class="absolute inset-0 bg-gray-200">
+                  <img [src]="event.banner" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-gray-900 to-transparent opacity-80"></div>
+                <div class="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm"
+                  [ngClass]="event.membershipRequired === false ? 'bg-white/90 text-gray-900' : 'bg-blue-600/90 text-white'">
+                  {{ event.membershipRequired === false ? 'Open to all' : 'Members only' }}
+                </div>
+                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-gray-900 shadow-lg flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full" [ngClass]="event.remainingSeats < 10 ? 'bg-red-500' : 'bg-emerald-500'"></span>
+                  {{event.remainingSeats}} Seats Left
+                </div>
+              </div>
+              <div class="p-8 flex flex-col flex-grow relative bg-white">
+                <div class="flex items-center text-sm text-gray-500 mb-4 space-x-4 font-medium">
+                  <div class="flex items-center bg-gray-50 px-2.5 py-1 rounded-lg">
+                    <svg class="w-4 h-4 mr-1.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    {{event.date}}
+                  </div>
+                  <div class="flex items-center bg-gray-50 px-2.5 py-1 rounded-lg">
+                    <svg class="w-4 h-4 mr-1.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span class="truncate max-w-[100px]" [title]="event.venue || event.location">{{event.venue || event.location || 'TBA'}}</span>
+                  </div>
+                </div>
+                <h3 class="text-2xl font-black text-gray-900 mb-3 group-hover:text-blue-600 transition-colors tracking-tight">{{event.title}}</h3>
+                <p class="text-gray-500 mb-6 line-clamp-2 leading-relaxed">{{event.description}}</p>
+                <div class="mt-auto flex justify-between items-center pt-4 border-t border-gray-50 gap-3">
+                  <span class="text-xs font-bold uppercase tracking-wider"
+                    [ngClass]="event.remainingSeats < 10 ? 'text-red-600' : 'text-gray-500'">
+                    {{event.remainingSeats}} seats left
+                  </span>
+                  @if (event.isRegistered) {
+                    <div class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border font-bold text-sm shadow-sm" (click)="$event.stopPropagation()"
+                      [ngClass]="registrationBadgeClass(event.registrationStatus)">
+                      {{ registrationLabel(event.registrationStatus) }}
+                    </div>
+                  } @else if (event.registrationDisabledReason === 'MEMBERSHIP_REQUIRED') {
+                    <div class="flex flex-col items-end gap-1.5" (click)="$event.stopPropagation()">
+                      <p class="text-[11px] leading-snug text-gray-500 text-right max-w-[190px]">An active membership is required to register for this event.</p>
+                      <a routerLink="/memberships"
+                        class="inline-flex items-center justify-center px-4 py-2.5 font-bold text-blue-700 transition-all duration-200 bg-blue-50 border border-blue-100 rounded-xl hover:bg-blue-100 text-sm">
+                        View Membership Plans
+                      </a>
+                    </div>
+                  } @else if (event.registrationDisabledReason === 'EVENT_FULL') {
+                    <div class="inline-flex items-center px-4 py-2 rounded-xl bg-gray-50 border border-gray-100 text-gray-500 font-bold text-sm" (click)="$event.stopPropagation()">
+                      Event full
+                    </div>
+                  } @else {
+                    <button (click)="$event.stopPropagation(); openRegisterModal(event)" [disabled]="isRegistering && registeringEventId === event.id"
+                      class="inline-flex items-center justify-center px-5 py-2.5 font-bold text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 shadow-md disabled:opacity-50">
+                      {{ isRegistering && registeringEventId === event.id ? 'Registering...' : 'Register' }}
+                    </button>
+                  }
+                </div>
+              </div>
+            </div>
+            } @empty {
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 py-24 text-center bg-white rounded-[2rem] shadow-sm border border-gray-100">
+              <div class="w-16 h-16 bg-gray-50 text-gray-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">{{ searchQuery ? 'No matching events' : 'No upcoming events' }}</h3>
+              <p class="text-gray-500">{{ searchQuery ? 'Try a different search term.' : 'Check back later for new and upcoming events.' }}</p>
+            </div>
+            }
+          </div>
+        </section>
+
+        <!-- Past Events Section -->
+        @if (pastEvents.length > 0) {
+        <section>
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-black text-gray-900 tracking-tight">Past Events</h2>
+            <div class="h-px bg-gray-200 flex-grow ml-6"></div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @for (event of pastEvents; track event.id) {
+            <div [routerLink]="event.slug" class="event-card group bg-white rounded-[2rem] shadow-sm border border-gray-100 flex flex-col cursor-pointer overflow-hidden relative opacity-75 hover:opacity-100 transition-opacity">
+              <div class="relative h-48 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
+                <div class="absolute inset-0 bg-gray-200">
+                  <img [src]="event.banner" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-gray-900 to-transparent opacity-80"></div>
+                <div class="absolute top-4 right-4 bg-gray-900/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-lg flex items-center gap-1">
+                  Completed
+                </div>
+              </div>
+              <div class="p-8 flex flex-col flex-grow relative bg-white">
+                <div class="flex items-center text-sm text-gray-500 mb-4 space-x-4 font-medium">
+                  <div class="flex items-center bg-gray-50 px-2.5 py-1 rounded-lg">
+                    <svg class="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    {{event.date}}
+                  </div>
+                  <div class="flex items-center bg-gray-50 px-2.5 py-1 rounded-lg">
+                    <svg class="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span class="truncate max-w-[100px]" [title]="event.venue || event.location">{{event.venue || event.location || 'TBA'}}</span>
+                  </div>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors tracking-tight">{{event.title}}</h3>
+                <p class="text-gray-500 line-clamp-2 leading-relaxed text-sm">{{event.description}}</p>
+              </div>
+            </div>
+            }
+          </div>
+        </section>
+        }
+      }
+    </div>
+  </div>
+</div>
+
+<app-modal [isOpen]="isSuccessModalOpen()" title="Registration Received"
+  confirmText="Done" [showCancel]="false" (confirmEvent)="isSuccessModalOpen.set(false)" (closeEvent)="isSuccessModalOpen.set(false)">
+  <div class="text-center py-4">
+    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold text-gray-900 mb-2">Registration pending approval</h3>
+    <p class="text-gray-600">
+      Your registration for <span class="font-semibold text-gray-900">{{ registeredEventTitle }}</span> has been received successfully and is currently pending admin approval.
+    </p>
+  </div>
+</app-modal>

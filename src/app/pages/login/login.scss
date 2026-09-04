@@ -1,0 +1,11 @@
+@use '../../../styles/mixins' as *;
+
+:host {
+  display: block;
+  min-height: 100%;
+  @include page-enter;
+}
+
+.login-panel {
+  animation: page-enter 480ms ease both;
+}
