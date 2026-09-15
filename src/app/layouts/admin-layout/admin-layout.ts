@@ -3,6 +3,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } fro
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -20,8 +21,11 @@ export class AdminLayout implements OnInit, OnDestroy {
   isProfileDropdownOpen = false;
   isThemeMenuOpen = false;
   isDarkMode = false;
+  supportUnread = signal(0);
   private router = inject(Router);
   public authService = inject(AuthService);
+  private dataService = inject(DataService);
+  private unreadTimer: ReturnType<typeof setInterval> | null = null;
 
   ngOnInit() {
     this.router.events.pipe(
@@ -30,6 +34,7 @@ export class AdminLayout implements OnInit, OnDestroy {
       if (this.scrollContainer) {
         this.scrollContainer.nativeElement.scrollTo({ top: 0, behavior: 'instant' });
       }
+      this.refreshUnread();
     });
     
     // Check initial theme
@@ -53,6 +58,8 @@ export class AdminLayout implements OnInit, OnDestroy {
           this.authService.setProfileImage(null);
         }
       });
+      this.refreshUnread();
+      this.unreadTimer = setInterval(() => this.refreshUnread(), 20000);
     }
   }
 
@@ -122,8 +129,17 @@ export class AdminLayout implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.unreadTimer) clearInterval(this.unreadTimer);
     if (typeof window !== 'undefined') {
       document.documentElement.classList.remove('dark');
     }
+  }
+
+  private refreshUnread() {
+    if (!this.authService.isLoggedIn()) return;
+    this.dataService.getSupportUnreadCount().subscribe({
+      next: (res) => this.supportUnread.set(res.count || 0),
+      error: () => {}
+    });
   }
 }

@@ -116,23 +116,4 @@ export class Events implements OnInit {
     this.upcomingEvents = this.allUpcoming.filter(matches);
     this.pastEvents = this.allPast.filter(matches);
   }
-
-  registrationLabel(status?: string | null) {
-    switch (status) {
-      case 'PENDING': return 'Pending';
-      case 'APPROVED': return 'Approved';
-      case 'REJECTED': return 'Rejected';
-      case 'CANCELLED': return 'Cancelled';
-      default: return 'Registered';
-    }
-  }
-
-  registrationBadgeClass(status?: string | null) {
-    switch (status) {
-      case 'PENDING': return 'bg-amber-50 border-amber-100 text-amber-700';
-      case 'APPROVED': return 'bg-emerald-50 border-emerald-100 text-emerald-600';
-      case 'REJECTED': return 'bg-red-50 border-red-100 text-red-600';
-      default: return 'bg-gray-50 border-gray-100 text-gray-600';
-    }
-  }
 }

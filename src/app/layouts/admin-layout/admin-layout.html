@@ -10,8 +10,8 @@
          [ngClass]="[isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0', isDesktopSidebarCollapsed ? 'w-20' : 'w-64']">
     <div class="p-6 flex items-center justify-between h-20 border-b border-gray-50 dark:border-white/5 relative" [ngClass]="isDesktopSidebarCollapsed ? 'px-4 justify-center' : 'px-6'">
       <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold shrink-0">M</div>
-        <span class="text-xl font-bold text-gray-900 dark:text-white tracking-tight whitespace-nowrap overflow-hidden transition-all duration-300" [ngClass]="isDesktopSidebarCollapsed ? 'w-0 opacity-0 hidden' : 'w-auto opacity-100'">MemEvents</span>
+        <img src="/taxiterminalen-logos/logo-icon.svg" alt="taxiterminalen" class="w-8 h-8 shrink-0">
+        <span class="text-xl font-bold text-gray-900 dark:text-white tracking-tight whitespace-nowrap overflow-hidden transition-all duration-300" [ngClass]="isDesktopSidebarCollapsed ? 'w-0 opacity-0 hidden' : 'w-auto opacity-100'">taxiterminalen </span>
       </div>
       <button class="hidden md:flex text-gray-400 hover:text-gray-900 dark:hover:text-white absolute -right-3 top-6 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-full p-1 shadow-sm z-50 items-center justify-center" (click)="isDesktopSidebarCollapsed = !isDesktopSidebarCollapsed">
         <svg class="w-4 h-4 transition-transform duration-300" [ngClass]="isDesktopSidebarCollapsed ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
@@ -40,6 +40,21 @@
       <a routerLink="/admin/events" routerLinkActive="bg-zinc-100 dark:bg-white/10 text-gray-900 dark:text-white shadow-sm" (click)="isSidebarOpen = false" class="flex items-center gap-3 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white font-semibold transition-all group" [ngClass]="isDesktopSidebarCollapsed ? 'px-3 justify-center' : 'px-4'" title="Events">
         <svg class="w-5 h-5 opacity-70 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
         <span class="whitespace-nowrap transition-opacity duration-300" [ngClass]="isDesktopSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'">Events</span>
+      </a>
+      <a routerLink="/admin/categories" routerLinkActive="bg-zinc-100 dark:bg-white/10 text-gray-900 dark:text-white shadow-sm" (click)="isSidebarOpen = false" class="flex items-center gap-3 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white font-semibold transition-all group" [ngClass]="isDesktopSidebarCollapsed ? 'px-3 justify-center' : 'px-4'" title="Categories">
+        <svg class="w-5 h-5 opacity-70 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.99 1.99 0 013 12V7a4 4 0 014-4z"></path></svg>
+        <span class="whitespace-nowrap transition-opacity duration-300" [ngClass]="isDesktopSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'">Categories</span>
+      </a>
+      <a routerLink="/admin/support" routerLinkActive="bg-zinc-100 dark:bg-white/10 text-gray-900 dark:text-white shadow-sm" (click)="isSidebarOpen = false" class="flex items-center gap-3 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white font-semibold transition-all group" [ngClass]="isDesktopSidebarCollapsed ? 'px-3 justify-center' : 'px-4'" title="Support Messages">
+        <span class="relative shrink-0">
+          <svg class="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l.8-3.2A7.5 7.5 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+          @if (supportUnread() > 0) {
+            <span class="absolute -top-1.5 -right-1.5 min-w-[1.1rem] h-4 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold flex items-center justify-center">{{ supportUnread() > 9 ? '9+' : supportUnread() }}</span>
+          }
+        </span>
+        <span class="whitespace-nowrap transition-opacity duration-300 flex items-center gap-2" [ngClass]="isDesktopSidebarCollapsed ? 'opacity-0 hidden' : 'opacity-100'">
+          Support Messages
+        </span>
       </a>
     </nav>
     <div class="p-4 border-t border-gray-50 dark:border-white/5 flex justify-center">

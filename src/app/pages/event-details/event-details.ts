@@ -92,14 +92,4 @@ export class EventDetails implements OnInit {
         }
       });
   }
-
-  registrationLabel(status?: string | null) {
-    switch (status) {
-      case 'PENDING': return 'Pending';
-      case 'APPROVED': return 'Approved';
-      case 'REJECTED': return 'Rejected';
-      case 'CANCELLED': return 'Cancelled';
-      default: return 'Registered';
-    }
-  }
 }

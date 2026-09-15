@@ -27,9 +27,7 @@ export interface Event {
   banner?: string;
   registrations?: number;
   registeredCount?: number;
-  capacity?: number;
   status?: string;
-  remainingSeats?: number;
   registrants?: EventRegistration[];
   agenda?: { time: string; title: string; description: string }[];
   isRegistered?: boolean;
@@ -68,6 +66,49 @@ export interface Plan {
   description?: string;
 }
 
+export type CategoryUrgency = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+
+export interface Category {
+  id: string;
+  name: string;
+  description: string;
+  urgency: CategoryUrgency;
+  createdAt?: string;
+}
+
+export type SupportStatus = 'OPEN' | 'RESOLVED';
+export type SupportSenderType = 'MEMBER' | 'ADMIN';
+
+export interface SupportMember {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface SupportMessage {
+  id: string;
+  senderType: SupportSenderType;
+  senderId: string;
+  body: string;
+  isRead: boolean;
+  createdAt: string;
+}
+
+export interface SupportConversation {
+  id: string;
+  subject: string;
+  status: SupportStatus;
+  lastMessage: string;
+  lastMessageAt: string;
+  lastSenderType: SupportSenderType;
+  unread: boolean;
+  createdAt: string;
+  updatedAt?: string;
+  category: { id: string; name: string; urgency: CategoryUrgency } | null;
+  member?: SupportMember;
+  messages?: SupportMessage[];
+}
+
 export interface PendingMember {
   id?: string;
   name: string;
@@ -100,7 +141,6 @@ export class DataService {
       .replace(/^\/+|\/+$/g, '')
       || (e.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
     const registeredCount = e.registeredCount ?? e.registrations ?? (e.registrants ? e.registrants.length : 0);
-    const capacity = e.capacity || 100;
 
     return {
       ...e,
@@ -114,8 +154,6 @@ export class DataService {
       registrations: registeredCount,
       registeredCount,
       registrants: e.registrants || [],
-      capacity,
-      remainingSeats: e.remainingSeats ?? Math.max(0, capacity - registeredCount),
       status: e.status || 'Published',
       membershipRequired: e.membershipRequired !== false,
       registrationDeadline: e.registrationDeadline || null,
@@ -318,6 +356,83 @@ export class DataService {
     return this.http.delete<any>(`${AppEndpointsMapping.DeletePlan}/${id}`);
   }
 
+  getCategories(params: PaginationQuery = {}): Observable<PaginatedResult<Category>> {
+    return this.http.get<PaginatedResult<Category>>(`${AppEndpointsMapping.GetAllCategories}${toQueryString({
+      page: params.page ?? 1,
+      limit: params.limit ?? 10,
+      search: params.search,
+      status: params.status,
+    })}`);
+  }
+
+  getCategory(id: string): Observable<Category> {
+    return this.http.get<Category>(`${AppEndpointsMapping.GetCategoryById}/${id}`);
+  }
+
+  addCategory(category: Partial<Category>): Observable<Category> {
+    return this.http.post<Category>(AppEndpointsMapping.CreateCategory, category);
+  }
+
+  updateCategory(id: string, category: Partial<Category>): Observable<Category> {
+    return this.http.put<Category>(`${AppEndpointsMapping.UpdateCategory}/${id}`, category);
+  }
+
+  deleteCategory(id: string): Observable<any> {
+    return this.http.delete<any>(`${AppEndpointsMapping.DeleteCategory}/${id}`);
+  }
+
+  getCategoryOptions(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${AppEndpointsMapping.GetCategoryOptions}/options`);
+  }
+
+  getMySupportConversations(params: PaginationQuery = {}): Observable<PaginatedResult<SupportConversation>> {
+    return this.http.get<PaginatedResult<SupportConversation>>(`${AppEndpointsMapping.GetMySupportConversations}/me${toQueryString({
+      page: params.page ?? 1,
+      limit: params.limit ?? 10,
+      search: params.search,
+      status: params.status,
+    })}`);
+  }
+
+  getMySupportConversation(id: string): Observable<SupportConversation> {
+    return this.http.get<SupportConversation>(`${AppEndpointsMapping.GetMySupportConversation}/me/${id}`);
+  }
+
+  createSupportConversation(payload: { categoryId: string; subject: string; message: string }): Observable<SupportConversation> {
+    return this.http.post<SupportConversation>(AppEndpointsMapping.CreateSupportConversation, payload);
+  }
+
+  replyMySupportConversation(id: string, message: string): Observable<SupportConversation> {
+    return this.http.post<SupportConversation>(`${AppEndpointsMapping.ReplyMySupportConversation}/me/${id}/messages`, { message });
+  }
+
+  getSupportConversations(params: PaginationQuery = {}): Observable<PaginatedResult<SupportConversation>> {
+    return this.http.get<PaginatedResult<SupportConversation>>(`${AppEndpointsMapping.GetAllSupportConversations}${toQueryString({
+      page: params.page ?? 1,
+      limit: params.limit ?? 10,
+      search: params.search,
+      status: params.status,
+      categoryId: params.categoryId,
+      urgency: params.urgency,
+    })}`);
+  }
+
+  getSupportConversation(id: string): Observable<SupportConversation> {
+    return this.http.get<SupportConversation>(`${AppEndpointsMapping.GetSupportConversation}/${id}`);
+  }
+
+  replySupportConversation(id: string, message: string): Observable<SupportConversation> {
+    return this.http.post<SupportConversation>(`${AppEndpointsMapping.ReplySupportConversation}/${id}/messages`, { message });
+  }
+
+  updateSupportStatus(id: string, status: SupportStatus): Observable<SupportConversation> {
+    return this.http.put<SupportConversation>(`${AppEndpointsMapping.UpdateSupportStatus}/${id}/status`, { status });
+  }
+
+  getSupportUnreadCount(): Observable<{ count: number }> {
+    return this.http.get<{ count: number }>(`${AppEndpointsMapping.GetSupportUnreadCount}/unread-count`);
+  }
+
   registerForEvent(eventId: number | string, name?: string, email?: string): Observable<any> {
     return this.http.post<any>(`${AppEndpointsMapping.RegisterEvent}/${eventId}/register`, { name, email });
   }
@@ -336,14 +451,6 @@ export class DataService {
         })),
       }))
     );
-  }
-
-  approveEventRegistration(eventId: number | string, registrationId: string): Observable<any> {
-    return this.http.post<any>(`${AppEndpointsMapping.ApproveEventRegistration}/${eventId}/registrations/${registrationId}/approve`, {});
-  }
-
-  rejectEventRegistration(eventId: number | string, registrationId: string): Observable<any> {
-    return this.http.post<any>(`${AppEndpointsMapping.RejectEventRegistration}/${eventId}/registrations/${registrationId}/reject`, {});
   }
 
   getRecentRegistrations(count: number = 5): Observable<any[]> {

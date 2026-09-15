@@ -1,0 +1,75 @@
+<div>
+  <a routerLink="/admin/support" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 mb-4">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    Back to Support Messages
+  </a>
+
+  @if (isLoading() && !conversation()) {
+    <div class="bg-white dark:bg-zinc-900/50 rounded-xl border border-gray-100 dark:border-white/5 p-16 flex justify-center">
+      <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+    </div>
+  } @else if (conversation(); as item) {
+    <div class="bg-white dark:bg-zinc-900/50 dark:backdrop-blur-xl rounded-xl shadow-sm border border-gray-100 dark:border-white/5 overflow-hidden flex flex-col min-h-[70vh]">
+      <div class="px-6 py-5 border-b border-gray-100 dark:border-white/10">
+        <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ item.subject }}</h1>
+            <p class="text-sm text-gray-500 mt-1">{{ item.member?.name }} · {{ item.member?.email }}</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold border border-gray-200 dark:border-white/15 text-gray-700 dark:text-gray-300">
+                {{ item.category?.name || 'Uncategorized' }}
+              </span>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold border" [ngClass]="urgencyBadgeClass(item.category?.urgency)">
+                {{ urgencyLabel(item.category?.urgency) }}
+              </span>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold border"
+                [ngClass]="item.status === 'RESOLVED' ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-500/30' : 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:border-amber-500/30'">
+                {{ item.status === 'RESOLVED' ? 'Resolved' : 'Open' }}
+              </span>
+            </div>
+            <p class="text-xs text-gray-400 mt-3">Created {{ formatDateTime(item.createdAt) }}</p>
+          </div>
+          <div class="flex gap-2">
+            @if (item.status === 'OPEN') {
+              <button type="button" (click)="isResolveOpen.set(true)" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-lg text-sm">
+                Mark as Resolved
+              </button>
+            } @else {
+              <button type="button" (click)="reopen()" [disabled]="isUpdatingStatus()" class="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold px-4 py-2 rounded-lg text-sm">
+                Reopen
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div #threadScroll class="flex-1 overflow-y-auto px-5 py-6 bg-gray-50/60 dark:bg-black/20">
+        <app-support-thread [messages]="item.messages || []" viewer="ADMIN"></app-support-thread>
+      </div>
+
+      <form (submit)="$event.preventDefault(); send()" class="p-4 sm:p-5 border-t border-gray-100 dark:border-white/10">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <textarea [(ngModel)]="draft" name="message" rows="2" maxlength="4000"
+            class="flex-1 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-black/20 px-3.5 py-2.5 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 resize-none"
+            placeholder="Reply to the member..."></textarea>
+          <button type="submit" [disabled]="isSending() || !draft.trim()"
+            class="sm:self-end bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold px-5 py-3 rounded-xl">
+            {{ isSending() ? 'Sending…' : 'Send reply' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  }
+</div>
+
+<app-modal
+  [isOpen]="isResolveOpen()"
+  title="Mark as resolved"
+  confirmText="Resolve"
+  [isConfirming]="isUpdatingStatus()"
+  (closeEvent)="isResolveOpen.set(false)"
+  (confirmEvent)="confirmResolve()">
+  <p class="text-sm text-gray-600 dark:text-gray-300">
+    Mark this conversation as resolved? You can reopen it later if the member still needs help.
+  </p>
+</app-modal>

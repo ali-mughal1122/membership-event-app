@@ -49,10 +49,8 @@
                 Event Completed
               </div>
             } @else if (event.isRegistered) {
-              <div class="inline-flex flex-col items-center justify-center gap-1 px-10 py-5 font-bold backdrop-blur-md border rounded-full w-full md:w-auto text-lg"
-                [ngClass]="event.registrationStatus === 'APPROVED' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : event.registrationStatus === 'REJECTED' ? 'text-red-300 bg-red-500/10 border-red-500/20' : 'text-amber-300 bg-amber-500/10 border-amber-500/20'">
-                <span>{{ registrationLabel(event.registrationStatus) }}</span>
-                <span class="text-xs font-medium opacity-80">Registration status</span>
+              <div class="inline-flex items-center justify-center px-10 py-5 font-bold text-emerald-400 bg-emerald-500/10 backdrop-blur-md border border-emerald-500/20 rounded-full w-full md:w-auto text-lg">
+                Registered
               </div>
             } @else if (event.registrationDisabledReason === 'MEMBERSHIP_REQUIRED') {
               <div class="w-full md:w-auto max-w-sm bg-white/10 backdrop-blur-md border border-white/15 rounded-3xl p-5 text-left">
@@ -61,10 +59,6 @@
                   class="inline-flex items-center justify-center px-5 py-3 font-bold text-white bg-blue-600 rounded-full hover:bg-blue-700 w-full">
                   View Membership Plans / Buy Membership
                 </a>
-              </div>
-            } @else if (event.registrationDisabledReason === 'EVENT_FULL') {
-              <div class="inline-flex items-center justify-center px-10 py-5 font-bold text-gray-300 bg-white/10 backdrop-blur-md border border-white/10 rounded-full w-full md:w-auto text-lg cursor-not-allowed">
-                Event Full
               </div>
             } @else if (event.registrationDisabledReason === 'REGISTRATION_CLOSED') {
               <div class="inline-flex items-center justify-center px-10 py-5 font-bold text-gray-300 bg-white/10 backdrop-blur-md border border-white/10 rounded-full w-full md:w-auto text-lg cursor-not-allowed">
@@ -178,26 +172,6 @@
                 </a>
               </div>
             </li>
-
-            <li class="flex items-start group">
-              <div
-                class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mr-5 flex-shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                  </path>
-                </svg>
-              </div>
-              <div class="pt-1 w-full">
-                <p class="text-sm font-bold text-gray-400 tracking-wide uppercase mb-1">Availability</p>
-                <p class="text-gray-900 font-semibold text-lg mb-3"><span class="text-emerald-600 font-bold text-2xl">{{ event.remainingSeats || 0 }}</span> seats left</p>
-                <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden shadow-inner">
-                  <div class="bg-gradient-to-r from-emerald-400 to-emerald-500 h-full rounded-full transition-all duration-1000"
-                    [style.width.%]="event.capacity ? (((event.remainingSeats || 0) / event.capacity) * 100) : 0"></div>
-                </div>
-                <p class="text-xs text-gray-400 font-medium mt-2 text-right">of {{ event.capacity || 100 }} total capacity</p>
-              </div>
-            </li>
           </ul>
         </div>
       </div>
@@ -219,17 +193,17 @@
 }
 </div>
 
-<app-modal [isOpen]="isSuccessModalOpen()" title="Registration Received"
+<app-modal [isOpen]="isSuccessModalOpen()" title="Registration Confirmed"
   confirmText="Done" [showCancel]="false" (confirmEvent)="isSuccessModalOpen.set(false)" (closeEvent)="isSuccessModalOpen.set(false)">
   <div class="text-center py-4">
-    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
       </svg>
     </div>
-    <h3 class="text-xl font-bold text-gray-900 mb-2">Registration pending approval</h3>
+    <h3 class="text-xl font-bold text-gray-900 mb-2">You are registered</h3>
     <p class="text-gray-600">
-      Your registration for <span class="font-semibold text-gray-900">{{ registeredEventTitle }}</span> has been received successfully and is currently pending admin approval.
+      Your registration for <span class="font-semibold text-gray-900">{{ registeredEventTitle }}</span> has been confirmed.
     </p>
   </div>
 </app-modal>

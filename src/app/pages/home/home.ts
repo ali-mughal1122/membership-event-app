@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
+import { ModalComponent } from '../../components/modal/modal';
 import { createApiState } from '../../core/api-state';
 import { map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, ModalComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
@@ -128,8 +129,7 @@ export class Home implements OnInit {
       error: () => {
         this.isSubmittingReview = false;
         this.toastService.error('Failed to fetch your review status');
-        this.isReviewModalOpen = false;
-        this.cdr.detectChanges();
+        this.closeReviewModal();
       }
     });
   }

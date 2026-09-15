@@ -1,16 +1,18 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
-import { DataService } from '../../services/data.service';
+import { Category, CategoryUrgency, DataService, SupportConversation } from '../../services/data.service';
 import { createApiState } from '../../core/api-state';
+import { ModalComponent } from '../../components/modal/modal';
+import { PaginationComponent } from '../../components/pagination/pagination';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, ModalComponent, PaginationComponent],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })
@@ -18,6 +20,7 @@ export class Profile implements OnInit {
   authService = inject(AuthService);
   toastService = inject(ToastService);
   router = inject(Router);
+  route = inject(ActivatedRoute);
   dataService = inject(DataService);
 
   email: string = '';
@@ -29,6 +32,18 @@ export class Profile implements OnInit {
   passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,}$/;
 
   membershipState = createApiState<any>();
+
+  conversations = signal<SupportConversation[]>([]);
+  supportLoading = signal(false);
+  supportPage = signal(1);
+  supportLimit = signal(10);
+  supportTotal = signal(0);
+  supportTotalPages = signal(1);
+
+  isAskOpen = signal(false);
+  isSavingRequest = signal(false);
+  categories = signal<Category[]>([]);
+  newRequest = { categoryId: '', subject: '', message: '' };
 
   ngOnInit() {
     if (!this.authService.isLoggedIn()) {
@@ -51,6 +66,107 @@ export class Profile implements OnInit {
     });
 
     this.membershipState.execute(this.dataService.getMyMembership());
+    this.fetchSupport();
+    this.dataService.getCategoryOptions().subscribe({
+      next: (categories) => this.categories.set(categories || []),
+      error: () => {}
+    });
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment === 'help') {
+        setTimeout(() => this.scrollToHelp(), 80);
+      }
+    });
+  }
+
+  private scrollToHelp() {
+    document.getElementById('help')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  fetchSupport() {
+    this.supportLoading.set(true);
+    this.dataService.getMySupportConversations({
+      page: this.supportPage(),
+      limit: this.supportLimit(),
+    }).subscribe({
+      next: (res) => {
+        this.conversations.set(res.data || []);
+        this.supportTotal.set(res.total);
+        this.supportTotalPages.set(res.totalPages);
+        this.supportPage.set(res.page);
+        this.supportLoading.set(false);
+      },
+      error: () => this.supportLoading.set(false)
+    });
+  }
+
+  openAskModal() {
+    this.newRequest = { categoryId: this.categories()[0]?.id || '', subject: '', message: '' };
+    this.isAskOpen.set(true);
+  }
+
+  selectedCategory() {
+    return this.categories().find(category => category.id === this.newRequest.categoryId);
+  }
+
+  submitSupportRequest() {
+    const categoryId = this.newRequest.categoryId;
+    const subject = this.newRequest.subject.trim();
+    const message = this.newRequest.message.trim();
+    if (!categoryId || !subject || !message) {
+      this.toastService.error('Category, subject, and message are required.');
+      return;
+    }
+    this.isSavingRequest.set(true);
+    this.dataService.createSupportConversation({ categoryId, subject, message }).subscribe({
+      next: (conversation) => {
+        this.isSavingRequest.set(false);
+        this.isAskOpen.set(false);
+        this.toastService.success('Support request sent.');
+        this.router.navigate(['/profile/support', conversation.id]);
+      },
+      error: (err) => {
+        this.isSavingRequest.set(false);
+        this.toastService.error(err.error?.message || 'Failed to create support request.');
+      }
+    });
+  }
+
+  onSupportPageChange(page: number) {
+    this.supportPage.set(page);
+    this.fetchSupport();
+  }
+
+  onSupportLimitChange(limit: number) {
+    this.supportLimit.set(limit);
+    this.supportPage.set(1);
+    this.fetchSupport();
+  }
+
+  urgencyLabel(urgency?: string) {
+    switch (urgency) {
+      case 'CRITICAL': return 'Critical';
+      case 'HIGH': return 'High';
+      case 'MEDIUM': return 'Medium';
+      case 'LOW': return 'Low';
+      default: return urgency || '';
+    }
+  }
+
+  urgencyHint(urgency?: CategoryUrgency) {
+    switch (urgency) {
+      case 'CRITICAL': return 'Handled first';
+      case 'HIGH': return 'Handled quickly';
+      case 'MEDIUM': return 'Normal priority';
+      case 'LOW': return 'Can wait';
+      default: return '';
+    }
+  }
+
+  formatDateTime(value?: string) {
+    if (!value) return '—';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '—';
+    return date.toLocaleString();
   }
 
   // File Upload Logic
@@ -93,8 +209,6 @@ export class Profile implements OnInit {
       this.authService.updateProfile({ profileImage: this.newImageUrl }).subscribe({
         next: (user: any) => {
           this.isUploadingPhoto = false;
-          // Cache the new image string returned from the backend in localStorage as a fallback,
-          // though we will be fetching it live in layouts soon.
           this.authService.setProfileImage(user?.profileImage || this.newImageUrl || null);
           this.profileImage = this.authService.getProfileImage();
           this.newImageUrl = this.profileImage;
@@ -112,7 +226,6 @@ export class Profile implements OnInit {
     }
   }
 
-  // Password Logic
   currentPassword = '';
   newPassword = '';
   confirmPassword = '';

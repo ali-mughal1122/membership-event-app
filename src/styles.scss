@@ -17,6 +17,13 @@
     scroll-behavior: smooth;
   }
 
+  html.overflow-hidden,
+  body.overflow-hidden {
+    overflow: hidden !important;
+    overscroll-behavior: none;
+    scroll-behavior: auto;
+  }
+
   body {
     font-family: $font-sans;
     background:

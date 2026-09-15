@@ -13,6 +13,7 @@ import {
   DOCUMENT,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { lockBodyScroll, unlockBodyScroll } from '../../core/scroll-lock';
 
 @Component({
   selector: 'app-modal',
@@ -24,7 +25,7 @@ import { CommonModule } from '@angular/common';
   template: `
     @if (isOpen) {
       <div
-        class="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6"
+        class="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 overscroll-none"
         role="dialog"
         aria-modal="true"
         [attr.aria-labelledby]="titleId">
@@ -37,37 +38,41 @@ import { CommonModule } from '@angular/common';
 
         <!-- Centered panel -->
         <div
-          class="relative z-10 w-full max-h-[90vh] flex flex-col overflow-hidden rounded-3xl bg-white dark:bg-slate-800 text-left shadow-[0_8px_40px_-12px_rgba(0,0,0,0.25)] border border-gray-100 dark:border-slate-700"
+          class="relative z-10 w-full max-h-[90vh] flex flex-col overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 text-left shadow-[0_24px_80px_-16px_rgba(0,0,0,0.45)] border border-gray-100 dark:border-white/10"
           [ngClass]="{
-            'sm:max-w-4xl': size === 'xl',
+            'sm:max-w-5xl': size === 'xl',
             'sm:max-w-2xl': size === 'lg',
             'sm:max-w-lg': size === 'md'
           }"
           (click)="$event.stopPropagation()">
-          <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 relative shrink-0">
+          <div class="px-5 pt-5 pb-4 sm:px-7 sm:pt-6 sm:pb-4 relative shrink-0 border-b border-gray-100 dark:border-white/10">
             @if (showCancel && !isConfirming) {
               <button
                 type="button"
-                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md transition-colors"
+                class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-1 transition-colors"
                 (click)="close()">
                 <span class="sr-only">Close</span>
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             }
 
-            <div class="w-full pr-8">
-              <h3 class="text-lg leading-6 font-bold text-gray-900 dark:text-white mb-4" [id]="titleId">
+            <div class="pr-10">
+              <h3 class="text-xl leading-7 font-bold tracking-tight text-gray-900 dark:text-white" [id]="titleId">
                 {{ title }}
               </h3>
-              <div class="w-full text-gray-700 dark:text-gray-300 max-h-[min(60vh,32rem)] overflow-y-auto">
-                <ng-content></ng-content>
-              </div>
+              @if (subtitle) {
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ subtitle }}</p>
+              }
             </div>
           </div>
 
-          <div class="bg-gray-50/80 dark:bg-slate-800/80 px-4 py-4 sm:px-6 flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-gray-100 dark:border-slate-700 shrink-0">
+          <div data-scroll-lock-allow class="flex-1 min-h-0 overflow-y-auto px-5 py-5 sm:px-7 sm:py-6 text-gray-700 dark:text-gray-300">
+            <ng-content></ng-content>
+          </div>
+
+          <div class="bg-gray-50/90 dark:bg-white/[0.03] px-5 py-4 sm:px-7 flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-gray-100 dark:border-white/10 shrink-0">
             @if (showCancel) {
               <button
                 type="button"
@@ -105,6 +110,7 @@ export class ModalComponent implements OnChanges, OnDestroy {
 
   @Input() isOpen = false;
   @Input() title = 'Modal Title';
+  @Input() subtitle = '';
   @Input() confirmText = 'Save';
   @Input() showConfirm = true;
   @Input() showCancel = true;
@@ -117,7 +123,7 @@ export class ModalComponent implements OnChanges, OnDestroy {
   readonly titleId = `modal-title-${Math.random().toString(36).slice(2, 9)}`;
 
   private movedToBody = false;
-  private previousBodyOverflow = '';
+  private scrollLocked = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['isOpen']) {
@@ -149,24 +155,28 @@ export class ModalComponent implements OnChanges, OnDestroy {
   private syncPortal() {
     const host = this.el.nativeElement;
     if (this.isOpen) {
+      this.lockBody();
       if (!this.movedToBody) {
         this.renderer.appendChild(this.doc.body, host);
         this.movedToBody = true;
       }
-      this.lockBody();
     } else {
+      if (this.doc.activeElement instanceof HTMLElement) {
+        this.doc.activeElement.blur();
+      }
       this.unlockBody();
     }
   }
 
   private lockBody() {
-    if (!this.doc.body) return;
-    this.previousBodyOverflow = this.doc.body.style.overflow;
-    this.renderer.setStyle(this.doc.body, 'overflow', 'hidden');
+    if (this.scrollLocked) return;
+    lockBodyScroll();
+    this.scrollLocked = true;
   }
 
   private unlockBody() {
-    if (!this.doc.body) return;
-    this.renderer.setStyle(this.doc.body, 'overflow', this.previousBodyOverflow || '');
+    if (!this.scrollLocked) return;
+    unlockBodyScroll();
+    this.scrollLocked = false;
   }
 }

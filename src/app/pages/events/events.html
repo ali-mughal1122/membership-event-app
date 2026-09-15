@@ -66,10 +66,6 @@
                   [ngClass]="event.membershipRequired === false ? 'bg-white/90 text-gray-900' : 'bg-blue-600/90 text-white'">
                   {{ event.membershipRequired === false ? 'Open to all' : 'Members only' }}
                 </div>
-                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-gray-900 shadow-lg flex items-center gap-1">
-                  <span class="w-2 h-2 rounded-full" [ngClass]="event.remainingSeats < 10 ? 'bg-red-500' : 'bg-emerald-500'"></span>
-                  {{event.remainingSeats}} Seats Left
-                </div>
               </div>
               <div class="p-8 flex flex-col flex-grow relative bg-white">
                 <div class="flex items-center text-sm text-gray-500 mb-4 space-x-4 font-medium">
@@ -89,15 +85,10 @@
                 </div>
                 <h3 class="text-2xl font-black text-gray-900 mb-3 group-hover:text-blue-600 transition-colors tracking-tight">{{event.title}}</h3>
                 <p class="text-gray-500 mb-6 line-clamp-2 leading-relaxed">{{event.description}}</p>
-                <div class="mt-auto flex justify-between items-center pt-4 border-t border-gray-50 gap-3">
-                  <span class="text-xs font-bold uppercase tracking-wider"
-                    [ngClass]="event.remainingSeats < 10 ? 'text-red-600' : 'text-gray-500'">
-                    {{event.remainingSeats}} seats left
-                  </span>
+                <div class="mt-auto flex justify-end items-center pt-4 border-t border-gray-50 gap-3">
                   @if (event.isRegistered) {
-                    <div class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border font-bold text-sm shadow-sm" (click)="$event.stopPropagation()"
-                      [ngClass]="registrationBadgeClass(event.registrationStatus)">
-                      {{ registrationLabel(event.registrationStatus) }}
+                    <div class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-emerald-100 bg-emerald-50 text-emerald-600 font-bold text-sm shadow-sm" (click)="$event.stopPropagation()">
+                      Registered
                     </div>
                   } @else if (event.registrationDisabledReason === 'MEMBERSHIP_REQUIRED') {
                     <div class="flex flex-col items-end gap-1.5" (click)="$event.stopPropagation()">
@@ -106,10 +97,6 @@
                         class="inline-flex items-center justify-center px-4 py-2.5 font-bold text-blue-700 transition-all duration-200 bg-blue-50 border border-blue-100 rounded-xl hover:bg-blue-100 text-sm">
                         View Membership Plans
                       </a>
-                    </div>
-                  } @else if (event.registrationDisabledReason === 'EVENT_FULL') {
-                    <div class="inline-flex items-center px-4 py-2 rounded-xl bg-gray-50 border border-gray-100 text-gray-500 font-bold text-sm" (click)="$event.stopPropagation()">
-                      Event full
                     </div>
                   } @else {
                     <button (click)="$event.stopPropagation(); openRegisterModal(event)" [disabled]="isRegistering && registeringEventId === event.id"
@@ -183,17 +170,17 @@
   </div>
 </div>
 
-<app-modal [isOpen]="isSuccessModalOpen()" title="Registration Received"
+<app-modal [isOpen]="isSuccessModalOpen()" title="Registration Confirmed"
   confirmText="Done" [showCancel]="false" (confirmEvent)="isSuccessModalOpen.set(false)" (closeEvent)="isSuccessModalOpen.set(false)">
   <div class="text-center py-4">
-    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
       </svg>
     </div>
-    <h3 class="text-xl font-bold text-gray-900 mb-2">Registration pending approval</h3>
+    <h3 class="text-xl font-bold text-gray-900 mb-2">You are registered</h3>
     <p class="text-gray-600">
-      Your registration for <span class="font-semibold text-gray-900">{{ registeredEventTitle }}</span> has been received successfully and is currently pending admin approval.
+      Your registration for <span class="font-semibold text-gray-900">{{ registeredEventTitle }}</span> has been confirmed.
     </p>
   </div>
 </app-modal>

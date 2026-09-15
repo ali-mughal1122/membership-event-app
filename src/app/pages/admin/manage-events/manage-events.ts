@@ -28,7 +28,6 @@ export class ManageEvents implements OnInit {
   selectedEventForRegistrants: Event | null = null;
   selectedRegistrations = signal<EventRegistration[]>([]);
   isLoadingRegistrations = signal(false);
-  updatingRegId = signal<string | null>(null);
   searchQuery = '';
   statusFilter = '';
   page = signal(1);
@@ -39,7 +38,6 @@ export class ManageEvents implements OnInit {
   registrationsLimit = signal(10);
   registrationsTotal = signal(0);
   registrationsTotalPages = signal(1);
-  registrationStatusFilter = '';
   private searchTimer: ReturnType<typeof setTimeout> | null = null;
 
   ngOnInit() {
@@ -102,7 +100,7 @@ export class ManageEvents implements OnInit {
       date: '',
       time: '',
       location: '',
-      capacity: 50,
+      banner: '',
       status: 'Draft',
       registrations: 0,
       agenda: [],
@@ -110,6 +108,17 @@ export class ManageEvents implements OnInit {
       registrationDeadline: '',
     };
     this.isModalOpen.set(true);
+  }
+
+  onEventTitleChange(name: string) {
+    this.currentEvent.name = name;
+    if (!this.isEditing()) {
+      const slug = name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      this.currentEvent.slug = slug ? '/events/' + slug : '';
+    }
   }
 
   openEditModal(event: Event) {
@@ -142,9 +151,6 @@ export class ManageEvents implements OnInit {
       return;
     }
 
-    if (this.currentEvent.capacity !== undefined) {
-      this.currentEvent.capacity = Number(this.currentEvent.capacity);
-    }
     this.currentEvent.title = this.currentEvent.name;
     if (!this.currentEvent.description) this.currentEvent.description = 'No description provided.';
     if (!this.currentEvent.location) this.currentEvent.location = 'TBA';
@@ -226,7 +232,6 @@ export class ManageEvents implements OnInit {
     this.selectedEventForRegistrants = event;
     this.selectedRegistrations.set([]);
     this.registrationsPage.set(1);
-    this.registrationStatusFilter = 'PENDING';
     this.isRegistrantsModalOpen.set(true);
     this.fetchRegistrations();
   }
@@ -238,7 +243,6 @@ export class ManageEvents implements OnInit {
     this.dataService.getEventRegistrations(eventId, {
       page: this.registrationsPage(),
       limit: this.registrationsLimit(),
-      status: this.registrationStatusFilter,
     }).subscribe({
       next: (res) => {
         this.selectedRegistrations.set(res.data);
@@ -262,47 +266,11 @@ export class ManageEvents implements OnInit {
     this.fetchRegistrations();
   }
 
-  onRegistrationStatusFilterChange() {
-    this.registrationsPage.set(1);
-    this.fetchRegistrations();
-  }
-
-  approveRegistration(reg: EventRegistration) {
-    const eventId = this.selectedEventForRegistrants?.id;
-    if (!eventId || !reg.id) return;
-    this.updatingRegId.set(reg.id);
-    this.dataService.approveEventRegistration(eventId, reg.id).subscribe({
-      next: () => {
-        this.selectedRegistrations.update(list => list.map(item => item.id === reg.id ? { ...item, status: 'APPROVED' } : item));
-        this.updatingRegId.set(null);
-        this.toastService.success('Registration approved. The member has been emailed that they are successfully registered.');
-        this.fetchRegistrations();
-      },
-      error: () => this.updatingRegId.set(null)
-    });
-  }
-
-  rejectRegistration(reg: EventRegistration) {
-    const eventId = this.selectedEventForRegistrants?.id;
-    if (!eventId || !reg.id) return;
-    this.updatingRegId.set(reg.id);
-    this.dataService.rejectEventRegistration(eventId, reg.id).subscribe({
-      next: () => {
-        this.selectedRegistrations.update(list => list.map(item => item.id === reg.id ? { ...item, status: 'REJECTED' } : item));
-        this.updatingRegId.set(null);
-        this.toastService.success('Registration rejected.');
-        this.fetchRegistrations();
-      },
-      error: () => this.updatingRegId.set(null)
-    });
-  }
-
   statusBadgeClass(status?: string) {
     switch (status) {
-      case 'PENDING': return 'bg-amber-100 text-amber-800 border-amber-200';
-      case 'APPROVED': return 'bg-emerald-100 text-emerald-800 border-emerald-200';
-      case 'REJECTED': return 'bg-red-100 text-red-800 border-red-200';
-      default: return 'bg-gray-100 text-gray-700 border-gray-200';
+      case 'REGISTERED': return 'bg-emerald-100 text-emerald-800 border-emerald-200';
+      case 'CANCELLED': return 'bg-gray-100 text-gray-700 border-gray-200';
+      default: return 'bg-emerald-100 text-emerald-800 border-emerald-200';
     }
   }
 

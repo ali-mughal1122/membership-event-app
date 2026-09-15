@@ -22,8 +22,10 @@ export class PublicLayout implements OnInit {
   ngOnInit() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+    ).subscribe((event: NavigationEnd) => {
+      if (!this.router.parseUrl(event.urlAfterRedirects).fragment) {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
     });
     
     if (this.authService.isLoggedIn()) {

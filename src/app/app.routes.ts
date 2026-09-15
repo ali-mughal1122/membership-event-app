@@ -12,6 +12,7 @@ export const routes: Routes = [
       { path: 'forgot-password', canActivate: [publicNoAuthGuard], loadComponent: () => import('./pages/forgot-password/forgot-password').then(m => m.ForgotPassword) },
       { path: 'memberships', loadComponent: () => import('./pages/memberships/memberships').then(m => m.Memberships) },
       { path: 'profile', canActivate: [clientGuard], loadComponent: () => import('./pages/profile/profile').then(m => m.Profile) },
+      { path: 'profile/support/:id', canActivate: [clientGuard], loadComponent: () => import('./pages/profile/support-conversation/support-conversation').then(m => m.MemberSupportConversation) },
       { path: 'events', loadComponent: () => import('./pages/events/events').then(m => m.Events) },
       { path: 'events/:slug', loadComponent: () => import('./pages/event-details/event-details').then(m => m.EventDetails) },
       { path: 'about', loadComponent: () => import('./pages/about-us/about-us').then(m => m.AboutUs) },
@@ -38,6 +39,9 @@ export const routes: Routes = [
           { path: 'registered-users', loadComponent: () => import('./pages/admin/registered-users/registered-users').then(m => m.AdminRegisteredUsers) },
           { path: 'memberships', redirectTo: 'members', pathMatch: 'full' },
           { path: 'events', loadComponent: () => import('./pages/admin/manage-events/manage-events').then(m => m.ManageEvents) },
+          { path: 'categories', loadComponent: () => import('./pages/admin/categories').then(m => m.AdminCategories) },
+          { path: 'support', loadComponent: () => import('./pages/admin/support-messages').then(m => m.AdminSupportMessages) },
+          { path: 'support/:id', loadComponent: () => import('./pages/admin/support-conversation/support-conversation').then(m => m.AdminSupportConversation) },
         ]
       }
     ]
