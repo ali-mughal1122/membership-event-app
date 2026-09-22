@@ -55,7 +55,7 @@
           } @else if (membershipState.data(); as membership) {
             <div class="space-y-4">
               <div class="flex items-center justify-between">
-                <span class="font-bold text-gray-900 text-lg">{{ membership.plan.name }}</span>
+                <span class="font-bold text-gray-900 text-lg">{{ membership.plan?.name || 'Membership Plan' }}</span>
                 <span class="px-2.5 py-1 text-xs font-bold rounded-lg uppercase tracking-wider" 
                       [ngClass]="{
                         'bg-emerald-50 text-emerald-600': membership.displayStatus === 'ACTIVE',
@@ -68,7 +68,11 @@
               </div>
               
               <div class="space-y-1">
-                <p class="text-sm font-semibold text-gray-900">{{ membership.plan.price }} DKK / {{ membership.plan.durationMonths === 12 ? 'year' : 'month' }}</p>
+                @if (membership.plan) {
+                  <p class="text-sm font-semibold text-gray-900">{{ membership.plan.price }} DKK / {{ membership.plan.durationMonths === 12 ? 'year' : 'month' }}</p>
+                } @else {
+                  <p class="text-sm text-gray-500 italic">Plan details unavailable</p>
+                }
                 <p class="text-sm text-gray-500">Started: {{ membership.startDate | date:'d MMMM yyyy' }}</p>
                 <p class="text-sm text-gray-500">
                   <span *ngIf="membership.displayStatus === 'ACTIVE'">Next renewal: </span>

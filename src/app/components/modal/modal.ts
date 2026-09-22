@@ -25,7 +25,7 @@ import { lockBodyScroll, unlockBodyScroll } from '../../core/scroll-lock';
   template: `
     @if (isOpen) {
       <div
-        class="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 overscroll-none"
+        class="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 overscroll-none"
         role="dialog"
         aria-modal="true"
         [attr.aria-labelledby]="titleId">
@@ -133,6 +133,9 @@ export class ModalComponent implements OnChanges, OnDestroy {
 
   ngOnDestroy() {
     this.unlockBody();
+    if (this.movedToBody && this.el.nativeElement.parentNode) {
+      this.renderer.removeChild(this.el.nativeElement.parentNode, this.el.nativeElement);
+    }
   }
 
   @HostListener('document:keydown.escape')

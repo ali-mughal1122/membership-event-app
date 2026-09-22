@@ -19,6 +19,22 @@ export class AuthService {
     return this.http.post(AuthEndpointsMapping.Register, userData);
   }
 
+  verifyEmail(token: string) {
+    return this.http.post<any>(AuthEndpointsMapping.VerifyEmail, { token });
+  }
+
+  resendVerification(email: string) {
+    return this.http.post<any>(AuthEndpointsMapping.ResendVerification, { email });
+  }
+
+  forgotPassword(email: string) {
+    return this.http.post<any>(AuthEndpointsMapping.ForgotPassword, { email });
+  }
+
+  resetPassword(data: { token: string; newPassword: string }) {
+    return this.http.post<any>(AuthEndpointsMapping.ResetPassword, data);
+  }
+
   isLoggedIn(): boolean {
     return !!this.getToken();
   }

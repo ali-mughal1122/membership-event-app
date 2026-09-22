@@ -3,9 +3,11 @@ import { inject } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ToastService } from '../services/toast.service';
+import { AuthService } from '../services/auth.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const toastService = inject(ToastService);
+  const authService = inject(AuthService);
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -18,6 +20,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         // Server side error
         if (error.status === 401) {
           errorMsg = 'Unauthorized: Invalid credentials or session expired.';
+          authService.logout();
         } else if (error.status === 403) {
           if (error.error?.code === 'MEMBERSHIP_REQUIRED') {
             return throwError(() => error);

@@ -1,7 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, ActivatedRoute, Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -11,59 +12,53 @@ import { ToastService } from '../../services/toast.service';
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.scss'
 })
-export class ForgotPassword implements OnInit {
+export class ForgotPassword {
+  authService = inject(AuthService);
   toastService = inject(ToastService);
-  route = inject(ActivatedRoute);
-  router = inject(Router);
 
   email = '';
   isSubmitting = false;
+  submitted = false;
+  successMessage = '';
+  errorMessage = '';
 
-  resetToken: string | null = null;
-  newPassword = '';
-  confirmPassword = '';
-  isSubmittingPassword = false;
-
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (params['token']) {
-        this.resetToken = params['token'];
-      }
-    });
-  }
   submit() {
-    if (!this.email) {
-      this.toastService.error('Please enter your email address');
+    this.errorMessage = '';
+    const cleanEmail = (this.email || '').trim().toLowerCase();
+
+    if (!cleanEmail) {
+      this.errorMessage = 'Please enter your email address.';
+      return;
+    }
+
+    // Basic email format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      this.errorMessage = 'Please enter a valid email address.';
       return;
     }
 
     this.isSubmitting = true;
-    
-    // Mocking an API call
-    setTimeout(() => {
-      this.isSubmitting = false;
-      this.toastService.success('Password reset link sent to your email');
-      this.email = '';
-    }, 1000);
+
+    this.authService.forgotPassword(cleanEmail).subscribe({
+      next: (res: any) => {
+        this.isSubmitting = false;
+        this.submitted = true;
+        this.successMessage =
+          res.message ||
+          'If an account exists with this email, you will receive a password reset link shortly.';
+      },
+      error: (err) => {
+        this.isSubmitting = false;
+        this.errorMessage =
+          err.error?.message || 'Failed to request password reset. Please try again.';
+      },
+    });
   }
 
-  submitNewPassword() {
-    if (!this.newPassword || !this.confirmPassword) {
-      this.toastService.error('Please fill in all fields');
-      return;
-    }
-    if (this.newPassword !== this.confirmPassword) {
-      this.toastService.error('Passwords do not match');
-      return;
-    }
-
-    this.isSubmittingPassword = true;
-    
-    // Mocking an API call for setting new password
-    setTimeout(() => {
-      this.isSubmittingPassword = false;
-      this.toastService.success('Password reset successfully. You can now login.');
-      this.router.navigate(['/login']);
-    }, 1000);
+  resetForm() {
+    this.submitted = false;
+    this.email = '';
+    this.errorMessage = '';
+    this.successMessage = '';
   }
 }

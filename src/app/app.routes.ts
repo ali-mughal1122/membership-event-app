@@ -10,6 +10,8 @@ export const routes: Routes = [
       { path: '', loadComponent: () => import('./pages/home/home').then(m => m.Home) },
       { path: 'login', canActivate: [publicNoAuthGuard], loadComponent: () => import('./pages/login/login').then(m => m.Login) },
       { path: 'forgot-password', canActivate: [publicNoAuthGuard], loadComponent: () => import('./pages/forgot-password/forgot-password').then(m => m.ForgotPassword) },
+      { path: 'reset-password', canActivate: [publicNoAuthGuard], loadComponent: () => import('./pages/reset-password/reset-password').then(m => m.ResetPassword) },
+      { path: 'verify-email', canActivate: [publicNoAuthGuard], loadComponent: () => import('./pages/verify-email/verify-email').then(m => m.VerifyEmail) },
       { path: 'memberships', loadComponent: () => import('./pages/memberships/memberships').then(m => m.Memberships) },
       { path: 'profile', canActivate: [clientGuard], loadComponent: () => import('./pages/profile/profile').then(m => m.Profile) },
       { path: 'profile/support/:id', canActivate: [clientGuard], loadComponent: () => import('./pages/profile/support-conversation/support-conversation').then(m => m.MemberSupportConversation) },
