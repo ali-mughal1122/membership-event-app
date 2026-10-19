@@ -19,8 +19,13 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       } else {
         // Server side error
         if (error.status === 401) {
-          errorMsg = 'Unauthorized: Invalid credentials or session expired.';
-          authService.logout();
+          const isLoginRequest = req.url.includes('auth/login');
+          if (isLoginRequest) {
+            errorMsg = error.error?.message || 'Invalid email or password.';
+          } else {
+            errorMsg = 'Unauthorized: Session expired or invalid token. Please log in again.';
+            authService.logout();
+          }
         } else if (error.status === 403) {
           if (error.error?.code === 'MEMBERSHIP_REQUIRED') {
             return throwError(() => error);

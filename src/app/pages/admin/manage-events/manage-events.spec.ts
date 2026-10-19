@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { ManageEvents } from './manage-events';
 
 describe('ManageEvents', () => {
@@ -9,6 +10,7 @@ describe('ManageEvents', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ManageEvents],
+      providers: [provideRouter([]), provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ManageEvents);

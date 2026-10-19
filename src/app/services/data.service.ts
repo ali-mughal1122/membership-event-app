@@ -382,7 +382,7 @@ export class DataService {
   }
 
   getCategoryOptions(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${AppEndpointsMapping.GetCategoryOptions}/options`);
+    return this.http.get<Category[]>(AppEndpointsMapping.GetCategoryOptions);
   }
 
   getMySupportConversations(params: PaginationQuery = {}): Observable<PaginatedResult<SupportConversation>> {

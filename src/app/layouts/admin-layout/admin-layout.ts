@@ -38,9 +38,11 @@ export class AdminLayout implements OnInit, OnDestroy {
     });
     
     // Check initial theme
+    // Check initial theme
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      const prefersDark = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         this.isDarkMode = true;
         document.documentElement.classList.add('dark');
       } else {
@@ -75,7 +77,7 @@ export class AdminLayout implements OnInit, OnDestroy {
     } else {
       // System
       localStorage.removeItem('theme');
-      this.isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      this.isDarkMode = typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (this.isDarkMode) {
         document.documentElement.classList.add('dark');
       } else {

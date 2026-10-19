@@ -12,19 +12,19 @@ export class MembersService {
     return this.http.get(MembersEndpointsMapping.GetAllMembers);
   }
 
-  deleteMember(email: string) {
-    return this.http.delete(`${MembersEndpointsMapping.GetAllMembers}?email=${email}`);
+  deleteMember(id: string) {
+    return this.http.delete(`${MembersEndpointsMapping.GetAllMembers}/${id}`);
   }
 
   getPendingMembers() {
     return this.http.get(MembersEndpointsMapping.GetPendingMembers);
   }
 
-  approvePendingMember(email: string) {
-    return this.http.post(MembersEndpointsMapping.ApprovePendingMember, { email });
+  approvePendingMember(id: string) {
+    return this.http.post(MembersEndpointsMapping.ApprovePendingMember, { id });
   }
 
-  rejectPendingMember(email: string) {
-    return this.http.post(MembersEndpointsMapping.RejectPendingMember, { email });
+  rejectPendingMember(id: string) {
+    return this.http.post(MembersEndpointsMapping.RejectPendingMember, { id });
   }
 }

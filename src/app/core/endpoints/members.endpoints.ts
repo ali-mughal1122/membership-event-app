@@ -1,5 +1,6 @@
 export const MembersEndpoints = [
   { baseUrl: "api", name: "members", alias: "getAllMembers", path: "", noToken: false, runAt: "onDemand" },
+  { baseUrl: "api", name: "members", alias: "subscribeToPlan", path: "", noToken: false, runAt: "onDemand" },
   { baseUrl: "api", name: "members/pending", alias: "getPendingMembers", path: "", noToken: false, runAt: "onDemand" },
   { baseUrl: "api", name: "members/pending/approve", alias: "approvePendingMember", path: "", noToken: false, runAt: "onDemand" },
   { baseUrl: "api", name: "members/pending/reject", alias: "rejectPendingMember", path: "", noToken: false, runAt: "onDemand" },
@@ -8,6 +9,7 @@ export const MembersEndpoints = [
 
 export const MembersEndpointsMapping = {
   GetAllMembers: 'getAllMembers',
+  SubscribeToPlan: 'subscribeToPlan',
   GetPendingMembers: 'getPendingMembers',
   ApprovePendingMember: 'approvePendingMember',
   RejectPendingMember: 'rejectPendingMember',

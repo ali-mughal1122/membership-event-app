@@ -17,6 +17,7 @@ export class AdminPlans implements OnInit {
 
   plans = signal<Plan[]>([]);
   isLoading = signal(false);
+  viewMode = signal<'table' | 'grid'>('table');
   isPlanModalOpen = signal(false);
   isEditingPlan = signal(false);
   currentPlan: Partial<Plan> = {};
@@ -28,6 +29,16 @@ export class AdminPlans implements OnInit {
   total = signal(0);
   totalPages = signal(1);
   private searchTimer: ReturnType<typeof setTimeout> | null = null;
+
+  setViewMode(mode: 'table' | 'grid') {
+    this.viewMode.set(mode);
+  }
+
+  getDurationLabel(months?: number): string {
+    if (!months || months === 1) return '1 Month';
+    if (months === 12) return '1 Year';
+    return `${months} Months`;
+  }
 
   ngOnInit() {
     this.fetchPlans();

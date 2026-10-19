@@ -54,16 +54,10 @@ export class Memberships implements OnInit {
   }
   
   private createMembershipRecord(userId: string) {
-    const startDate = new Date();
-    const endDate = new Date();
-    endDate.setMonth(endDate.getMonth() + (this.selectedPlan?.durationMonths || 1));
+    if (!this.selectedPlan?.id) return;
     
-    this.http.post(AppEndpointsMapping.GetAllMembers, {
-      userId: userId,
-      planId: this.selectedPlan?.id,
-      startDate: startDate.toISOString(),
-      endDate: endDate.toISOString(),
-      status: 'ACTIVE'
+    this.http.post(AppEndpointsMapping.SubscribeToPlan, {
+      planId: this.selectedPlan.id,
     }).subscribe({
       next: () => {
         this.isSubscribeModalOpen.set(false);
