@@ -42,6 +42,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -52,6 +58,15 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "8kB",
                   "maximumError": "16kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.stage.ts"
                 }
               ],
               "outputHashing": "all"
@@ -69,6 +84,9 @@
           "configurations": {
             "production": {
               "buildTarget": "membership-event-app:build:production"
+            },
+            "staging": {
+              "buildTarget": "membership-event-app:build:staging"
             },
             "development": {
               "buildTarget": "membership-event-app:build:development"
