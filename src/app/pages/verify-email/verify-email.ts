@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
+import { Subscription } from 'rxjs';
 
 type VerifyState = 'loading' | 'success' | 'already-verified' | 'error' | 'no-token';
 
@@ -14,7 +15,7 @@ type VerifyState = 'loading' | 'success' | 'already-verified' | 'error' | 'no-to
   templateUrl: './verify-email.html',
   styleUrl: './verify-email.scss',
 })
-export class VerifyEmail implements OnInit {
+export class VerifyEmail implements OnInit, OnDestroy {
   authService = inject(AuthService);
   toastService = inject(ToastService);
   route = inject(ActivatedRoute);
@@ -29,9 +30,10 @@ export class VerifyEmail implements OnInit {
   isResending = false;
   resendSuccess = false;
   resendMessage = '';
+  private querySub?: Subscription;
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
+    this.querySub = this.route.queryParams.subscribe((params) => {
       this.token = (params['token'] || '').trim();
 
       if (!this.token) {
@@ -43,6 +45,10 @@ export class VerifyEmail implements OnInit {
 
       this.verifyToken(this.token);
     });
+  }
+
+  ngOnDestroy() {
+    this.querySub?.unsubscribe();
   }
 
   verifyToken(token: string) {

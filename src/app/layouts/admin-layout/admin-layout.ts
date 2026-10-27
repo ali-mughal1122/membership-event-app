@@ -1,6 +1,6 @@
 import { Component, HostListener, signal, inject, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
@@ -27,8 +27,10 @@ export class AdminLayout implements OnInit, OnDestroy {
   private dataService = inject(DataService);
   private unreadTimer: ReturnType<typeof setInterval> | null = null;
 
+  private routerSub?: Subscription;
+
   ngOnInit() {
-    this.router.events.pipe(
+    this.routerSub = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       if (this.scrollContainer) {
@@ -131,6 +133,7 @@ export class AdminLayout implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.routerSub?.unsubscribe();
     if (this.unreadTimer) clearInterval(this.unreadTimer);
     if (typeof window !== 'undefined') {
       document.documentElement.classList.remove('dark');

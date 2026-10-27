@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
 import { ModalComponent } from '../../components/modal/modal';
 import { createApiState } from '../../core/api-state';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ import { map } from 'rxjs';
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
-export class Home implements OnInit {
+export class Home implements OnInit, OnDestroy {
   dataService = inject(DataService);
   authService = inject(AuthService);
   router = inject(Router);
@@ -38,19 +38,24 @@ export class Home implements OnInit {
   isEditMode = false;
   myReviewId: string | null = null;
   expandedReviews: { [key: string]: boolean } = {};
+  private querySub?: Subscription;
 
   ngOnInit() {
     this.fetchEvents();
     this.fetchReviews();
     
     // Check if we returned from login to write a review
-    this.route.queryParams.subscribe(params => {
+    this.querySub = this.route.queryParams.subscribe(params => {
       if (params['action'] === 'review' && this.authService.isLoggedIn()) {
         this.openReviewModal();
         // clear query param
         this.router.navigate([], { queryParams: { action: null }, queryParamsHandling: 'merge', replaceUrl: true });
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.querySub?.unsubscribe();
   }
 
   fetchEvents() {

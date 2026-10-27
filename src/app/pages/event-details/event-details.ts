@@ -1,10 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DataService, Event } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { createApiState } from '../../core/api-state';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { ToastService } from '../../services/toast.service';
 import { ModalComponent } from '../../components/modal/modal';
 
@@ -15,26 +15,31 @@ import { ModalComponent } from '../../components/modal/modal';
   templateUrl: './event-details.html',
   styleUrl: './event-details.scss'
 })
-export class EventDetails implements OnInit {
+export class EventDetails implements OnInit, OnDestroy {
   slug: string | null = '';
   eventState = createApiState<Event>();
 
   dataService = inject(DataService);
   authService = inject(AuthService);
   router = inject(Router);
+  route = inject(ActivatedRoute);
   toastService = inject(ToastService);
 
   isRegistering = false;
   isSuccessModalOpen = signal(false);
   registeredEventTitle = '';
   isPastEvent = false;
-
-  constructor(private route: ActivatedRoute) {
-    this.slug = this.route.snapshot.paramMap.get('slug');
-  }
+  private routeSub?: Subscription;
 
   ngOnInit() {
-    this.fetchEvent();
+    this.routeSub = this.route.paramMap.subscribe(params => {
+      this.slug = params.get('slug');
+      this.fetchEvent();
+    });
+  }
+
+  ngOnDestroy() {
+    this.routeSub?.unsubscribe();
   }
 
   fetchEvent() {

@@ -84,8 +84,12 @@ export class Memberships implements OnInit {
     // Otherwise, register first
     this.authService.register(this.registerData).subscribe({
       next: (res: any) => {
-        this.authService.setToken(res.access_token);
-        this.createMembershipRecord(res.user.id);
+        this.isSubscribeModalOpen.set(false);
+        this.toastService.success(
+          res.message ||
+            'Registration successful! Please check your email to verify your account, then sign in to complete your subscription.',
+        );
+        this.router.navigate(['/login'], { queryParams: { returnUrl: '/memberships' } });
       },
       error: (err) => {
         this.toastService.error('Failed to sign up: ' + (err.error?.message || 'Unknown error'));

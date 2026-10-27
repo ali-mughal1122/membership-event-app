@@ -19,6 +19,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       } else {
         // Server side error
         if (error.status === 401) {
+          if (error.error?.code === 'EMAIL_NOT_VERIFIED') {
+            return throwError(() => error);
+          }
           const isLoginRequest = req.url.includes('auth/login');
           if (isLoginRequest) {
             errorMsg = error.error?.message || 'Invalid email or password.';

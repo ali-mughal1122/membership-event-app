@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reset-password',
@@ -12,7 +13,7 @@ import { ToastService } from '../../services/toast.service';
   templateUrl: './reset-password.html',
   styleUrl: './reset-password.scss',
 })
-export class ResetPassword implements OnInit {
+export class ResetPassword implements OnInit, OnDestroy {
   authService = inject(AuthService);
   toastService = inject(ToastService);
   route = inject(ActivatedRoute);
@@ -28,15 +29,20 @@ export class ResetPassword implements OnInit {
   isLoading = false;
   isSuccess = false;
   errorMessage = '';
+  private querySub?: Subscription;
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
+    this.querySub = this.route.queryParams.subscribe((params) => {
       this.token = (params['token'] || '').trim();
       if (!this.token) {
         this.errorMessage =
           'No password reset token was provided. Please check the link from your email or request a new one.';
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.querySub?.unsubscribe();
   }
 
   toggleShowNewPassword() {

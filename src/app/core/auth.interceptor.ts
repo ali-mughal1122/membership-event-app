@@ -18,7 +18,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
     if (endpoint) {
       const envConfig: any = (environment as any)[endpoint.baseUrl];
-      console.log('url', envConfig.baseUrl)
       if (envConfig) {
         const pathPart = endpoint.path ? `${endpoint.path}/` : '';
         fullUrl = `${envConfig.baseUrl}${envConfig.apiVersion || ''}${pathPart}${endpoint.name}`;

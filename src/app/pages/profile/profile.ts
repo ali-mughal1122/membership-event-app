@@ -213,10 +213,6 @@ export class Profile implements OnInit {
           this.profileImage = this.authService.getProfileImage();
           this.newImageUrl = this.profileImage;
           this.toastService.success('Profile photo updated successfully');
-          
-          setTimeout(() => {
-            if (typeof window !== 'undefined') window.location.reload();
-          }, 500);
         },
         error: (err: any) => {
           this.isUploadingPhoto = false;
@@ -242,7 +238,7 @@ export class Profile implements OnInit {
       lowercase: /[a-z]/.test(this.newPassword),
       number: /\d/.test(this.newPassword),
       special: /[@$!%*?&#^]/.test(this.newPassword),
-      noSpaces: this.newPassword.length > 0 && !this.newPassword.startsWith(' ') && !this.newPassword.endsWith(' '),
+      noSpaces: this.newPassword.length > 0 && !/\s/.test(this.newPassword),
       notSame: this.newPassword.length > 0 && this.newPassword !== this.currentPassword,
       match: this.newPassword.length > 0 && this.newPassword === this.confirmPassword,
       allValid: false
