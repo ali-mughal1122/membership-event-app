@@ -23,15 +23,15 @@ export class Events implements OnInit {
   toastService = inject(ToastService);
 
   eventsState = createApiState<any[]>([]);
-  upcomingEvents: any[] = [];
-  pastEvents: any[] = [];
+  upcomingEvents = signal<any[]>([]);
+  pastEvents = signal<any[]>([]);
   allUpcoming: any[] = [];
   allPast: any[] = [];
   searchQuery = '';
   isSuccessModalOpen = signal(false);
   registeredEventTitle = '';
-  isRegistering = false;
-  registeringEventId: number | string | null = null;
+  isRegistering = signal(false);
+  registeringEventId = signal<number | string | null>(null);
 
   ngOnInit() {
     this.fetchEvents();
@@ -69,7 +69,7 @@ export class Events implements OnInit {
   }
 
   openRegisterModal(event: Event) {
-    if (this.isRegistering) return;
+    if (this.isRegistering()) return;
 
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login'], { queryParams: { returnUrl: '/events' } });
@@ -80,20 +80,21 @@ export class Events implements OnInit {
       return;
     }
 
-    this.isRegistering = true;
-    this.registeringEventId = event.id;
+    this.isRegistering.set(true);
+    this.registeringEventId.set(event.id);
+
     this.dataService.registerForEvent(event.id)
       .subscribe({
         next: () => {
-          this.isRegistering = false;
-          this.registeringEventId = null;
+          this.isRegistering.set(false);
+          this.registeringEventId.set(null);
           this.registeredEventTitle = event.title;
           this.isSuccessModalOpen.set(true);
           this.fetchEvents();
         },
         error: (err) => {
-          this.isRegistering = false;
-          this.registeringEventId = null;
+          this.isRegistering.set(false);
+          this.registeringEventId.set(null);
           if (err.error?.code === 'MEMBERSHIP_REQUIRED') {
             this.allUpcoming = this.allUpcoming.map(e =>
               e.id === event.id ? { ...e, registrationDisabledReason: 'MEMBERSHIP_REQUIRED', canRegister: false } : e
@@ -113,7 +114,7 @@ export class Events implements OnInit {
         .filter(Boolean)
         .some(value => String(value).toLowerCase().includes(query));
     };
-    this.upcomingEvents = this.allUpcoming.filter(matches);
-    this.pastEvents = this.allPast.filter(matches);
+    this.upcomingEvents.set(this.allUpcoming.filter(matches));
+    this.pastEvents.set(this.allPast.filter(matches));
   }
 }

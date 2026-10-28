@@ -1,6 +1,6 @@
 import { Component, HostListener, signal, inject, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
@@ -15,20 +15,22 @@ import { DataService } from '../../services/data.service';
 export class AdminLayout implements OnInit, OnDestroy {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLElement>;
 
-  isSidebarOpen = false;
-  isDesktopSidebarCollapsed = false;
+  isSidebarOpen = signal(false);
+  isDesktopSidebarCollapsed = signal(false);
   showScrollToTop = signal(false);
-  isProfileDropdownOpen = false;
-  isThemeMenuOpen = false;
-  isDarkMode = false;
+  isProfileDropdownOpen = signal(false);
+  isThemeMenuOpen = signal(false);
+  isDarkMode = signal(false);
   supportUnread = signal(0);
   private router = inject(Router);
   public authService = inject(AuthService);
   private dataService = inject(DataService);
   private unreadTimer: ReturnType<typeof setInterval> | null = null;
 
+  private routerSub?: Subscription;
+
   ngOnInit() {
-    this.router.events.pipe(
+    this.routerSub = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       if (this.scrollContainer) {
@@ -38,15 +40,14 @@ export class AdminLayout implements OnInit, OnDestroy {
     });
     
     // Check initial theme
-    // Check initial theme
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('theme');
       const prefersDark = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        this.isDarkMode = true;
+        this.isDarkMode.set(true);
         document.documentElement.classList.add('dark');
       } else {
-        this.isDarkMode = false;
+        this.isDarkMode.set(false);
         document.documentElement.classList.remove('dark');
       }
     }
@@ -67,37 +68,38 @@ export class AdminLayout implements OnInit, OnDestroy {
 
   setTheme(theme: string) {
     if (theme === 'dark') {
-      this.isDarkMode = true;
+      this.isDarkMode.set(true);
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     } else if (theme === 'light') {
-      this.isDarkMode = false;
+      this.isDarkMode.set(false);
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     } else {
       // System
       localStorage.removeItem('theme');
-      this.isDarkMode = typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (this.isDarkMode) {
+      const prefersDark = typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      this.isDarkMode.set(prefersDark);
+      if (prefersDark) {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
       }
     }
-    this.isThemeMenuOpen = false;
+    this.isThemeMenuOpen.set(false);
   }
 
   toggleThemeMenu() {
-    this.isThemeMenuOpen = !this.isThemeMenuOpen;
-    if (this.isThemeMenuOpen) {
-      this.isProfileDropdownOpen = false;
+    this.isThemeMenuOpen.update(v => !v);
+    if (this.isThemeMenuOpen()) {
+      this.isProfileDropdownOpen.set(false);
     }
   }
 
   toggleProfileDropdown() {
-    this.isProfileDropdownOpen = !this.isProfileDropdownOpen;
-    if (this.isProfileDropdownOpen) {
-      this.isThemeMenuOpen = false;
+    this.isProfileDropdownOpen.update(v => !v);
+    if (this.isProfileDropdownOpen()) {
+      this.isThemeMenuOpen.set(false);
     }
   }
 
@@ -110,10 +112,10 @@ export class AdminLayout implements OnInit, OnDestroy {
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (!target.closest('.profile-dropdown-container')) {
-      this.isProfileDropdownOpen = false;
+      this.isProfileDropdownOpen.set(false);
     }
     if (!target.closest('.theme-dropdown-container')) {
-      this.isThemeMenuOpen = false;
+      this.isThemeMenuOpen.set(false);
     }
   }
 
@@ -131,6 +133,7 @@ export class AdminLayout implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.routerSub?.unsubscribe();
     if (this.unreadTimer) clearInterval(this.unreadTimer);
     if (typeof window !== 'undefined') {
       document.documentElement.classList.remove('dark');

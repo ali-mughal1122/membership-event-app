@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reset-password',
@@ -12,7 +13,7 @@ import { ToastService } from '../../services/toast.service';
   templateUrl: './reset-password.html',
   styleUrl: './reset-password.scss',
 })
-export class ResetPassword implements OnInit {
+export class ResetPassword implements OnInit, OnDestroy {
   authService = inject(AuthService);
   toastService = inject(ToastService);
   route = inject(ActivatedRoute);
@@ -22,29 +23,35 @@ export class ResetPassword implements OnInit {
   newPassword = '';
   confirmPassword = '';
 
-  showNewPassword = false;
-  showConfirmPassword = false;
+  showNewPassword = signal(false);
+  showConfirmPassword = signal(false);
 
-  isLoading = false;
-  isSuccess = false;
-  errorMessage = '';
+  isLoading = signal(false);
+  isSuccess = signal(false);
+  errorMessage = signal('');
+  private querySub?: Subscription;
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
+    this.querySub = this.route.queryParams.subscribe((params) => {
       this.token = (params['token'] || '').trim();
       if (!this.token) {
-        this.errorMessage =
-          'No password reset token was provided. Please check the link from your email or request a new one.';
+        this.errorMessage.set(
+          'No password reset token was provided. Please check the link from your email or request a new one.'
+        );
       }
     });
   }
 
+  ngOnDestroy() {
+    this.querySub?.unsubscribe();
+  }
+
   toggleShowNewPassword() {
-    this.showNewPassword = !this.showNewPassword;
+    this.showNewPassword.update(v => !v);
   }
 
   toggleShowConfirmPassword() {
-    this.showConfirmPassword = !this.showConfirmPassword;
+    this.showConfirmPassword.update(v => !v);
   }
 
   get passwordLengthValid(): boolean {
@@ -93,18 +100,19 @@ export class ResetPassword implements OnInit {
 
   submit() {
     if (!this.token) {
-      this.errorMessage = 'A valid reset token is required.';
+      this.errorMessage.set('A valid reset token is required.');
       return;
     }
 
     if (!this.isFormValid) {
-      this.errorMessage =
-        'Please make sure your password meets all requirements and that both fields match.';
+      this.errorMessage.set(
+        'Please make sure your password meets all requirements and that both fields match.'
+      );
       return;
     }
 
-    this.isLoading = true;
-    this.errorMessage = '';
+    this.isLoading.set(true);
+    this.errorMessage.set('');
 
     this.authService
       .resetPassword({
@@ -113,17 +121,18 @@ export class ResetPassword implements OnInit {
       })
       .subscribe({
         next: (res: any) => {
-          this.isLoading = false;
-          this.isSuccess = true;
+          this.isLoading.set(false);
+          this.isSuccess.set(true);
           this.toastService.success(
             res.message || 'Password reset successfully! You can now log in.',
           );
         },
         error: (err) => {
-          this.isLoading = false;
-          this.errorMessage =
+          this.isLoading.set(false);
+          this.errorMessage.set(
             err.error?.message ||
-            'Failed to reset password. This link may have expired or already been used.';
+            'Failed to reset password. This link may have expired or already been used.'
+          );
         },
       });
   }

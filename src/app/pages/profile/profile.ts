@@ -23,11 +23,11 @@ export class Profile implements OnInit {
   route = inject(ActivatedRoute);
   dataService = inject(DataService);
 
-  email: string = '';
-  profileImage: string = '';
-  newImageUrl: string = '';
+  email = signal('');
+  profileImage = signal('');
+  newImageUrl = signal('');
 
-  isUploadingPhoto = false;
+  isUploadingPhoto = signal(false);
 
   passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,}$/;
 
@@ -51,16 +51,16 @@ export class Profile implements OnInit {
       return;
     }
     
-    this.email = this.authService.getUserEmail() || 'User';
-    this.profileImage = this.authService.getProfileImage();
-    this.newImageUrl = this.profileImage;
+    this.email.set(this.authService.getUserEmail() || 'User');
+    this.profileImage.set(this.authService.getProfileImage());
+    this.newImageUrl.set(this.profileImage());
 
     this.authService.getMe().subscribe({
       next: (user: any) => {
         this.authService.setProfileImage(user?.profileImage || null);
-        this.profileImage = this.authService.getProfileImage();
-        this.newImageUrl = this.profileImage;
-        if (user?.email) this.email = user.email;
+        this.profileImage.set(this.authService.getProfileImage());
+        this.newImageUrl.set(this.profileImage());
+        if (user?.email) this.email.set(user.email);
       },
       error: () => {}
     });
@@ -184,42 +184,39 @@ export class Profile implements OnInit {
       return;
     }
 
-    this.isUploadingPhoto = true;
+    this.isUploadingPhoto.set(true);
     const reader = new FileReader();
     reader.onload = (e: any) => {
-      this.newImageUrl = e.target.result;
+      this.newImageUrl.set(e.target.result);
       this.saveProfile();
-      this.isUploadingPhoto = false;
+      this.isUploadingPhoto.set(false);
     };
     reader.onerror = () => {
       this.toastService.error('Failed to read file.');
-      this.isUploadingPhoto = false;
+      this.isUploadingPhoto.set(false);
     };
     reader.readAsDataURL(file);
   }
 
   removePhoto() {
-    this.newImageUrl = `https://ui-avatars.com/api/?name=${this.email}&background=10b981&color=fff`;
+    this.newImageUrl.set(`https://ui-avatars.com/api/?name=${this.email()}&background=10b981&color=fff`);
     this.saveProfile();
   }
 
   saveProfile() {
-    if (this.newImageUrl) {
-      this.isUploadingPhoto = true;
-      this.authService.updateProfile({ profileImage: this.newImageUrl }).subscribe({
+    const url = this.newImageUrl();
+    if (url) {
+      this.isUploadingPhoto.set(true);
+      this.authService.updateProfile({ profileImage: url }).subscribe({
         next: (user: any) => {
-          this.isUploadingPhoto = false;
-          this.authService.setProfileImage(user?.profileImage || this.newImageUrl || null);
-          this.profileImage = this.authService.getProfileImage();
-          this.newImageUrl = this.profileImage;
+          this.isUploadingPhoto.set(false);
+          this.authService.setProfileImage(user?.profileImage || url || null);
+          this.profileImage.set(this.authService.getProfileImage());
+          this.newImageUrl.set(this.profileImage());
           this.toastService.success('Profile photo updated successfully');
-          
-          setTimeout(() => {
-            if (typeof window !== 'undefined') window.location.reload();
-          }, 500);
         },
         error: (err: any) => {
-          this.isUploadingPhoto = false;
+          this.isUploadingPhoto.set(false);
           this.toastService.error(err.error?.message || 'Failed to save profile photo');
         }
       });
@@ -229,11 +226,11 @@ export class Profile implements OnInit {
   currentPassword = '';
   newPassword = '';
   confirmPassword = '';
-  isSubmittingPassword = false;
+  isSubmittingPassword = signal(false);
 
-  showCurrentPassword = false;
-  showNewPassword = false;
-  showConfirmPassword = false;
+  showCurrentPassword = signal(false);
+  showNewPassword = signal(false);
+  showConfirmPassword = signal(false);
 
   get passwordValidations() {
     return {
@@ -242,7 +239,7 @@ export class Profile implements OnInit {
       lowercase: /[a-z]/.test(this.newPassword),
       number: /\d/.test(this.newPassword),
       special: /[@$!%*?&#^]/.test(this.newPassword),
-      noSpaces: this.newPassword.length > 0 && !this.newPassword.startsWith(' ') && !this.newPassword.endsWith(' '),
+      noSpaces: this.newPassword.length > 0 && !/\s/.test(this.newPassword),
       notSame: this.newPassword.length > 0 && this.newPassword !== this.currentPassword,
       match: this.newPassword.length > 0 && this.newPassword === this.confirmPassword,
       allValid: false
@@ -259,20 +256,20 @@ export class Profile implements OnInit {
       return;
     }
 
-    this.isSubmittingPassword = true;
+    this.isSubmittingPassword.set(true);
     this.authService.changePassword({
       currentPassword: this.currentPassword,
       newPassword: this.newPassword
     }).subscribe({
       next: () => {
-        this.isSubmittingPassword = false;
+        this.isSubmittingPassword.set(false);
         this.toastService.success('Password changed successfully');
         this.currentPassword = '';
         this.newPassword = '';
         this.confirmPassword = '';
       },
       error: (err: any) => {
-        this.isSubmittingPassword = false;
+        this.isSubmittingPassword.set(false);
         const msg = err?.error?.message || 'Failed to change password.';
         this.toastService.error(Array.isArray(msg) ? msg[0] : msg);
       }

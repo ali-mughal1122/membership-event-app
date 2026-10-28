@@ -86,7 +86,7 @@
 </div>
 
 <app-modal [isOpen]="isSubscribeModalOpen()" [title]="'Subscribe to ' + selectedPlan?.name"
-  [confirmText]="'Complete Subscription'" (closeEvent)="closeSubscribeModal()" (confirmEvent)="submitSubscription()">
+  [confirmText]="'Complete Subscription'" [isConfirming]="isSubmitting()" (closeEvent)="closeSubscribeModal()" (confirmEvent)="submitSubscription()">
   <div class="space-y-4">
     @if (!authService.isLoggedIn()) {
       <div class="mb-4">

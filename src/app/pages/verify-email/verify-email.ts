@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
+import { Subscription } from 'rxjs';
 
 type VerifyState = 'loading' | 'success' | 'already-verified' | 'error' | 'no-token';
 
@@ -14,30 +15,32 @@ type VerifyState = 'loading' | 'success' | 'already-verified' | 'error' | 'no-to
   templateUrl: './verify-email.html',
   styleUrl: './verify-email.scss',
 })
-export class VerifyEmail implements OnInit {
+export class VerifyEmail implements OnInit, OnDestroy {
   authService = inject(AuthService);
   toastService = inject(ToastService);
   route = inject(ActivatedRoute);
 
-  state: VerifyState = 'loading';
+  state = signal<VerifyState>('loading');
   token = '';
-  statusMessage = '';
-  errorMessage = '';
+  statusMessage = signal('');
+  errorMessage = signal('');
 
   // Resend form
   resendEmail = '';
-  isResending = false;
-  resendSuccess = false;
-  resendMessage = '';
+  isResending = signal(false);
+  resendSuccess = signal(false);
+  resendMessage = signal('');
+  private querySub?: Subscription;
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
+    this.querySub = this.route.queryParams.subscribe((params) => {
       this.token = (params['token'] || '').trim();
 
       if (!this.token) {
-        this.state = 'no-token';
-        this.errorMessage =
-          'No verification token was found. Please check your verification link or request a new one below.';
+        this.state.set('no-token');
+        this.errorMessage.set(
+          'No verification token was found. Please check your verification link or request a new one below.'
+        );
         return;
       }
 
@@ -45,27 +48,34 @@ export class VerifyEmail implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.querySub?.unsubscribe();
+  }
+
   verifyToken(token: string) {
-    this.state = 'loading';
-    this.errorMessage = '';
+    this.state.set('loading');
+    this.errorMessage.set('');
 
     this.authService.verifyEmail(token).subscribe({
       next: (res: any) => {
         if (res.alreadyVerified) {
-          this.state = 'already-verified';
-          this.statusMessage =
-            res.message || 'Your email address is already verified. You can log in directly.';
+          this.state.set('already-verified');
+          this.statusMessage.set(
+            res.message || 'Your email address is already verified. You can log in directly.'
+          );
         } else {
-          this.state = 'success';
-          this.statusMessage =
-            res.message || 'Email verified successfully! You can now log in to your account.';
+          this.state.set('success');
+          this.statusMessage.set(
+            res.message || 'Email verified successfully! You can now log in to your account.'
+          );
         }
       },
       error: (err) => {
-        this.state = 'error';
-        this.errorMessage =
+        this.state.set('error');
+        this.errorMessage.set(
           err.error?.message ||
-          'This verification link is invalid, has expired, or has already been used.';
+          'This verification link is invalid, has expired, or has already been used.'
+        );
       },
     });
   }
@@ -77,19 +87,20 @@ export class VerifyEmail implements OnInit {
       return;
     }
 
-    this.isResending = true;
-    this.resendMessage = '';
+    this.isResending.set(true);
+    this.resendMessage.set('');
 
     this.authService.resendVerification(email).subscribe({
       next: (res: any) => {
-        this.isResending = false;
-        this.resendSuccess = true;
-        this.resendMessage =
-          res.message || 'A new verification link has been sent to your email address.';
-        this.toastService.success(this.resendMessage);
+        this.isResending.set(false);
+        this.resendSuccess.set(true);
+        this.resendMessage.set(
+          res.message || 'A new verification link has been sent to your email address.'
+        );
+        this.toastService.success(this.resendMessage());
       },
       error: (err) => {
-        this.isResending = false;
+        this.isResending.set(false);
         const msg = err.error?.message || 'Failed to send verification email. Please try again.';
         this.toastService.error(msg);
       },

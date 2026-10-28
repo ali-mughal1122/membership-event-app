@@ -1,6 +1,6 @@
-import { Component, HostListener, signal, inject, OnInit, ElementRef } from '@angular/core';
+import { Component, HostListener, signal, inject, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 
@@ -11,16 +11,17 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './public-layout.html',
   styleUrl: './public-layout.scss'
 })
-export class PublicLayout implements OnInit {
-  isMobileMenuOpen = false;
-  isProfileDropdownOpen = false;
+export class PublicLayout implements OnInit, OnDestroy {
+  isMobileMenuOpen = signal(false);
+  isProfileDropdownOpen = signal(false);
   showScrollToTop = signal(false);
   private router = inject(Router);
   public authService = inject(AuthService);
   private elementRef = inject(ElementRef);
+  private routerSub?: Subscription;
 
   ngOnInit() {
-    this.router.events.pipe(
+    this.routerSub = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       if (!this.router.parseUrl(event.urlAfterRedirects).fragment) {
@@ -38,6 +39,10 @@ export class PublicLayout implements OnInit {
         }
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.routerSub?.unsubscribe();
   }
 
   @HostListener('window:scroll', [])
@@ -62,7 +67,7 @@ export class PublicLayout implements OnInit {
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (!target.closest('.profile-dropdown-container')) {
-      this.isProfileDropdownOpen = false;
+      this.isProfileDropdownOpen.set(false);
     }
   }
 

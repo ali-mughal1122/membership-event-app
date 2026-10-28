@@ -1,10 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DataService, Event } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { createApiState } from '../../core/api-state';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { ToastService } from '../../services/toast.service';
 import { ModalComponent } from '../../components/modal/modal';
 
@@ -15,26 +15,31 @@ import { ModalComponent } from '../../components/modal/modal';
   templateUrl: './event-details.html',
   styleUrl: './event-details.scss'
 })
-export class EventDetails implements OnInit {
+export class EventDetails implements OnInit, OnDestroy {
   slug: string | null = '';
   eventState = createApiState<Event>();
 
   dataService = inject(DataService);
   authService = inject(AuthService);
   router = inject(Router);
+  route = inject(ActivatedRoute);
   toastService = inject(ToastService);
 
-  isRegistering = false;
+  isRegistering = signal(false);
   isSuccessModalOpen = signal(false);
-  registeredEventTitle = '';
-  isPastEvent = false;
-
-  constructor(private route: ActivatedRoute) {
-    this.slug = this.route.snapshot.paramMap.get('slug');
-  }
+  registeredEventTitle = signal('');
+  isPastEvent = signal(false);
+  private routeSub?: Subscription;
 
   ngOnInit() {
-    this.fetchEvent();
+    this.routeSub = this.route.paramMap.subscribe(params => {
+      this.slug = params.get('slug');
+      this.fetchEvent();
+    });
+  }
+
+  ngOnDestroy() {
+    this.routeSub?.unsubscribe();
   }
 
   fetchEvent() {
@@ -47,7 +52,7 @@ export class EventDetails implements OnInit {
               eventDate.setHours(0, 0, 0, 0);
               const today = new Date();
               today.setHours(0, 0, 0, 0);
-              this.isPastEvent = eventDate < today;
+              this.isPastEvent.set(eventDate < today);
             }
             return event;
           })
@@ -57,7 +62,7 @@ export class EventDetails implements OnInit {
   }
 
   openRegisterModal(event: Event) {
-    if (this.isRegistering) return;
+    if (this.isRegistering()) return;
 
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login'], { queryParams: { returnUrl: `/events/${this.slug}` } });
@@ -68,17 +73,18 @@ export class EventDetails implements OnInit {
       return;
     }
 
-    this.isRegistering = true;
+    this.isRegistering.set(true);
+
     this.dataService.registerForEvent(event.id)
       .subscribe({
         next: () => {
-          this.isRegistering = false;
-          this.registeredEventTitle = event.title;
+          this.isRegistering.set(false);
+          this.registeredEventTitle.set(event.title);
           this.isSuccessModalOpen.set(true);
           this.fetchEvent();
         },
         error: (err) => {
-          this.isRegistering = false;
+          this.isRegistering.set(false);
           if (err.error?.code === 'MEMBERSHIP_REQUIRED') {
             const current = this.eventState.data();
             if (current) {
