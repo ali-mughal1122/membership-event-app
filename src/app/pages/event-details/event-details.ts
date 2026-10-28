@@ -25,10 +25,10 @@ export class EventDetails implements OnInit, OnDestroy {
   route = inject(ActivatedRoute);
   toastService = inject(ToastService);
 
-  isRegistering = false;
+  isRegistering = signal(false);
   isSuccessModalOpen = signal(false);
-  registeredEventTitle = '';
-  isPastEvent = false;
+  registeredEventTitle = signal('');
+  isPastEvent = signal(false);
   private routeSub?: Subscription;
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class EventDetails implements OnInit, OnDestroy {
               eventDate.setHours(0, 0, 0, 0);
               const today = new Date();
               today.setHours(0, 0, 0, 0);
-              this.isPastEvent = eventDate < today;
+              this.isPastEvent.set(eventDate < today);
             }
             return event;
           })
@@ -62,7 +62,7 @@ export class EventDetails implements OnInit, OnDestroy {
   }
 
   openRegisterModal(event: Event) {
-    if (this.isRegistering) return;
+    if (this.isRegistering()) return;
 
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login'], { queryParams: { returnUrl: `/events/${this.slug}` } });
@@ -73,17 +73,18 @@ export class EventDetails implements OnInit, OnDestroy {
       return;
     }
 
-    this.isRegistering = true;
+    this.isRegistering.set(true);
+
     this.dataService.registerForEvent(event.id)
       .subscribe({
         next: () => {
-          this.isRegistering = false;
-          this.registeredEventTitle = event.title;
+          this.isRegistering.set(false);
+          this.registeredEventTitle.set(event.title);
           this.isSuccessModalOpen.set(true);
           this.fetchEvent();
         },
         error: (err) => {
-          this.isRegistering = false;
+          this.isRegistering.set(false);
           if (err.error?.code === 'MEMBERSHIP_REQUIRED') {
             const current = this.eventState.data();
             if (current) {

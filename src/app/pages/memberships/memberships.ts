@@ -27,6 +27,7 @@ export class Memberships implements OnInit {
   plansState = createApiState<Plan[]>([]);
   
   isSubscribeModalOpen = signal(false);
+  isSubmitting = signal(false);
   selectedPlan: Plan | null = null;
   
   registerData = {
@@ -56,21 +57,26 @@ export class Memberships implements OnInit {
   private createMembershipRecord(userId: string) {
     if (!this.selectedPlan?.id) return;
     
+    this.isSubmitting.set(true);
     this.http.post(AppEndpointsMapping.SubscribeToPlan, {
       planId: this.selectedPlan.id,
     }).subscribe({
       next: () => {
+        this.isSubmitting.set(false);
         this.isSubscribeModalOpen.set(false);
         this.toastService.success('Successfully subscribed!');
         this.router.navigate(['/events']);
       },
       error: (err) => {
+        this.isSubmitting.set(false);
         this.toastService.error('Failed to activate subscription: ' + (err.error?.message || 'Unknown error'));
       }
     });
   }
 
   submitSubscription() {
+    if (this.isSubmitting()) return;
+
     if (this.authService.isLoggedIn()) {
       const userId = this.authService.getUserId();
       if (userId) {
@@ -82,8 +88,10 @@ export class Memberships implements OnInit {
     }
 
     // Otherwise, register first
+    this.isSubmitting.set(true);
     this.authService.register(this.registerData).subscribe({
       next: (res: any) => {
+        this.isSubmitting.set(false);
         this.isSubscribeModalOpen.set(false);
         this.toastService.success(
           res.message ||
@@ -92,6 +100,7 @@ export class Memberships implements OnInit {
         this.router.navigate(['/login'], { queryParams: { returnUrl: '/memberships' } });
       },
       error: (err) => {
+        this.isSubmitting.set(false);
         this.toastService.error('Failed to sign up: ' + (err.error?.message || 'Unknown error'));
       }
     });

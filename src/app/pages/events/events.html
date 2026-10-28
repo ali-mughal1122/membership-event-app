@@ -55,7 +55,7 @@
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @for (event of upcomingEvents; track event.id) {
+            @for (event of upcomingEvents(); track event.id) {
             <div [routerLink]="event.slug" class="event-card group bg-white rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 border border-gray-100 hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-2 flex flex-col cursor-pointer overflow-hidden relative">
               <div class="relative h-56 overflow-hidden">
                 <div class="absolute inset-0 bg-gray-200">
@@ -99,9 +99,9 @@
                       </a>
                     </div>
                   } @else {
-                    <button (click)="$event.stopPropagation(); openRegisterModal(event)" [disabled]="isRegistering && registeringEventId === event.id"
+                    <button (click)="$event.stopPropagation(); openRegisterModal(event)" [disabled]="isRegistering() && registeringEventId() === event.id"
                       class="inline-flex items-center justify-center px-5 py-2.5 font-bold text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 shadow-md disabled:opacity-50">
-                      {{ isRegistering && registeringEventId === event.id ? 'Registering...' : 'Register' }}
+                      {{ isRegistering() && registeringEventId() === event.id ? 'Registering...' : 'Register' }}
                     </button>
                   }
                 </div>
@@ -122,7 +122,7 @@
         </section>
 
         <!-- Past Events Section -->
-        @if (pastEvents.length > 0) {
+        @if (pastEvents().length > 0) {
         <section>
           <div class="flex items-center justify-between mb-8">
             <h2 class="text-3xl font-black text-gray-900 tracking-tight">Past Events</h2>
@@ -130,7 +130,7 @@
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @for (event of pastEvents; track event.id) {
+            @for (event of pastEvents(); track event.id) {
             <div [routerLink]="event.slug" class="event-card group bg-white rounded-[2rem] shadow-sm border border-gray-100 flex flex-col cursor-pointer overflow-hidden relative opacity-75 hover:opacity-100 transition-opacity">
               <div class="relative h-48 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
                 <div class="absolute inset-0 bg-gray-200">

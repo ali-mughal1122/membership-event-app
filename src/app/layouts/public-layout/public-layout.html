@@ -43,28 +43,34 @@
         <div class="hidden lg:flex items-center space-x-4 shrink-0 ml-auto">
           @if (!authService.isLoggedIn()) {
           <a routerLink="/login"
-            class="text-gray-500 hover:text-blue-600 transition-colors font-semibold px-2 lg:px-4 py-2 whitespace-nowrap">Sign In</a>
+            class="text-gray-500 hover:text-blue-600 transition-colors font-semibold px-2 lg:px-4 py-2 whitespace-nowrap">Sign
+            In</a>
           <a routerLink="/memberships"
             class="bg-gray-900 hover:bg-gray-800 text-white px-4 lg:px-6 py-2.5 rounded-full font-semibold transition-all shadow-md hover:shadow-xl transform hover:-translate-y-0.5 border border-transparent hover:border-gray-700 whitespace-nowrap">
             Join Now
           </a>
           } @else {
           <div class="relative group inline-block profile-dropdown-container">
-            <button (click)="isProfileDropdownOpen = !isProfileDropdownOpen" class="focus:outline-none flex items-center relative z-50">
-              <img [src]="profileImage" alt="Profile" class="w-10 h-10 rounded-full border-2 border-transparent hover:border-blue-500 transition-all object-cover shadow-sm">
+            <button (click)="isProfileDropdownOpen.set(!isProfileDropdownOpen())"
+              class="focus:outline-none flex items-center relative z-50">
+              <img [src]="profileImage" alt="Profile"
+                class="w-10 h-10 rounded-full border-2 border-transparent hover:border-blue-500 transition-all object-cover shadow-sm">
             </button>
 
-            <div *ngIf="isProfileDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 transform origin-top-right transition-all">
+            <div *ngIf="isProfileDropdownOpen()"
+              class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 transform origin-top-right transition-all">
               <div class="px-4 py-2 border-b border-gray-50 mb-1">
                 <p class="text-sm font-medium text-gray-900 truncate">{{ authService.getUserEmail() }}</p>
               </div>
-              <a routerLink="/profile" (click)="isProfileDropdownOpen = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors font-medium">
+              <a routerLink="/profile" (click)="isProfileDropdownOpen.set(false)"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors font-medium">
                 My Profile
               </a>
-              <!-- <a routerLink="/profile" fragment="help" (click)="isProfileDropdownOpen = false" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors font-medium">
+              <!-- <a routerLink="/profile" fragment="help" (click)="isProfileDropdownOpen.set(false)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors font-medium">
                 Help & Support
               </a> -->
-              <button (click)="logout()" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors font-medium">
+              <button (click)="logout()"
+                class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors font-medium">
                 Logout
               </button>
             </div>
@@ -74,12 +80,12 @@
 
         <!-- Mobile Menu Button -->
         <div class="lg:hidden flex items-center ml-auto">
-          <button (click)="isMobileMenuOpen = !isMobileMenuOpen"
+          <button (click)="isMobileMenuOpen.set(!isMobileMenuOpen())"
             class="w-10 h-10 rounded-full bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none flex items-center justify-center transition-colors">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path *ngIf="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              <path *ngIf="!isMobileMenuOpen()" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M4 6h16M4 12h16M4 18h16" />
-              <path *ngIf="isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              <path *ngIf="isMobileMenuOpen()" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -89,52 +95,54 @@
 
     <!-- Mobile Nav Dropdown -->
     <div
-      class="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 px-4 pt-4 pb-6 shadow-2xl absolute w-full left-0 origin-top transition-all duration-300 ease-in-out"
-      [ngClass]="isMobileMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'">
+      class="lg:hidden bg-white border-t border-b border-gray-100 px-4 pt-4 pb-6 shadow-2xl absolute w-full left-0 origin-top transition-all duration-300 ease-in-out"
+      [ngClass]="isMobileMenuOpen() ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'">
       <div class="flex flex-col space-y-2">
-        <a routerLink="/" routerLinkActive="text-blue-600 bg-blue-50/50 font-bold"
-          [routerLinkActiveOptions]="{exact: true}" (click)="isMobileMenuOpen = false"
-          class="block px-4 py-3 text-base font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-xl transition-colors">Home</a>
-        <a routerLink="/about" routerLinkActive="text-blue-600 bg-blue-50/50 font-bold"
-          (click)="isMobileMenuOpen = false"
-          class="block px-4 py-3 text-base font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-xl transition-colors">About
+        <a routerLink="/" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
+          [routerLinkActiveOptions]="{exact: true}" (click)="isMobileMenuOpen.set(false)"
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Home</a>
+        <a routerLink="/about" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
+          (click)="isMobileMenuOpen.set(false)"
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">About
           Us</a>
-        <a routerLink="/events" routerLinkActive="text-blue-600 bg-blue-50/50 font-bold"
-          (click)="isMobileMenuOpen = false"
-          class="block px-4 py-3 text-base font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-xl transition-colors">Events</a>
-        <a routerLink="/memberships" routerLinkActive="text-blue-600 bg-blue-50/50 font-bold"
-          (click)="isMobileMenuOpen = false"
-          class="block px-4 py-3 text-base font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-xl transition-colors">Memberships</a>
-        <a routerLink="/contact" routerLinkActive="text-blue-600 bg-blue-50/50 font-bold"
-          (click)="isMobileMenuOpen = false"
-          class="block px-4 py-3 text-base font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-xl transition-colors">Contact
+        <a routerLink="/events" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
+          (click)="isMobileMenuOpen.set(false)"
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Events</a>
+        <a routerLink="/memberships" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
+          (click)="isMobileMenuOpen.set(false)"
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Memberships</a>
+        <a routerLink="/contact" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
+          (click)="isMobileMenuOpen.set(false)"
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Contact
           Us</a>
         @if (authService.getUserType() === 'ADMIN') {
-        <a routerLink="/admin" routerLinkActive="text-blue-600 bg-blue-50/50 font-bold"
-          (click)="isMobileMenuOpen = false"
-          class="block px-4 py-3 text-base font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-xl transition-colors">Admin
+        <a routerLink="/admin" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
+          (click)="isMobileMenuOpen.set(false)"
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Admin
           Panel</a>
         }
 
         <div class="pt-4 mt-2 border-t border-gray-100">
           @if (!authService.isLoggedIn()) {
-          <a routerLink="/login" (click)="isMobileMenuOpen = false"
+          <a routerLink="/login" (click)="isMobileMenuOpen.set(false)"
             class="block px-4 py-3 text-base font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-xl transition-colors text-center border border-gray-200">Sign
             In</a>
-          <a routerLink="/memberships" (click)="isMobileMenuOpen = false"
+          <a routerLink="/memberships" (click)="isMobileMenuOpen.set(false)"
             class="block mt-3 text-center bg-gray-900 hover:bg-gray-800 text-white px-4 py-3 rounded-xl font-semibold transition-colors shadow-md">Join
             Now</a>
           } @else {
-          <a routerLink="/profile" (click)="isMobileMenuOpen = false"
-            class="flex items-center gap-3 px-4 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 rounded-xl transition-colors mb-2">
+          <a routerLink="/profile" [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
+            (click)="isMobileMenuOpen.set(false)"
+            class="flex items-center gap-3 px-4 py-3 text-base font-semibold text-gray-700 hover:bg-blue-50/60 hover:text-blue-600 rounded-xl transition-all mb-2">
             <img [src]="profileImage" class="w-8 h-8 rounded-full object-cover shadow-sm">
             My Profile
           </a>
-          <a routerLink="/profile" fragment="help" (click)="isMobileMenuOpen = false"
-            class="block px-4 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 rounded-xl transition-colors mb-2">
+          <a routerLink="/profile" fragment="help" (click)="isMobileMenuOpen.set(false)"
+            class="block px-4 py-3 text-base font-semibold text-gray-700 hover:bg-blue-50/60 hover:text-blue-600 rounded-xl transition-all mb-2">
             Help & Support
           </a>
-          <button (click)="logout(); isMobileMenuOpen = false"
+          <button (click)="logout(); isMobileMenuOpen.set(false)"
             class="block w-full px-4 py-3 text-base font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-red-100">Logout</button>
           }
         </div>
@@ -204,9 +212,9 @@
             <li><a routerLink="/contact" class="hover:text-emerald-400 transition-colors flex items-center gap-2"><span
                   class="w-1.5 h-1.5 rounded-full bg-emerald-500/0 hover:bg-emerald-500 transition-colors"></span>
                 Contact Us</a></li>
-            <li><a routerLink="/admin" class="hover:text-emerald-400 transition-colors flex items-center gap-2"><span
+            <!-- <li><a routerLink="/admin" class="hover:text-emerald-400 transition-colors flex items-center gap-2"><span
                   class="w-1.5 h-1.5 rounded-full bg-emerald-500/0 hover:bg-emerald-500 transition-colors"></span> Admin
-                Portal</a></li>
+                Portal</a></li> -->
             <li><a href="javascript:void(0)"
                 class="hover:text-emerald-400 transition-colors flex items-center gap-2"><span
                   class="w-1.5 h-1.5 rounded-full bg-emerald-500/0 hover:bg-emerald-500 transition-colors"></span>
@@ -217,7 +225,7 @@
 
       <div
         class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
-        <p>&copy; 2026 taxiterminalen  Inc. All rights reserved.</p>
+        <p>&copy; 2026 taxiterminalen Inc. All rights reserved.</p>
         <p class="flex items-center gap-1">Designed with loves
           <!-- <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg> f -->
           or Professionals
@@ -227,10 +235,8 @@
   </footer>
 </div>
 
-<button type="button" (click)="scrollToTop()" aria-label="Scroll to top"
-  [class.opacity-100]="showScrollToTop()"
-  [class.pointer-events-auto]="showScrollToTop()"
-  [class.opacity-0]="!showScrollToTop()"
+<button type="button" (click)="scrollToTop()" aria-label="Scroll to top" [class.opacity-100]="showScrollToTop()"
+  [class.pointer-events-auto]="showScrollToTop()" [class.opacity-0]="!showScrollToTop()"
   [class.pointer-events-none]="!showScrollToTop()"
   class="fixed bottom-8 right-8 z-[100] bg-gray-900 hover:bg-gray-800 text-white p-3 rounded-full shadow-xl shadow-gray-900/20 transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 border border-gray-700 hover:scale-110">
   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

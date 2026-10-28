@@ -19,8 +19,8 @@
           <div class="flex flex-col items-center">
             <div class="relative group mb-6">
               <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-50 relative z-10">
-                <img [src]="newImageUrl || profileImage" alt="Profile avatar" class="w-full h-full object-cover">
-                @if (isUploadingPhoto) {
+                <img [src]="newImageUrl() || profileImage()" alt="Profile avatar" class="w-full h-full object-cover">
+                @if (isUploadingPhoto()) {
                   <div class="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
                     <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
                   </div>
@@ -30,12 +30,12 @@
             </div>
 
             <div class="w-full space-y-3">
-              <button type="button" (click)="fileInput.click()" [disabled]="isUploadingPhoto" class="w-full bg-blue-50 text-blue-600 font-bold px-4 py-3 rounded-xl hover:bg-blue-100 focus:outline-none transition-colors border border-blue-100">
+              <button type="button" (click)="fileInput.click()" [disabled]="isUploadingPhoto()" class="w-full bg-blue-50 text-blue-600 font-bold px-4 py-3 rounded-xl hover:bg-blue-100 focus:outline-none transition-colors border border-blue-100">
                 Change Photo
               </button>
               <input type="file" #fileInput class="hidden" accept="image/png, image/jpeg, image/jpg, image/webp" (change)="onFileSelected($event)">
               
-              <button type="button" (click)="removePhoto()" [disabled]="isUploadingPhoto" class="w-full bg-white text-red-500 font-semibold px-4 py-3 rounded-xl hover:bg-red-50 focus:outline-none transition-colors border border-gray-200 hover:border-red-100">
+              <button type="button" (click)="removePhoto()" [disabled]="isUploadingPhoto()" class="w-full bg-white text-red-500 font-semibold px-4 py-3 rounded-xl hover:bg-red-50 focus:outline-none transition-colors border border-gray-200 hover:border-red-100">
                 Remove Photo
               </button>
             </div>
@@ -119,7 +119,7 @@
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-bold text-gray-400 uppercase tracking-wide mb-1">Email Address</label>
-              <p class="text-gray-900 font-semibold text-lg bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">{{ email }}</p>
+              <p class="text-gray-900 font-semibold text-lg bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">{{ email() }}</p>
             </div>
           </div>
         </div>
@@ -143,11 +143,11 @@
             <div>
               <label class="block text-sm font-bold text-gray-700 mb-2">Current Password</label>
               <div class="relative">
-                <input [type]="showCurrentPassword ? 'text' : 'password'" [(ngModel)]="currentPassword" name="currentPassword" 
+                <input [type]="showCurrentPassword() ? 'text' : 'password'" [(ngModel)]="currentPassword" name="currentPassword" 
                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all font-medium pr-12">
-                <button type="button" (click)="showCurrentPassword = !showCurrentPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
-                  <svg *ngIf="!showCurrentPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                  <svg *ngIf="showCurrentPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                <button type="button" (click)="showCurrentPassword.set(!showCurrentPassword())" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                  <svg *ngIf="!showCurrentPassword()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                  <svg *ngIf="showCurrentPassword()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
                 </button>
               </div>
             </div>
@@ -156,11 +156,11 @@
             <div>
               <label class="block text-sm font-bold text-gray-700 mb-2">New Password</label>
               <div class="relative">
-                <input [type]="showNewPassword ? 'text' : 'password'" [(ngModel)]="newPassword" name="newPassword" 
+                <input [type]="showNewPassword() ? 'text' : 'password'" [(ngModel)]="newPassword" name="newPassword" 
                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all font-medium pr-12">
-                <button type="button" (click)="showNewPassword = !showNewPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
-                  <svg *ngIf="!showNewPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                  <svg *ngIf="showNewPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                <button type="button" (click)="showNewPassword.set(!showNewPassword())" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                  <svg *ngIf="!showNewPassword()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                  <svg *ngIf="showNewPassword()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
                 </button>
               </div>
 
@@ -201,11 +201,11 @@
             <div>
               <label class="block text-sm font-bold text-gray-700 mb-2">Confirm New Password</label>
               <div class="relative">
-                <input [type]="showConfirmPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="confirmPassword" 
+                <input [type]="showConfirmPassword() ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="confirmPassword" 
                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all font-medium pr-12">
-                <button type="button" (click)="showConfirmPassword = !showConfirmPassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
-                  <svg *ngIf="!showConfirmPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                  <svg *ngIf="showConfirmPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                <button type="button" (click)="showConfirmPassword.set(!showConfirmPassword())" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                  <svg *ngIf="!showConfirmPassword()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                  <svg *ngIf="showConfirmPassword()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
                 </button>
               </div>
               <p *ngIf="confirmPassword.length > 0 && newPassword !== confirmPassword" class="text-red-500 text-sm font-medium mt-2 flex items-center">
@@ -215,12 +215,12 @@
             </div>
             
             <div class="pt-4 border-t border-gray-100">
-              <button type="submit" [disabled]="isSubmittingPassword || !isPasswordFormValid" class="w-full sm:w-auto bg-gray-900 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-all shadow-md hover:shadow-lg flex items-center justify-center min-w-[200px]">
-                <span *ngIf="isSubmittingPassword" class="flex items-center gap-2">
+              <button type="submit" [disabled]="isSubmittingPassword() || !isPasswordFormValid" class="w-full sm:w-auto bg-gray-900 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-all shadow-md hover:shadow-lg flex items-center justify-center min-w-[200px]">
+                <span *ngIf="isSubmittingPassword()" class="flex items-center gap-2">
                   <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                   Updating...
                 </span>
-                <span *ngIf="!isSubmittingPassword">Update Password</span>
+                <span *ngIf="!isSubmittingPassword()">Update Password</span>
               </button>
             </div>
           </form>

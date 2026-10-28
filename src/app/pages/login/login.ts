@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
@@ -18,28 +18,28 @@ export class Login {
   router = inject(Router);
   route = inject(ActivatedRoute);
 
-  isSignupMode = false;
-  isLoading = false;
-  errorMessage = '';
-  successMessage = '';
+  isSignupMode = signal(false);
+  isLoading = signal(false);
+  errorMessage = signal('');
+  successMessage = signal('');
 
-  showPassword = false;
-  isUnverified = false;
-  unverifiedEmail = '';
-  isResending = false;
+  showPassword = signal(false);
+  isUnverified = signal(false);
+  unverifiedEmail = signal('');
+  isResending = signal(false);
 
   loginData = { email: '', password: '' };
   registerData = { name: '', email: '', password: '', phone: '', address: '' };
 
   toggleMode() {
-    this.isSignupMode = !this.isSignupMode;
-    this.errorMessage = '';
-    this.successMessage = '';
-    this.isUnverified = false;
+    this.isSignupMode.update(v => !v);
+    this.errorMessage.set('');
+    this.successMessage.set('');
+    this.isUnverified.set(false);
   }
 
   toggleShowPassword() {
-    this.showPassword = !this.showPassword;
+    this.showPassword.update(v => !v);
   }
 
   // Live password requirement checks for registration
@@ -80,38 +80,39 @@ export class Login {
   }
 
   onSubmit() {
-    this.isLoading = true;
-    this.errorMessage = '';
-    this.successMessage = '';
-    this.isUnverified = false;
+    this.isLoading.set(true);
+    this.errorMessage.set('');
+    this.successMessage.set('');
+    this.isUnverified.set(false);
 
-    if (this.isSignupMode) {
+    if (this.isSignupMode()) {
       if (!this.isRegisterPasswordValid) {
-        this.isLoading = false;
-        this.errorMessage = 'Please ensure your password meets all requirements.';
+        this.isLoading.set(false);
+        this.errorMessage.set('Please ensure your password meets all requirements.');
         return;
       }
 
       this.authService.register(this.registerData).subscribe({
         next: (res: any) => {
-          this.isLoading = false;
-          this.isSignupMode = false;
-          this.successMessage =
+          this.isLoading.set(false);
+          this.isSignupMode.set(false);
+          this.successMessage.set(
             res.message ||
-            'Registration successful! We have sent a verification link to your email. Please verify your email before signing in.';
-          this.unverifiedEmail = this.registerData.email;
+            'Registration successful! We have sent a verification link to your email. Please verify your email before signing in.'
+          );
+          this.unverifiedEmail.set(this.registerData.email);
           this.loginData.email = this.registerData.email;
           this.registerData = { name: '', email: '', password: '', phone: '', address: '' };
         },
         error: (err) => {
-          this.isLoading = false;
-          this.errorMessage = err.error?.message || 'Registration failed. Please try again.';
+          this.isLoading.set(false);
+          this.errorMessage.set(err.error?.message || 'Registration failed. Please try again.');
         },
       });
     } else {
       this.authService.login(this.loginData).subscribe({
         next: (res: any) => {
-          this.isLoading = false;
+          this.isLoading.set(false);
           this.authService.setToken(res.access_token);
           this.authService.getMe().subscribe({
             next: (user: any) => this.authService.setProfileImage(user?.profileImage || null),
@@ -126,18 +127,19 @@ export class Login {
           }
         },
         error: (err) => {
-          this.isLoading = false;
+          this.isLoading.set(false);
           const isUnverifiedErr =
             err.error?.code === 'EMAIL_NOT_VERIFIED' ||
             (err.error?.message && err.error.message.toLowerCase().includes('verify your email'));
 
           if (isUnverifiedErr) {
-            this.isUnverified = true;
-            this.unverifiedEmail = err.error?.email || this.loginData.email;
-            this.errorMessage =
-              err.error?.message || 'Please verify your email address before signing in.';
+            this.isUnverified.set(true);
+            this.unverifiedEmail.set(err.error?.email || this.loginData.email);
+            this.errorMessage.set(
+              err.error?.message || 'Please verify your email address before signing in.'
+            );
           } else {
-            this.errorMessage = err.error?.message || 'Invalid email or password.';
+            this.errorMessage.set(err.error?.message || 'Invalid email or password.');
           }
         },
       });
@@ -145,16 +147,17 @@ export class Login {
   }
 
   resendVerification() {
-    if (!this.unverifiedEmail) return;
-    this.isResending = true;
+    const email = this.unverifiedEmail();
+    if (!email) return;
+    this.isResending.set(true);
 
-    this.authService.resendVerification(this.unverifiedEmail).subscribe({
+    this.authService.resendVerification(email).subscribe({
       next: (res: any) => {
-        this.isResending = false;
+        this.isResending.set(false);
         this.toastService.success(res.message || 'Verification link sent to your email.');
       },
       error: (err) => {
-        this.isResending = false;
+        this.isResending.set(false);
         this.toastService.error(err.error?.message || 'Failed to resend verification email.');
       },
     });

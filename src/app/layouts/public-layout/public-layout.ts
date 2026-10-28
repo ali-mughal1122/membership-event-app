@@ -12,8 +12,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './public-layout.scss'
 })
 export class PublicLayout implements OnInit, OnDestroy {
-  isMobileMenuOpen = false;
-  isProfileDropdownOpen = false;
+  isMobileMenuOpen = signal(false);
+  isProfileDropdownOpen = signal(false);
   showScrollToTop = signal(false);
   private router = inject(Router);
   public authService = inject(AuthService);
@@ -67,7 +67,7 @@ export class PublicLayout implements OnInit, OnDestroy {
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (!target.closest('.profile-dropdown-container')) {
-      this.isProfileDropdownOpen = false;
+      this.isProfileDropdownOpen.set(false);
     }
   }
 
