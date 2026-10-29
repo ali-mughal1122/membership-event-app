@@ -12,43 +12,28 @@
         <nav class="hidden lg:flex items-center gap-6 xl:gap-8 h-20 absolute left-1/2 -translate-x-1/2">
           <a routerLink="/" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
             [routerLinkActiveOptions]="{exact: true}"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">
-            Home
-          </a>
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{ 'nav.home' | translate }}</a>
 
           <a routerLink="/events" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">
-            Events
-          </a>
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{ 'nav.events' | translate }}</a>
           <a routerLink="/memberships" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">
-            Memberships
-          </a>
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{ 'nav.memberships' | translate }}</a>
           <a routerLink="/contact" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">
-            Contact Us
-          </a>
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{ 'nav.contact_us' | translate }}</a>
           <a routerLink="/about" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">
-            About Us
-          </a>
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{ 'nav.about_us' | translate }}</a>
           @if (authService.getUserType() === 'ADMIN') {
           <a routerLink="/admin" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">
-            Admin Panel
-          </a>
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{ 'nav.admin_panel' | translate }}</a>
           }
         </nav>
 
-        <div class="hidden lg:flex items-center space-x-4 shrink-0 ml-auto">
+        <div class="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0 ml-auto z-20">
           @if (!authService.isLoggedIn()) {
           <a routerLink="/login"
-            class="text-gray-500 hover:text-blue-600 transition-colors font-semibold px-2 lg:px-4 py-2 whitespace-nowrap">Sign
-            In</a>
+            class="text-gray-600 hover:text-blue-600 transition-colors font-semibold px-2.5 py-2 whitespace-nowrap text-sm">{{ 'nav.sign_in' | translate }}</a>
           <a routerLink="/memberships"
-            class="bg-gray-900 hover:bg-gray-800 text-white px-4 lg:px-6 py-2.5 rounded-full font-semibold transition-all shadow-md hover:shadow-xl transform hover:-translate-y-0.5 border border-transparent hover:border-gray-700 whitespace-nowrap">
-            Join Now
-          </a>
+            class="bg-gray-900 hover:bg-gray-800 text-white px-4 lg:px-5 py-2 rounded-full font-semibold transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5 border border-transparent hover:border-gray-700 whitespace-nowrap text-sm">{{ 'nav.join_now' | translate }}</a>
           } @else {
           <div class="relative group inline-block profile-dropdown-container">
             <button (click)="isProfileDropdownOpen.set(!isProfileDropdownOpen())"
@@ -63,23 +48,21 @@
                 <p class="text-sm font-medium text-gray-900 truncate">{{ authService.getUserEmail() }}</p>
               </div>
               <a routerLink="/profile" (click)="isProfileDropdownOpen.set(false)"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors font-medium">
-                My Profile
-              </a>
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors font-medium">{{ 'nav.my_profile' | translate }}</a>
               <!-- <a routerLink="/profile" fragment="help" (click)="isProfileDropdownOpen.set(false)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors font-medium">
                 Help & Support
               </a> -->
               <button (click)="logout()"
-                class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors font-medium">
-                Logout
-              </button>
+                class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors font-medium">{{ 'nav.logout' | translate }}</button>
             </div>
           </div>
           }
         </div>
 
+          <div class="hidden lg:flex items-center pl-2 border-l border-gray-200/80"><app-language-switcher></app-language-switcher></div>
         <!-- Mobile Menu Button -->
-        <div class="lg:hidden flex items-center ml-auto">
+        <div class="lg:hidden flex items-center gap-2 ml-auto">
+          <app-language-switcher></app-language-switcher>
           <button (click)="isMobileMenuOpen.set(!isMobileMenuOpen())"
             class="w-10 h-10 rounded-full bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none flex items-center justify-center transition-colors">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,50 +83,43 @@
       <div class="flex flex-col space-y-2">
         <a routerLink="/" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
           [routerLinkActiveOptions]="{exact: true}" (click)="isMobileMenuOpen.set(false)"
-          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Home</a>
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">{{ 'nav.home' | translate }}</a>
         <a routerLink="/about" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
           (click)="isMobileMenuOpen.set(false)"
-          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">About
-          Us</a>
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">{{ 'NAV_ABOUT_US' | translate }}</a>
         <a routerLink="/events" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
           (click)="isMobileMenuOpen.set(false)"
-          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Events</a>
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">{{ 'nav.events' | translate }}</a>
         <a routerLink="/memberships" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
           (click)="isMobileMenuOpen.set(false)"
-          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Memberships</a>
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">{{ 'nav.memberships' | translate }}</a>
         <a routerLink="/contact" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
           (click)="isMobileMenuOpen.set(false)"
-          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Contact
-          Us</a>
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">{{ 'nav.contact_us' | translate }}</a>
         @if (authService.getUserType() === 'ADMIN') {
         <a routerLink="/admin" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
           (click)="isMobileMenuOpen.set(false)"
-          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">Admin
-          Panel</a>
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">{{ 'nav.admin_panel' | translate }}</a>
         }
 
         <div class="pt-4 mt-2 border-t border-gray-100">
           @if (!authService.isLoggedIn()) {
           <a routerLink="/login" (click)="isMobileMenuOpen.set(false)"
-            class="block px-4 py-3 text-base font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-xl transition-colors text-center border border-gray-200">Sign
-            In</a>
+            class="block px-4 py-3 text-base font-semibold text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-xl transition-colors text-center border border-gray-200">{{ 'nav.sign_in' | translate }}</a>
           <a routerLink="/memberships" (click)="isMobileMenuOpen.set(false)"
-            class="block mt-3 text-center bg-gray-900 hover:bg-gray-800 text-white px-4 py-3 rounded-xl font-semibold transition-colors shadow-md">Join
-            Now</a>
+            class="block mt-3 text-center bg-gray-900 hover:bg-gray-800 text-white px-4 py-3 rounded-xl font-semibold transition-colors shadow-md">{{ 'nav.join_now' | translate }}</a>
           } @else {
           <a routerLink="/profile" [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
             (click)="isMobileMenuOpen.set(false)"
             class="flex items-center gap-3 px-4 py-3 text-base font-semibold text-gray-700 hover:bg-blue-50/60 hover:text-blue-600 rounded-xl transition-all mb-2">
-            <img [src]="profileImage" class="w-8 h-8 rounded-full object-cover shadow-sm">
-            My Profile
-          </a>
+            <img [src]="profileImage" class="w-8 h-8 rounded-full object-cover shadow-sm">{{ 'NAV_MY_PROFILE' | translate }}</a>
           <a routerLink="/profile" fragment="help" (click)="isMobileMenuOpen.set(false)"
             class="block px-4 py-3 text-base font-semibold text-gray-700 hover:bg-blue-50/60 hover:text-blue-600 rounded-xl transition-all mb-2">
             Help & Support
           </a>
           <button (click)="logout(); isMobileMenuOpen.set(false)"
-            class="block w-full px-4 py-3 text-base font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-red-100">Logout</button>
+            class="block w-full px-4 py-3 text-base font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-red-100">{{ 'NAV_LOGOUT' | translate }}</button>
           }
         </div>
       </div>
@@ -170,8 +146,7 @@
             <h3 class="text-2xl font-black tracking-tight text-white">taxiterminalen</h3>
           </div>
           <p class="text-gray-400 leading-relaxed mb-8 max-w-sm">
-            The premier membership and event management platform. We connect professionals, foster growth, and deliver
-            unforgettable experiences.
+            {{ 'footer.desc' | translate }}
           </p>
           <div class="flex space-x-4">
             <a href="#"
@@ -192,44 +167,39 @@
         </div>
 
         <div class="md:col-span-3 lg:col-span-2 lg:col-start-6">
-          <h4 class="font-bold mb-6 text-lg text-white">Platform</h4>
+          <h4 class="font-bold mb-6 text-lg text-white">{{ 'footer.platform' | translate }}</h4>
           <ul class="space-y-4 text-gray-400">
             <li><a routerLink="/" class="hover:text-blue-400 transition-colors flex items-center gap-2"><span
-                  class="w-1.5 h-1.5 rounded-full bg-blue-500/0 hover:bg-blue-500 transition-colors"></span> Home</a>
+                  class="w-1.5 h-1.5 rounded-full bg-blue-500/0 hover:bg-blue-500 transition-colors"></span>{{ 'NAV_HOME' | translate }}</a>
             </li>
             <li><a routerLink="/events" class="hover:text-blue-400 transition-colors flex items-center gap-2"><span
-                  class="w-1.5 h-1.5 rounded-full bg-blue-500/0 hover:bg-blue-500 transition-colors"></span> Events</a>
+                  class="w-1.5 h-1.5 rounded-full bg-blue-500/0 hover:bg-blue-500 transition-colors"></span>{{ 'NAV_EVENTS' | translate }}</a>
             </li>
             <li><a routerLink="/memberships" class="hover:text-blue-400 transition-colors flex items-center gap-2"><span
-                  class="w-1.5 h-1.5 rounded-full bg-blue-500/0 hover:bg-blue-500 transition-colors"></span>
-                Memberships</a></li>
+                  class="w-1.5 h-1.5 rounded-full bg-blue-500/0 hover:bg-blue-500 transition-colors"></span>{{ 'NAV_MEMBERSHIPS' | translate }}</a></li>
           </ul>
         </div>
 
         <div class="md:col-span-4 lg:col-span-3">
-          <h4 class="font-bold mb-6 text-lg text-white">Company</h4>
+          <h4 class="font-bold mb-6 text-lg text-white">{{ 'footer.company' | translate }}</h4>
           <ul class="space-y-4 text-gray-400">
             <li><a routerLink="/contact" class="hover:text-emerald-400 transition-colors flex items-center gap-2"><span
-                  class="w-1.5 h-1.5 rounded-full bg-emerald-500/0 hover:bg-emerald-500 transition-colors"></span>
-                Contact Us</a></li>
+                  class="w-1.5 h-1.5 rounded-full bg-emerald-500/0 hover:bg-emerald-500 transition-colors"></span>{{ 'NAV_CONTACT_US' | translate }}</a></li>
             <!-- <li><a routerLink="/admin" class="hover:text-emerald-400 transition-colors flex items-center gap-2"><span
                   class="w-1.5 h-1.5 rounded-full bg-emerald-500/0 hover:bg-emerald-500 transition-colors"></span> Admin
                 Portal</a></li> -->
             <li><a href="javascript:void(0)"
                 class="hover:text-emerald-400 transition-colors flex items-center gap-2"><span
                   class="w-1.5 h-1.5 rounded-full bg-emerald-500/0 hover:bg-emerald-500 transition-colors"></span>
-                Privacy Policy</a></li>
+                {{ 'footer.privacy_policy' | translate }}</a></li>
           </ul>
         </div>
       </div>
 
       <div
         class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
-        <p>&copy; 2026 taxiterminalen Inc. All rights reserved.</p>
-        <p class="flex items-center gap-1">Designed with loves
-          <!-- <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg> f -->
-          or Professionals
-        </p>
+        <p>&copy; 2026 taxiterminalen Inc. {{ 'footer.rights_reserved' | translate }}</p>
+        <p class="flex items-center gap-1">{{ 'footer.designed_with' | translate }}</p>
       </div>
     </div>
   </footer>

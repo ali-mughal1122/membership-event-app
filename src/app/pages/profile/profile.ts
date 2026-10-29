@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../core/translate.pipe';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +13,7 @@ import { PaginationComponent } from '../../components/pagination/pagination';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ModalComponent, PaginationComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ModalComponent, PaginationComponent, TranslatePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })

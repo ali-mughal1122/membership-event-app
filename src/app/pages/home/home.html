@@ -14,22 +14,15 @@
         <div
           class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 shadow-xl">
           <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-sm font-bold text-emerald-100 tracking-wide uppercase">The Taxi Terminal</span>
+          <span class="text-sm font-bold text-emerald-100 tracking-wide uppercase">{{ 'home.hero.badge' | translate }}</span>
         </div>
         <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight mb-8 leading-[1.1]">
-          Together we create <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400">better taxi
-            services</span>.
+          {{ 'home.hero.title_part1' | translate }} <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400">{{ 'home.hero.title_part2' | translate }}</span>.
         </h1>
-        <p class="text-xl text-gray-300 font-medium leading-relaxed mb-10 max-w-xl">
-          Welcome to Taxiterminalen - your preferred platform for taxi services, where we bring together taxi drivers
-          and offer advice as well as the creation of cheap electricity contracts, insurance and pension agreements to
-          ensure the best terms for our customers.
-        </p>
+        <p class="text-xl text-gray-300 font-medium leading-relaxed mb-10 max-w-xl">{{ 'home.hero.desc' | translate }}</p>
         <a routerLink="/contact"
-          class="inline-flex items-center justify-center px-8 py-4 font-bold text-gray-900 transition-all duration-200 bg-white border border-transparent rounded-xl hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white shadow-xl hover:-translate-y-1 hover:shadow-2xl">
-          Contact us
-        </a>
+          class="inline-flex items-center justify-center px-8 py-4 font-bold text-gray-900 transition-all duration-200 bg-white border border-transparent rounded-xl hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white shadow-xl hover:-translate-y-1 hover:shadow-2xl">{{ 'home.hero.contact_btn' | translate }}</a>
       </div>
 
       <div class="hidden lg:flex justify-center">
@@ -52,18 +45,12 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start border-b border-gray-100 pb-24">
       <div>
-        <h2 class="text-4xl font-black text-gray-900 tracking-tight">About the Taxi Terminal</h2>
+        <h2 class="text-4xl font-black text-gray-900 tracking-tight">{{ 'home.about.title' | translate }}</h2>
       </div>
       <div>
-        <p class="text-xl text-gray-600 leading-relaxed font-medium mb-8">
-          We are a taxi association that offers advice and the creation of cheap electricity contracts, cheaper
-          insurance and better pension agreements for our members. We also work to bring taxi drivers together to
-          strengthen the industry.
-        </p>
+        <p class="text-xl text-gray-600 leading-relaxed font-medium mb-8">{{ 'home.about.desc' | translate }}</p>
         <a routerLink="/about"
-          class="inline-flex items-center text-emerald-600 font-bold text-lg hover:text-emerald-700 transition-colors group">
-          About us
-          <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none"
+          class="inline-flex items-center text-emerald-600 font-bold text-lg hover:text-emerald-700 transition-colors group">{{ 'home.about.btn' | translate }} <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none"
             stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
           </svg>
@@ -76,26 +63,25 @@
       <div class="group">
         <h3
           class="text-2xl font-black text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors tracking-tight">
-          Cheap electricity deals</h3>
+          {{ 'home.features.feature1_title' | translate }}</h3>
         <p class="text-gray-500 font-medium leading-relaxed">
-          Value is an expression of something or someone that is considered significant or important.
+          {{ 'home.features.feature1_desc' | translate }}
         </p>
       </div>
       <div class="group">
         <h3
           class="text-2xl font-black text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors tracking-tight">
-          Better pension agreement</h3>
+          {{ 'home.features.feature2_title' | translate }}</h3>
         <p class="text-gray-500 font-medium leading-relaxed">
-          Value is a subjective and individual perception of something, which can be based on various factors such as
-          morality, culture and
+          {{ 'home.features.feature2_desc' | translate }}
         </p>
       </div>
       <div class="group">
         <h3
           class="text-2xl font-black text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors tracking-tight">
-          Gathered the taxi drivers together</h3>
+          {{ 'home.features.feature3_title' | translate }}</h3>
         <p class="text-gray-500 font-medium leading-relaxed">
-          Value is a subjective perception of something that is considered important or significant.
+          {{ 'home.features.feature3_desc' | translate }}
         </p>
       </div>
     </div>
@@ -111,44 +97,34 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-start">
       <div>
-        <p class="text-2xl text-gray-900 font-bold leading-relaxed tracking-tight">
-          Welcome to Taxiterminalen - your association for taxi drivers and advice on <span
-            class="text-emerald-600">cheap electricity contracts, insurance and pension agreements</span>. We specialize
-          in bringing taxi drivers together and ensuring better conditions for our members.
-        </p>
+        <p class="text-2xl text-gray-900 font-bold leading-relaxed tracking-tight">{{ 'home.services.headline' | translate }}</p>
       </div>
       <div>
-        <p class="text-lg text-gray-600 leading-relaxed font-medium mb-10">
-          We offer professional advice and assistance in setting up a taxi business, as well as advantages on
-          electricity contracts, insurance and pension agreements for our members. We bring taxi drivers together and
-          ensure better conditions for the entire industry.
-        </p>
+        <p class="text-lg text-gray-600 leading-relaxed font-medium mb-10">{{ 'home.services.sub' | translate }}</p>
 
         <ul class="space-y-4 mb-10">
           <li class="flex items-center text-gray-700 font-medium">
             <svg class="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
-            Advice on taxi legislation
+            {{ 'home.services.item1' | translate }}
           </li>
           <li class="flex items-center text-gray-700 font-medium">
             <svg class="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
-            Setting up a taxi business
+            {{ 'home.services.item2' | translate }}
           </li>
           <li class="flex items-center text-gray-700 font-medium">
             <svg class="w-5 h-5 text-emerald-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
-            Better pension agreements for truckers and drivers
+            {{ 'home.services.item3' | translate }}
           </li>
         </ul>
 
         <a routerLink="/memberships"
-          class="inline-flex items-center text-emerald-600 font-bold text-lg hover:text-emerald-700 transition-colors group">
-          All services
-          <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none"
+          class="inline-flex items-center text-emerald-600 font-bold text-lg hover:text-emerald-700 transition-colors group">{{ 'home.services.all_btn' | translate }} <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none"
             stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
           </svg>
@@ -162,10 +138,10 @@
 <div class="py-24 bg-white relative overflow-hidden border-t border-gray-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
     <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">
-      Empowering Professionals <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500">Worldwide</span>.
+      {{ 'home.benefits.title' | translate }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500">{{ 'home.benefits.title_accent' | translate }}</span>.
     </h2>
     <p class="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto mb-20 font-medium">
-      We are a leading organization dedicated to fostering growth, networking, and innovation. Through our membership programs and dynamic events, we provide the platform you need to succeed.
+      {{ 'home.benefits.desc' | translate }}
     </p>
     
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
@@ -174,8 +150,8 @@
         <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform shadow-inner">
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
         </div>
-        <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-blue-600 transition-colors">Vibrant Community</h3>
-        <p class="text-gray-500 font-medium leading-relaxed">Connect with like-minded individuals and industry leaders in our exclusive network.</p>
+        <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-blue-600 transition-colors">{{ 'home.benefits.card1_title' | translate }}</h3>
+        <p class="text-gray-500 font-medium leading-relaxed">{{ 'home.benefits.card1_desc' | translate }}</p>
       </div>
       
       <div class="group bg-white p-10 rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-emerald-500/10 border border-gray-100 hover:border-emerald-100 transition-all duration-300 transform hover:-translate-y-2 relative overflow-hidden text-left">
@@ -183,8 +159,8 @@
         <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform shadow-inner">
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
         </div>
-        <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-emerald-600 transition-colors">Exclusive Resources</h3>
-        <p class="text-gray-500 font-medium leading-relaxed">Gain access to premium content, curated tools, and actionable insights.</p>
+        <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-emerald-600 transition-colors">{{ 'home.benefits.card2_title' | translate }}</h3>
+        <p class="text-gray-500 font-medium leading-relaxed">{{ 'home.benefits.card2_desc' | translate }}</p>
       </div>
       
       <div class="group bg-white p-10 rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-purple-500/10 border border-gray-100 hover:border-purple-100 transition-all duration-300 transform hover:-translate-y-2 relative overflow-hidden text-left">
@@ -192,8 +168,8 @@
         <div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform shadow-inner">
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
         </div>
-        <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-purple-600 transition-colors">Premier Events</h3>
-        <p class="text-gray-500 font-medium leading-relaxed">Attend interactive workshops, global conferences, and VIP networking mixers.</p>
+        <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-purple-600 transition-colors">{{ 'home.benefits.card3_title' | translate }}</h3>
+        <p class="text-gray-500 font-medium leading-relaxed">{{ 'home.benefits.card3_desc' | translate }}</p>
       </div>
     </div>
   </div>
@@ -203,10 +179,10 @@
 <div class="py-24 bg-gray-50 relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row justify-between items-end md:items-center mb-16 gap-4">
-      <h2 class="text-4xl font-black text-gray-900 tracking-tight">Customer reviews</h2>
+      <h2 class="text-4xl font-black text-gray-900 tracking-tight">{{ 'home.reviews.customer_reviews' | translate }}</h2>
       <button (click)="handleLeaveReviewClick()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-        Share Your Experience
+        {{ 'home.reviews.share_experience' | translate }}
       </button>
     </div>
 
@@ -221,9 +197,9 @@
     @else if (loadingReviewsError()) {
       <div class="bg-red-50 text-red-600 p-8 rounded-2xl text-center border border-red-100">
         <svg class="w-12 h-12 mx-auto mb-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-        <h3 class="text-xl font-bold mb-2">Oops! Something went wrong</h3>
-        <p>We couldn't load the reviews at this time. Please try again later.</p>
-        <button (click)="fetchReviews()" class="mt-4 px-6 py-2 bg-red-100 hover:bg-red-200 text-red-700 font-bold rounded-lg transition-colors">Try Again</button>
+        <h3 class="text-xl font-bold mb-2">{{ 'home.reviews.error_title' | translate }}</h3>
+        <p>{{ 'home.reviews.error_desc' | translate }}</p>
+        <button (click)="fetchReviews()" class="mt-4 px-6 py-2 bg-red-100 hover:bg-red-200 text-red-700 font-bold rounded-lg transition-colors">{{ 'home.reviews.try_again' | translate }}</button>
       </div>
     }
     
@@ -233,9 +209,9 @@
         <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
           <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
         </div>
-        <h3 class="text-2xl font-bold text-gray-900 mb-2">No reviews yet</h3>
-        <p class="text-gray-500 mb-6 max-w-md mx-auto">Be the first to share your experience and help others learn about our platform!</p>
-        <button (click)="handleLeaveReviewClick()" class="px-6 py-2.5 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-xl transition-colors">Write a Review</button>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ 'home.reviews.no_reviews_title' | translate }}</h3>
+        <p class="text-gray-500 mb-6 max-w-md mx-auto">{{ 'home.reviews.no_reviews_desc' | translate }}</p>
+        <button (click)="handleLeaveReviewClick()" class="px-6 py-2.5 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-xl transition-colors">{{ 'home.reviews.write_review' | translate }}</button>
       </div>
     }
     
@@ -260,7 +236,7 @@
             </p>
             @if (review.comment.length > 150) {
               <button (click)="toggleReviewExpansion(review.id)" class="text-emerald-600 font-bold text-sm mt-2 hover:text-emerald-700 transition-colors">
-                {{ expandedReviews()[review.id] ? 'Show Less' : 'Read More' }}
+                {{ expandedReviews()[review.id] ? ('home.reviews.show_less' | translate) : ('home.reviews.read_more' | translate) }}
               </button>
             }
           </div>
@@ -288,8 +264,8 @@
 
 <app-modal
   [isOpen]="isReviewModalOpen()"
-  [title]="isEditMode() ? 'Update Your Review' : 'Share Your Experience'"
-  [confirmText]="isEditMode() ? 'Update' : 'Submit'"
+  [title]="isEditMode() ? ('home.reviews.update_title' | translate) : ('home.reviews.share_experience' | translate)"
+  [confirmText]="isEditMode() ? ('home.reviews.update_btn' | translate) : ('home.reviews.submit_btn' | translate)"
   [showConfirm]="!(isSubmittingReview() && !reviewForm.comment)"
   [isConfirming]="isSubmittingReview() && !!reviewForm.comment"
   (closeEvent)="closeReviewModal()"
@@ -301,7 +277,7 @@
   } @else {
     <div class="space-y-6">
       <div>
-        <label class="block text-sm font-bold text-gray-700 mb-3">Your Rating</label>
+        <label class="block text-sm font-bold text-gray-700 mb-3">{{ 'home.reviews.your_rating' | translate }}</label>
         <div class="flex items-center space-x-2">
           @for (star of [1, 2, 3, 4, 5]; track star) {
             <button type="button" (click)="setRating(star)" class="focus:outline-none transition-transform hover:scale-110">
@@ -314,17 +290,17 @@
       </div>
 
       <div>
-        <label class="block text-sm font-bold text-gray-700 mb-2">Your Feedback</label>
+        <label class="block text-sm font-bold text-gray-700 mb-2">{{ 'home.reviews.your_feedback' | translate }}</label>
         <textarea
           [(ngModel)]="reviewForm.comment"
           name="comment"
           rows="5"
           class="w-full rounded-xl border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/20 bg-gray-50/50 p-4 transition-all resize-none"
-          placeholder="Tell us what you liked (or didn't like)..."
+          placeholder="{{'home.reviews.feedback_placeholder' | translate}}"
           [maxlength]="1000"
         ></textarea>
         <div class="flex justify-between mt-2 text-xs font-medium text-gray-500">
-          <span>Minimum 10 characters</span>
+          <span>{{ 'home.reviews.min_chars' | translate }}</span>
           <span [ngClass]="{'text-red-500': reviewForm.comment.length > 1000}">{{ reviewForm.comment.length }} / 1000</span>
         </div>
       </div>

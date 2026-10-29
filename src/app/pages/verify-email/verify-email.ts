@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../core/translate.pipe';
 import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +12,7 @@ type VerifyState = 'loading' | 'success' | 'already-verified' | 'error' | 'no-to
 @Component({
   selector: 'app-verify-email',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslatePipe],
   templateUrl: './verify-email.html',
   styleUrl: './verify-email.scss',
 })

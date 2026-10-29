@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../../core/translate.pipe';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +9,7 @@ import { DataService, Plan } from '../../../services/data.service';
 @Component({
   selector: 'app-admin-plans',
   standalone: true,
-  imports: [CommonModule, FormsModule, ModalComponent, PaginationComponent],
+  imports: [CommonModule, FormsModule, ModalComponent, PaginationComponent, TranslatePipe],
   templateUrl: './plans.html',
   styleUrl: './plans.scss'
 })

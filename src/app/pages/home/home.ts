@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../core/translate.pipe';
 import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -12,7 +13,7 @@ import { map, Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, ModalComponent],
+  imports: [CommonModule, RouterLink, FormsModule, ModalComponent, TranslatePipe],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

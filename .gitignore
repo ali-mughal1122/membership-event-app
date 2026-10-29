@@ -13,6 +13,9 @@
 /out-tsc
 /bazel-out
 
+#scripts
+/scripts
+
 # IDEs and editors
 .idea/
 .project

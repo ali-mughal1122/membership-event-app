@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../core/translate.pipe';
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +9,7 @@ import { ToastService } from '../../services/toast.service';
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslatePipe],
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.scss'
 })

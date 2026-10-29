@@ -12,14 +12,13 @@
     <div
       class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 shadow-xl mx-auto">
       <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
-      <span class="text-sm font-semibold text-blue-100 tracking-wide uppercase">Our Story</span>
+      <span class="text-sm font-semibold text-blue-100 tracking-wide uppercase">{{ 'about.hero.badge' | translate }}</span>
     </div>
     <h1 class="text-5xl md:text-7xl font-black text-white tracking-tight mb-6 leading-[1.1]">
-      About <span
-        class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400 drop-shadow-sm">Us</span>.
+      {{ 'about.hero.title' | translate }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400 drop-shadow-sm">{{ 'about.hero.title_accent' | translate }}</span>
     </h1>
     <p class="mt-4 text-xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed">
-      Strengthening the taxi industry, one driver at a time.
+      {{ 'about.hero.subtitle' | translate }}
     </p>
   </div>
 </div>
@@ -29,17 +28,7 @@
   <!-- Introduction Columns -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
     <div>
-      <p class="text-xl text-gray-600 leading-relaxed font-medium">
-        We are a professional taxi association that offers advice and the creation of cheap electricity contracts,
-        cheaper insurance and better pension agreements for our members. We also work to bring taxi drivers together to
-        strengthen the industry.
-      </p>
-    </div>
-    <div>
-      <p class="text-xl text-gray-600 leading-relaxed font-medium">
-        We are a taxi association that specializes in helping taxi drivers achieve better agreements and savings on
-        electricity and insurance, as well as bringing them together to strengthen their business.
-      </p>
+      <p class="text-xl text-gray-600 leading-relaxed font-medium">{{ 'about.intro.col2' | translate }}</p>
     </div>
   </div>
 
@@ -61,12 +50,8 @@
     </div>
 
     <div class="order-1 lg:order-2">
-      <h2 class="text-4xl font-black text-gray-900 mb-6 tracking-tight">About the Taxi Terminal</h2>
-      <p class="text-lg text-gray-600 leading-relaxed font-medium mb-6">
-        Dear customers, Are you tired of having to pay a fortune for your taxi rides? Do you miss a better pension
-        agreement and cheaper insurance as a taxi driver? Then read on! We are proud to present Taxiterminalen.dk - your
-        new and improved solution for all your taxi needs.
-      </p>
+      <h2 class="text-4xl font-black text-gray-900 mb-6 tracking-tight">{{ 'about.terminal.title' | translate }}</h2>
+      <p class="text-lg text-gray-600 leading-relaxed font-medium mb-6">{{ 'about.terminal.desc' | translate }}</p>
     </div>
   </div>
 

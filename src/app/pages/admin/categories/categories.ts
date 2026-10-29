@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../../core/translate.pipe';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +10,7 @@ import { ToastService } from '../../../services/toast.service';
 @Component({
   selector: 'app-admin-categories',
   standalone: true,
-  imports: [CommonModule, FormsModule, ModalComponent, PaginationComponent],
+  imports: [CommonModule, FormsModule, ModalComponent, PaginationComponent, TranslatePipe],
   templateUrl: './categories.html',
   styleUrl: './categories.scss'
 })

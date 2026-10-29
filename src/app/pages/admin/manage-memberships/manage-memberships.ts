@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../../core/translate.pipe';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +8,7 @@ import { DataService, Plan, Member, PendingMember } from '../../../services/data
 @Component({
   selector: 'app-manage-memberships',
   standalone: true,
-  imports: [CommonModule, FormsModule, ModalComponent],
+  imports: [CommonModule, FormsModule, ModalComponent, TranslatePipe],
   templateUrl: './manage-memberships.html',
   styleUrl: './manage-memberships.scss'
 })

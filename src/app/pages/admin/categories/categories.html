@@ -1,13 +1,11 @@
 <div>
   <div class="flex justify-between items-center mb-6">
     <div>
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Categories</h2>
-      <p class="text-sm text-gray-500 mt-1">Define request types and which ones should be handled first.</p>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ 'admin.categories.title' | translate }}</h2>
+      <p class="text-sm text-gray-500 mt-1">{{ 'admin.categories.subtitle' | translate }}</p>
     </div>
     <button (click)="openCreateModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center shadow-sm">
-      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-      Add Category
-    </button>
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>{{ 'admin.categories.add_category' | translate }}</button>
   </div>
 
   <div class="bg-white dark:bg-zinc-900/50 dark:backdrop-blur-xl rounded-xl shadow-sm border border-gray-100 dark:border-white/5 overflow-hidden relative min-h-[400px]">
@@ -19,7 +17,7 @@
 
     <div class="p-4 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3">
       <div class="relative w-full sm:w-64">
-        <input type="text" placeholder="Search categories..." [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()"
+        <input type="text" placeholder="{{'admin.categories.search_placeholder' | translate}}" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()"
           class="w-full pl-9 pr-4 py-2 border border-gray-300 dark:border-white/10 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-black/20 text-gray-900 dark:text-white">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -29,11 +27,11 @@
       </div>
       <select [(ngModel)]="urgencyFilter" (ngModelChange)="onFilterChange()"
         class="border border-gray-300 dark:border-white/10 rounded-lg text-sm px-3 py-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-black/20 text-gray-900 dark:text-white">
-        <option value="">All urgencies</option>
-        <option value="CRITICAL">Critical</option>
-        <option value="HIGH">High</option>
-        <option value="MEDIUM">Medium</option>
-        <option value="LOW">Low</option>
+        <option value="">{{ 'admin.categories.all_urgencies' | translate }}</option>
+        <option value="CRITICAL">{{ 'admin.categories.urgency_critical' | translate }}</option>
+        <option value="HIGH">{{ 'admin.categories.urgency_high' | translate }}</option>
+        <option value="MEDIUM">{{ 'admin.categories.urgency_medium' | translate }}</option>
+        <option value="LOW">{{ 'admin.categories.urgency_low' | translate }}</option>
       </select>
     </div>
 
@@ -41,11 +39,11 @@
       <table class="w-full text-left border-collapse min-w-[800px]">
         <thead>
           <tr class="bg-gray-50 dark:bg-white/5">
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Category Name</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Description</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Urgency</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Created Date</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Actions</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.categories.col_name' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.categories.col_description' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.categories.col_urgency' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.categories.col_created_date' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">{{ 'admin.categories.col_actions' | translate }}</th>
           </tr>
         </thead>
         <tbody class="text-sm">
@@ -136,7 +134,7 @@
 
 <app-modal
   [isOpen]="isViewModalOpen()"
-  title="Category details"
+  title="{{ 'admin.categories.details' | translate }}"
   confirmText="Close"
   [showCancel]="false"
   (closeEvent)="isViewModalOpen.set(false)"
@@ -168,7 +166,7 @@
 
 <app-modal
   [isOpen]="isDeleteModalOpen()"
-  title="Delete category"
+  title="{{ 'admin.categories.delete_category' | translate }}"
   confirmText="Delete"
   [isConfirming]="isDeleting()"
   (closeEvent)="isDeleteModalOpen.set(false)"
