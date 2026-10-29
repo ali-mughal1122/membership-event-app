@@ -8,13 +8,13 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 shadow-xl mx-auto">
         <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
-        <span class="text-sm font-semibold text-blue-100 tracking-wide uppercase">Premium Access</span>
+        <span class="text-sm font-semibold text-blue-100 tracking-wide uppercase">{{ 'memberships.hero.badge' | translate }}</span>
       </div>
       <h1 class="text-5xl md:text-7xl font-black text-white tracking-tight mb-6 leading-[1.1]">
-        Membership <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 drop-shadow-sm">Plans</span>.
+        {{ 'memberships.hero.title_part1' | translate }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 drop-shadow-sm">{{ 'memberships.hero.title_accent' | translate }}</span>
       </h1>
       <p class="mt-4 text-xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed">
-        Choose the perfect plan for your professional journey. Unlock exclusive benefits and join our community today.
+        {{ 'memberships.hero.subtitle' | translate }}
       </p>
     </div>
   </div>
@@ -24,7 +24,7 @@
       @if (plansState.loading()) {
       <div class="w-full md:col-span-3 py-20 text-center text-gray-500">
         <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto"></div>
-        <p class="mt-4 font-medium text-lg">Loading plans...</p>
+        <p class="mt-4 font-medium text-lg">{{ 'memberships.card.loading_plans' | translate }}</p>
       </div>
       } @else if (plansState.error()) {
       <div class="w-full md:col-span-3 py-20 text-center">
@@ -74,7 +74,7 @@
             <button (click)="openSubscribeModal(plan)" 
               class="w-full inline-flex items-center justify-center px-8 py-4 font-bold text-lg transition-all duration-200 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2"
               [ngClass]="(plansState.data()?.length === 1 || plan.name === 'Gold') ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-600 shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-1' : 'bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-200 hover:-translate-y-1'">
-              Subscribe Now
+              {{ 'memberships.card.subscribe_now' | translate }}
             </button>
           </div>
         </div>
@@ -86,30 +86,30 @@
 </div>
 
 <app-modal [isOpen]="isSubscribeModalOpen()" [title]="'Subscribe to ' + selectedPlan?.name"
-  [confirmText]="'Complete Subscription'" [isConfirming]="isSubmitting()" (closeEvent)="closeSubscribeModal()" (confirmEvent)="submitSubscription()">
+  [confirmText]="'memberships.modal.complete_subscription' | translate" [isConfirming]="isSubmitting()" (closeEvent)="closeSubscribeModal()" (confirmEvent)="submitSubscription()">
   <div class="space-y-4">
     @if (!authService.isLoggedIn()) {
       <div class="mb-4">
         <p class="text-sm text-gray-500 mb-4">You need an account to subscribe. Please fill out your details below:</p>
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Full Name</label>
+        <label class="block text-sm font-medium text-gray-700">{{ 'memberships.modal.full_name' | translate }}</label>
         <input type="text" [(ngModel)]="registerData.name" class="modern-input mt-1">
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Email Address</label>
+        <label class="block text-sm font-medium text-gray-700">{{ 'memberships.modal.email_address' | translate }}</label>
         <input type="email" [(ngModel)]="registerData.email" class="modern-input mt-1">
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Password</label>
+        <label class="block text-sm font-medium text-gray-700">{{ 'memberships.modal.password' | translate }}</label>
         <input type="password" [(ngModel)]="registerData.password" class="modern-input mt-1">
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+        <label class="block text-sm font-medium text-gray-700">{{ 'memberships.modal.phone_number' | translate }}</label>
         <input type="tel" [(ngModel)]="registerData.phone" class="modern-input mt-1">
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Address</label>
+        <label class="block text-sm font-medium text-gray-700">{{ 'memberships.modal.address' | translate }}</label>
         <input type="text" [(ngModel)]="registerData.address" class="modern-input mt-1">
       </div>
     } @else {

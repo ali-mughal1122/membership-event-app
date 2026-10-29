@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../../core/translate.pipe';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +8,7 @@ import { PaginationComponent } from '../../../components/pagination/pagination';
 @Component({
   selector: 'app-admin-registered-users',
   standalone: true,
-  imports: [CommonModule, FormsModule, PaginationComponent],
+  imports: [CommonModule, FormsModule, PaginationComponent, TranslatePipe],
   templateUrl: './registered-users.html',
   styleUrl: './registered-users.scss'
 })

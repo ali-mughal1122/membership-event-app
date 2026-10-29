@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../core/translate.pipe';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -12,7 +13,7 @@ import { map } from 'rxjs';
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [RouterLink, CommonModule, FormsModule, ModalComponent],
+  imports: [RouterLink, CommonModule, FormsModule, ModalComponent, TranslatePipe],
   templateUrl: './events.html',
   styleUrl: './events.scss'
 })

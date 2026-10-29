@@ -1,3 +1,4 @@
+import { TranslatePipe } from './core/translate.pipe';
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ToastComponent } from './components/toast/toast';
@@ -5,7 +6,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToastComponent, ProgressBarComponent],
+  imports: [RouterOutlet, ToastComponent, ProgressBarComponent, TranslatePipe],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

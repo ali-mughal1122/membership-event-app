@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../core/translate.pipe';
 import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,7 +12,7 @@ import { ModalComponent } from '../../components/modal/modal';
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [RouterLink, CommonModule, ModalComponent],
+  imports: [RouterLink, CommonModule, ModalComponent, TranslatePipe],
   templateUrl: './event-details.html',
   styleUrl: './event-details.scss'
 })

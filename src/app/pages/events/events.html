@@ -13,13 +13,13 @@
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
             </span>
-            <span class="text-sm font-semibold text-emerald-100 tracking-wide uppercase">Live & Upcoming</span>
+            <span class="text-sm font-semibold text-emerald-100 tracking-wide uppercase">{{ 'events.hero.badge' | translate }}</span>
           </div>
           <h1 class="text-5xl md:text-6xl font-black text-white tracking-tight mb-4">
-            Discover <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Incredible</span> Events.
+            {{ 'events.hero.title_part1' | translate }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">{{ 'events.hero.title_accent' | translate }}</span> {{ 'events.hero.title_part2' | translate }}
           </h1>
           <p class="text-xl text-gray-300 leading-relaxed font-medium">
-            Join the world's leading minds. Register for exclusive conferences, workshops, and high-impact meetups.
+            {{ 'events.hero.subtitle' | translate }}
           </p>
         </div>
         
@@ -27,7 +27,7 @@
           <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-blue-400 transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </div>
-          <input type="text" placeholder="Search events..." [(ngModel)]="searchQuery" (ngModelChange)="applySearch()"
+          <input type="text" placeholder="{{'events.hero.search_placeholder' | translate}}" [(ngModel)]="searchQuery" (ngModelChange)="applySearch()"
             class="pl-11 pr-4 py-3.5 border border-white/20 bg-white/10 backdrop-blur-md rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 outline-none w-full md:w-80 shadow-lg transition-all font-medium">
         </div>
       </div>
@@ -39,7 +39,7 @@
       @if (eventsState.loading()) {
         <div class="py-20 text-center text-gray-500">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p class="mt-4 font-medium">Loading events...</p>
+          <p class="mt-4 font-medium">{{ 'events.section.loading' | translate }}</p>
         </div>
       } @else if (eventsState.error()) {
         <div class="py-20 text-center text-red-500 bg-red-50 rounded-[2rem] border border-red-100">
@@ -47,7 +47,7 @@
         </div>
       } @else {
         
-        <!-- Upcoming Events Section -->
+        <!-- {{ 'events.section.upcoming_title' | translate }} Section -->
         <section>
           <div class="flex items-center justify-between mb-8">
             <h2 class="text-3xl font-black text-gray-900 tracking-tight">Upcoming Events</h2>
@@ -64,7 +64,7 @@
                 <div class="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-gray-900 to-transparent opacity-80"></div>
                 <div class="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm"
                   [ngClass]="event.membershipRequired === false ? 'bg-white/90 text-gray-900' : 'bg-blue-600/90 text-white'">
-                  {{ event.membershipRequired === false ? 'Open to all' : 'Members only' }}
+                  {{ event.membershipRequired === false ? ('events.section.open_to_all' | translate) : ('events.section.members_only' | translate) }}
                 </div>
               </div>
               <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -92,16 +92,16 @@
                     </div>
                   } @else if (event.registrationDisabledReason === 'MEMBERSHIP_REQUIRED') {
                     <div class="flex flex-col items-end gap-1.5" (click)="$event.stopPropagation()">
-                      <p class="text-[11px] leading-snug text-gray-500 text-right max-w-[190px]">An active membership is required to register for this event.</p>
+                      <p class="text-[11px] leading-snug text-gray-500 text-right max-w-[190px]">{{ 'events.section.membership_required_note' | translate }}</p>
                       <a routerLink="/memberships"
                         class="inline-flex items-center justify-center px-4 py-2.5 font-bold text-blue-700 transition-all duration-200 bg-blue-50 border border-blue-100 rounded-xl hover:bg-blue-100 text-sm">
-                        View Membership Plans
+                        {{ 'events.section.view_plans_btn' | translate }}
                       </a>
                     </div>
                   } @else {
                     <button (click)="$event.stopPropagation(); openRegisterModal(event)" [disabled]="isRegistering() && registeringEventId() === event.id"
                       class="inline-flex items-center justify-center px-5 py-2.5 font-bold text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 shadow-md disabled:opacity-50">
-                      {{ isRegistering() && registeringEventId() === event.id ? 'Registering...' : 'Register' }}
+                      {{ isRegistering() && registeringEventId() === event.id ? ('events.section.registering_btn' | translate) : ('events.section.register_btn' | translate) }}
                     </button>
                   }
                 </div>
@@ -121,7 +121,7 @@
           </div>
         </section>
 
-        <!-- Past Events Section -->
+        <!-- {{ 'events.section.past_title' | translate }} Section -->
         @if (pastEvents().length > 0) {
         <section>
           <div class="flex items-center justify-between mb-8">
@@ -170,15 +170,15 @@
   </div>
 </div>
 
-<app-modal [isOpen]="isSuccessModalOpen()" title="Registration Confirmed"
-  confirmText="Done" [showCancel]="false" (confirmEvent)="isSuccessModalOpen.set(false)" (closeEvent)="isSuccessModalOpen.set(false)">
+<app-modal [isOpen]="isSuccessModalOpen()" [title]="'events.details.confirmed_title' | translate"
+  [confirmText]="'events.details.done_btn' | translate" [showCancel]="false" (confirmEvent)="isSuccessModalOpen.set(false)" (closeEvent)="isSuccessModalOpen.set(false)">
   <div class="text-center py-4">
     <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
       </svg>
     </div>
-    <h3 class="text-xl font-bold text-gray-900 mb-2">You are registered</h3>
+    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ 'events.details.registered' | translate }}</h3>
     <p class="text-gray-600">
       Your registration for <span class="font-semibold text-gray-900">{{ registeredEventTitle }}</span> has been confirmed.
     </p>

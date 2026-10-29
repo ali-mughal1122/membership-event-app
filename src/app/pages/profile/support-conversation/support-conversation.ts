@@ -1,3 +1,4 @@
+import { TranslatePipe } from '../../../core/translate.pipe';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +10,7 @@ import { SupportThreadComponent } from '../../../components/support-thread/suppo
 @Component({
   selector: 'app-member-support-conversation',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, SupportThreadComponent],
+  imports: [CommonModule, FormsModule, RouterLink, SupportThreadComponent, TranslatePipe],
   templateUrl: './support-conversation.html',
   styleUrl: './support-conversation.scss'
 })
