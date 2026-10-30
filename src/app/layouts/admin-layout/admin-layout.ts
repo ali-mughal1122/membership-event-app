@@ -5,10 +5,13 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
 
+import { TranslatePipe } from '../../core/translate.pipe';
+import { LanguageSwitcherComponent } from '../../components/language-switcher/language-switcher.component';
+
 @Component({
   selector: 'app-admin-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule, TranslatePipe, LanguageSwitcherComponent],
   templateUrl: './admin-layout.html',
   styleUrl: './admin-layout.scss'
 })

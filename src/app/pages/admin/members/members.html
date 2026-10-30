@@ -1,8 +1,8 @@
 <div>
   <div class="flex justify-between items-center mb-6">
     <div>
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Members</h2>
-      <p class="text-sm text-gray-500 mt-1">View and manage active membership accounts.</p>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ 'admin.members.title' | translate }}</h2>
+      <p class="text-sm text-gray-500 mt-1">{{ 'admin.members.subtitle' | translate }}</p>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
 
     <div class="p-4 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3">
       <div class="relative w-full sm:w-64">
-        <input type="text" placeholder="Search members..." [(ngModel)]="memberSearch" (ngModelChange)="onSearchChange()"
+        <input type="text" placeholder="{{'admin.members.search_placeholder' | translate}}" [(ngModel)]="memberSearch" (ngModelChange)="onSearchChange()"
           class="w-full pl-9 pr-4 py-2 border border-gray-300 dark:border-white/10 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-black/20 text-gray-900 dark:text-white">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -27,17 +27,17 @@
       <div class="flex space-x-2">
         <select [(ngModel)]="memberDurationFilter" (ngModelChange)="onFilterChange()"
           class="border border-gray-300 dark:border-white/10 rounded-lg text-sm px-3 py-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-black/20 text-gray-900 dark:text-white">
-          <option value="">All Durations</option>
-          <option value="1">1 Month</option>
-          <option value="3">3 Months</option>
-          <option value="6">6 Months</option>
-          <option value="12">1 Year</option>
+          <option value="">{{ 'admin.members.all_durations' | translate }}</option>
+          <option value="1">{{ 'admin.members.dur_1m' | translate }}</option>
+          <option value="3">{{ 'admin.members.dur_3m' | translate }}</option>
+          <option value="6">{{ 'admin.members.dur_6m' | translate }}</option>
+          <option value="12">{{ 'admin.members.dur_1y' | translate }}</option>
         </select>
         <select [(ngModel)]="memberStatusFilter" (ngModelChange)="onFilterChange()"
           class="border border-gray-300 dark:border-white/10 rounded-lg text-sm px-3 py-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-black/20 text-gray-900 dark:text-white">
-          <option value="">All Statuses</option>
-          <option value="Active">Active</option>
-          <option value="Expired">Expired</option>
+          <option value="">{{ 'admin.members.all_statuses' | translate }}</option>
+          <option value="Active">{{ 'admin.members.status_active' | translate }}</option>
+          <option value="Expired">{{ 'admin.members.status_expired' | translate }}</option>
         </select>
       </div>
     </div>
@@ -46,13 +46,13 @@
       <table class="w-full text-left border-collapse min-w-[800px]">
         <thead>
           <tr class="bg-gray-50 dark:bg-white/5">
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Member Info</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Plan</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Join Date</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Expiry</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Remaining</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
-            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Actions</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.members.col_member_info' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.members.col_plan' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.members.col_join_date' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.members.col_expiry' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.members.col_remaining' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ 'admin.members.col_status' | translate }}</th>
+            <th class="py-3 px-6 border-b border-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">{{ 'admin.members.col_actions' | translate }}</th>
           </tr>
         </thead>
         <tbody class="text-sm">
@@ -77,24 +77,24 @@
               {{member.expiryDate}}</td>
             <td class="py-4 px-6 border-b border-gray-50">
               @if (member.status === 'Expired' || (member.remainingDays ?? 0) <= 0) {
-                <span class="text-red-600 font-semibold">Expired</span>
+                <span class="text-red-600 font-semibold">{{ 'admin.members.status_expired' | translate }}</span>
               } @else {
                 <span class="font-semibold"
                   [ngClass]="(member.remainingDays ?? 0) <= 7 ? 'text-amber-600' : 'text-emerald-600'">
-                  {{ member.remainingDays }} day{{ member.remainingDays === 1 ? '' : 's' }}
+                  {{ member.remainingDays }} {{ (member.remainingDays === 1 ? 'common.day' : 'common.days') | translate }}
                 </span>
               }
             </td>
             <td class="py-4 px-6 border-b border-gray-50">
               @if (member.status === 'Active') {
-              <span class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full text-xs font-medium border border-emerald-200">Active</span>
+              <span class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full text-xs font-medium border border-emerald-200">{{ 'admin.members.status_active' | translate }}</span>
               } @else {
-              <span class="bg-red-100 text-red-700 px-2.5 py-1 rounded-full text-xs font-medium border border-red-200">Expired</span>
+              <span class="bg-red-100 text-red-700 px-2.5 py-1 rounded-full text-xs font-medium border border-red-200">{{ 'admin.members.status_expired' | translate }}</span>
               }
             </td>
             <td class="py-4 px-6 border-b border-gray-50 text-right">
               <button (click)="deleteMember(member.id!)" class="text-red-400 hover:text-red-600 transition-colors"
-                title="Remove Member">
+                title="{{ 'admin.members.remove_member' | translate }}">
                 <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
