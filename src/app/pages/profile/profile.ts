@@ -190,7 +190,6 @@ export class Profile implements OnInit {
     reader.onload = (e: any) => {
       this.newImageUrl.set(e.target.result);
       this.saveProfile();
-      this.isUploadingPhoto.set(false);
     };
     reader.onerror = () => {
       this.toastService.error('Failed to read file.');
