@@ -226,7 +226,13 @@
       "dont_have_account": "Har du ikke en konto?",
       "sign_up": "Opret konto"
     },
-    "forgot_password": "Glemt adgangskode?",
+    "forgot_password": {
+      "title": "Glemt adgangskode?",
+      "subtitle": "Husker du din adgangskode?",
+      "desc": "Indtast den e-mailadresse, der er tilknyttet din konto, så sender vi dig et link til at nulstille din adgangskode.",
+      "send_link": "Send nulstillingslink",
+      "back_to_login": "Tilbage til login"
+    },
     "reset_password": {
       "title": "Opret ny adgangskode",
       "new_password": "Ny adgangskode",

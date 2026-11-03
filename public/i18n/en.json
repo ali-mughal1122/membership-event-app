@@ -226,7 +226,13 @@
       "dont_have_account": "Don't have an account?",
       "sign_up": "Sign Up"
     },
-    "forgot_password": "Forgot password?",
+    "forgot_password": {
+      "title": "Forgot password?",
+      "subtitle": "Remember your password?",
+      "desc": "Enter the email address associated with your account and we'll send you a password reset link.",
+      "send_link": "Send Reset Link",
+      "back_to_login": "Back to Sign In"
+    },
     "reset_password": {
       "title": "Set New Password",
       "new_password": "New Password",
