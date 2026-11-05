@@ -10,7 +10,7 @@
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 z-10 w-full">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div>
+      <div class="animate-fade-in-up">
         <div
           class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 shadow-xl">
           <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -22,18 +22,18 @@
         </h1>
         <p class="text-xl text-gray-300 font-medium leading-relaxed mb-10 max-w-xl">{{ 'home.hero.desc' | translate }}</p>
         <a routerLink="/contact"
-          class="inline-flex items-center justify-center px-8 py-4 font-bold text-gray-900 transition-all duration-200 bg-white border border-transparent rounded-xl hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white shadow-xl hover:-translate-y-1 hover:shadow-2xl">{{ 'home.hero.contact_btn' | translate }}</a>
+          class="inline-flex items-center justify-center px-8 py-4 font-bold text-gray-900 transition-all duration-300 bg-white border border-transparent rounded-xl hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white shadow-xl hover:-translate-y-1 hover:shadow-2xl active:scale-95">{{ 'home.hero.contact_btn' | translate }}</a>
       </div>
 
-      <div class="hidden lg:flex justify-center">
+      <div class="hidden lg:flex justify-center animate-fade-in-up animation-delay-200">
         <!-- Logo / Graphic representing the green circle -->
         <div
-          class="w-96 h-96 bg-white/5 backdrop-blur-md rounded-full border border-white/10 flex items-center justify-center shadow-[0_0_100px_rgba(16,185,129,0.2)] p-12 relative group">
+          class="w-96 h-96 bg-white/5 backdrop-blur-md rounded-full border border-white/10 flex items-center justify-center shadow-[0_0_100px_rgba(16,185,129,0.2)] p-12 relative group animate-float-subtle">
           <div
             class="absolute inset-0 border-2 border-emerald-500/30 rounded-full border-dashed animate-[spin_20s_linear_infinite]">
           </div>
           <img src="/taxiterminalen-logos/app-icon-256.svg" alt="taxiterminalen"
-            class="w-48 h-48 group-hover:scale-110 transition-transform duration-500">
+            class="w-48 h-48 group-hover:scale-110 transition-transform duration-500 ease-out">
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
 
     <!-- Features -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-24">
-      <div class="group">
+      <div class="group p-6 rounded-2xl transition-all duration-300 hover:bg-gray-50/80 hover:-translate-y-1">
         <h3
           class="text-2xl font-black text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors tracking-tight">
           {{ 'home.features.feature1_title' | translate }}</h3>
@@ -68,7 +68,7 @@
           {{ 'home.features.feature1_desc' | translate }}
         </p>
       </div>
-      <div class="group">
+      <div class="group p-6 rounded-2xl transition-all duration-300 hover:bg-gray-50/80 hover:-translate-y-1">
         <h3
           class="text-2xl font-black text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors tracking-tight">
           {{ 'home.features.feature2_title' | translate }}</h3>
@@ -76,7 +76,7 @@
           {{ 'home.features.feature2_desc' | translate }}
         </p>
       </div>
-      <div class="group">
+      <div class="group p-6 rounded-2xl transition-all duration-300 hover:bg-gray-50/80 hover:-translate-y-1">
         <h3
           class="text-2xl font-black text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors tracking-tight">
           {{ 'home.features.feature3_title' | translate }}</h3>
@@ -219,7 +219,7 @@
     @else {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
         @for (review of reviews(); track review.id) {
-        <div class="bg-white rounded-[2rem] p-8 border border-gray-100 hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 flex flex-col h-full min-h-[250px]">
+        <div class="bg-white rounded-[2rem] p-8 border border-gray-100 hover:shadow-xl hover:shadow-gray-200/50 hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full min-h-[250px]">
           <!-- Rating -->
           <div class="flex text-emerald-500 mb-6 space-x-1">
             @for (star of [1, 2, 3, 4, 5]; track star) {

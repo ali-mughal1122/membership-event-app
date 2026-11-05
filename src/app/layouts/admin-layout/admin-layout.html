@@ -138,6 +138,19 @@
           [ngClass]="isDesktopSidebarCollapsed() ? 'opacity-0 hidden' : 'opacity-100'">
           {{ 'admin.nav.support' | translate }}</span>
       </a>
+      <a routerLink="/admin/whatsapp-settings"
+        routerLinkActive="bg-zinc-100 dark:bg-white/10 text-gray-900 dark:text-white shadow-sm"
+        (click)="isSidebarOpen.set(false)"
+        class="flex items-center gap-3 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white font-semibold transition-all group"
+        [ngClass]="isDesktopSidebarCollapsed() ? 'px-3 justify-center' : 'px-4'" title="{{ 'admin.nav.whatsapp_settings' | translate }}">
+        <svg class="w-5 h-5 opacity-70 shrink-0 fill-current" viewBox="0 0 24 24">
+          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/>
+        </svg>
+        <span class="whitespace-nowrap transition-opacity duration-300"
+          [ngClass]="isDesktopSidebarCollapsed() ? 'opacity-0 hidden' : 'opacity-100'">
+          {{ 'admin.nav.whatsapp_settings' | translate }}
+        </span>
+      </a>
     </nav>
     <div class="p-4 border-t border-gray-50 dark:border-white/5 flex justify-center">
       <a routerLink="/"
@@ -177,18 +190,22 @@
           <button (click)="toggleThemeMenu()"
             class="w-10 h-10 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
             title="{{'admin.header.toggle_theme' | translate}}">
-            <svg *ngIf="!isDarkMode()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            @if (!isDarkMode()) {
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
               </path>
             </svg>
-            <svg *ngIf="isDarkMode()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            } @else {
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
             </svg>
+            }
           </button>
 
-          <div *ngIf="isThemeMenuOpen()"
+          @if (isThemeMenuOpen()) {
+          <div
             class="absolute right-0 mt-2 w-48 rounded-xl shadow-lg bg-white dark:bg-zinc-800/90 dark:backdrop-blur-xl border border-transparent dark:border-white/10 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 dark:divide-white/5 z-50 overflow-hidden">
             <div class="py-1">
               <button (click)="setTheme('light')"
@@ -202,6 +219,7 @@
                 'admin.header.system_default' | translate }}</button>
             </div>
           </div>
+          }
         </div>
 
         <!-- Profile Dropdown Container -->
@@ -212,7 +230,8 @@
           </button>
 
           <!-- Dropdown Menu -->
-          <div *ngIf="isProfileDropdownOpen()"
+          @if (isProfileDropdownOpen()) {
+          <div
             class="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-800/90 dark:backdrop-blur-xl rounded-xl shadow-lg border border-gray-100 dark:border-white/10 py-2 z-50 transform origin-top-right transition-all">
             <div class="px-4 py-2 border-b border-gray-100 dark:border-white/5">
               <p class="text-sm font-semibold text-gray-900 dark:text-white">{{ 'admin.header.admin_user' | translate }}
@@ -227,7 +246,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>{{ 'nav.my_profile' | translate }}</a>
-              <a href="javascript:void(0)"
+              <a routerLink="/admin/whatsapp-settings" (click)="isProfileDropdownOpen.set(false)"
                 class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -236,7 +255,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
-                Settings
+                {{ 'admin.nav.whatsapp_settings' | translate }}
               </a>
             </div>
             <div class="py-1 border-t border-gray-100 dark:border-white/5">
@@ -251,6 +270,7 @@
               </a>
             </div>
           </div>
+          }
         </div>
       </div>
     </header>

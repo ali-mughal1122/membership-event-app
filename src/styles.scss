@@ -95,6 +95,41 @@
   .page-shell {
     @include page-enter;
   }
+
+  /* Minimal polished animations for client-facing experience */
+  .animate-fade-in-up {
+    animation: fade-in-up 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-float-subtle {
+    animation: float-subtle 4s ease-in-out infinite;
+  }
+
+  .animate-glow-subtle {
+    animation: glow-pulse-subtle 6s ease-in-out infinite;
+  }
+
+  /* Micro-interactions for interactive elements */
+  .interactive-hover-lift {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .interactive-card-hover {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-500/30 dark:hover:border-emerald-500/30;
+  }
+}
+
+/* Staggered entrance animation delays */
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
 }
 
 ::-webkit-scrollbar {
@@ -111,6 +146,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

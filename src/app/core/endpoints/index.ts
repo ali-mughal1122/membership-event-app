@@ -6,6 +6,7 @@ import { ReviewsEndpoints, ReviewsEndpointsMapping } from './reviews.endpoints';
 import { UsersEndpoints, UsersEndpointsMapping } from './users.endpoints';
 import { CategoriesEndpoints, CategoriesEndpointsMapping } from './categories.endpoints';
 import { SupportEndpoints, SupportEndpointsMapping } from './support.endpoints';
+import { SettingsEndpoints, SettingsEndpointsMapping } from './settings.endpoints';
 
 export const AppEndpoints = [
   ...AuthEndpoints,
@@ -16,6 +17,7 @@ export const AppEndpoints = [
   ...UsersEndpoints,
   ...CategoriesEndpoints,
   ...SupportEndpoints,
+  ...SettingsEndpoints,
 ];
 
 export const AppEndpointsMapping = {
@@ -27,4 +29,5 @@ export const AppEndpointsMapping = {
   ...UsersEndpointsMapping,
   ...CategoriesEndpointsMapping,
   ...SupportEndpointsMapping,
+  ...SettingsEndpointsMapping,
 };

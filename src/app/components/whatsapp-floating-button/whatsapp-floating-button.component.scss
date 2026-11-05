@@ -1,0 +1,17 @@
+/* Floating button animations & interactions */
+:host {
+  display: block;
+}
+
+aside {
+  will-change: bottom, transform;
+}
+
+a {
+  box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4), 0 8px 10px -6px rgba(37, 211, 102, 0.2);
+
+  &:hover {
+    box-shadow: 0 20px 30px -10px rgba(37, 211, 102, 0.5), 0 12px 14px -7px rgba(37, 211, 102, 0.3);
+  }
+}
+

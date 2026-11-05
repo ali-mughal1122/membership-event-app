@@ -5,11 +5,12 @@ import { filter, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { LanguageSwitcherComponent } from '../../components/language-switcher/language-switcher.component';
+import { WhatsappFloatingButtonComponent } from '../../components/whatsapp-floating-button/whatsapp-floating-button.component';
 
 @Component({
   selector: 'app-public-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule, TranslatePipe, LanguageSwitcherComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule, TranslatePipe, LanguageSwitcherComponent, WhatsappFloatingButtonComponent],
   templateUrl: './public-layout.html',
   styleUrl: './public-layout.scss'
 })
