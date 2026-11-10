@@ -226,7 +226,13 @@
       "dont_have_account": "Har du ikke en konto?",
       "sign_up": "Opret konto"
     },
-    "forgot_password": "Glemt adgangskode?",
+    "forgot_password": {
+      "title": "Glemt adgangskode?",
+      "subtitle": "Husker du din adgangskode?",
+      "desc": "Indtast den e-mailadresse, der er tilknyttet din konto, så sender vi dig et link til at nulstille din adgangskode.",
+      "send_link": "Send nulstillingslink",
+      "back_to_login": "Tilbage til login"
+    },
     "reset_password": {
       "title": "Opret ny adgangskode",
       "new_password": "Ny adgangskode",
@@ -327,7 +333,8 @@
       "registered_users": "Registrerede brugere",
       "events": "Begivenheder",
       "categories": "Kategorier",
-      "support": "Supportbeskeder"
+      "support": "Supportbeskeder",
+      "whatsapp_settings": "WhatsApp Indstillinger"
     },
     "dashboard": {
       "title": "Dashboard oversigt",
@@ -491,6 +498,31 @@
       "unread": "Ulæst",
       "reply_placeholder": "Skriv et svar til medlemmet...",
       "mark_resolved": "Marker som løst"
+    },
+    "whatsapp": {
+      "title": "WhatsApp Konfiguration",
+      "subtitle": "Konfigurer den flydende WhatsApp-kontaktknap, der vises for besøgende på hjemmesiden.",
+      "status_active": "Aktiv & Synlig",
+      "status_disabled": "Deaktiveret",
+      "enable_label": "Aktiver flydende WhatsApp-ikon",
+      "enable_desc": "Vis en flydende WhatsApp-chatknap i nederste højre hjørne på offentlige sider.",
+      "country_code_label": "Landekode",
+      "country_code_hint": "f.eks. +45 for Danmark",
+      "phone_number_label": "WhatsApp Telefonnummer",
+      "phone_number_hint": "Indtast kun cifre uden landekode eller foranstillet 0 (f.eks. 20 12 34 56).",
+      "validation_error": "Angiv venligst et gyldigt telefonnummer med 7 til 15 cifre inklusiv landekode.",
+      "save_btn": "Gem ændringer",
+      "saving": "Gemmer...",
+      "reset_btn": "Nulstil",
+      "preview_title": "Konfigurationsoversigt",
+      "active_number_label": "Formateret kontaktnummer",
+      "no_number": "Intet nummer konfigureret",
+      "url_label": "WhatsApp Click-to-Chat URL",
+      "no_url": "URL genereres så snart telefonnummer er indtastet",
+      "test_link": "Test WhatsApp-link",
+      "icon_preview_title": "Forhåndsvisning af flydende knap",
+      "preview_hidden_notice": "Det flydende ikon er i øjeblikket deaktiveret eller ikke konfigureret",
+      "preview_footnote": "Knappen er placeret i nederste højre hjørne over rul-til-top-knappen, så de aldrig overlapper hinanden."
     }
   },
   "footer": {
@@ -522,7 +554,8 @@
     "inactive": "Inaktiv",
     "created_at": "Oprettet",
     "days": "dage",
-    "day": "dag"
+    "day": "dag",
+    "chat_whatsapp": "Chat med os på WhatsApp"
   },
   "NAV_HOME": "Hjem",
   "NAV_EVENTS": "Begivenheder",
@@ -542,5 +575,6 @@
   "ADMIN_NAV_USERS": "Registrerede brugere",
   "ADMIN_NAV_EVENTS": "Begivenheder",
   "ADMIN_NAV_CATEGORIES": "Kategorier",
-  "ADMIN_NAV_SUPPORT": "Supportbeskeder"
+  "ADMIN_NAV_SUPPORT": "Supportbeskeder",
+  "ADMIN_NAV_WHATSAPP_SETTINGS": "WhatsApp Indstillinger"
 }

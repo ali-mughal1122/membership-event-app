@@ -226,7 +226,13 @@
       "dont_have_account": "Don't have an account?",
       "sign_up": "Sign Up"
     },
-    "forgot_password": "Forgot password?",
+    "forgot_password": {
+      "title": "Forgot password?",
+      "subtitle": "Remember your password?",
+      "desc": "Enter the email address associated with your account and we'll send you a password reset link.",
+      "send_link": "Send Reset Link",
+      "back_to_login": "Back to Sign In"
+    },
     "reset_password": {
       "title": "Set New Password",
       "new_password": "New Password",
@@ -327,7 +333,8 @@
       "registered_users": "Registered Users",
       "events": "Events",
       "categories": "Categories",
-      "support": "Support Messages"
+      "support": "Support Messages",
+      "whatsapp_settings": "WhatsApp Settings"
     },
     "dashboard": {
       "title": "Dashboard Overview",
@@ -491,6 +498,31 @@
       "unread": "Unread",
       "reply_placeholder": "Reply to the member...",
       "mark_resolved": "Mark as resolved"
+    },
+    "whatsapp": {
+      "title": "WhatsApp Configuration",
+      "subtitle": "Configure the floating WhatsApp contact button displayed to website visitors.",
+      "status_active": "Live & Active",
+      "status_disabled": "Disabled",
+      "enable_label": "Enable WhatsApp Floating Icon",
+      "enable_desc": "Display a floating WhatsApp chat button in the bottom right on public-facing pages.",
+      "country_code_label": "Country Calling Code",
+      "country_code_hint": "e.g. +45 for Denmark",
+      "phone_number_label": "WhatsApp Phone Number",
+      "phone_number_hint": "Enter digits only without country code or leading 0 (e.g. 20 12 34 56).",
+      "validation_error": "Please provide a valid phone number with 7 to 15 digits including country code.",
+      "save_btn": "Save Changes",
+      "saving": "Saving...",
+      "reset_btn": "Reset",
+      "preview_title": "Configuration Overview",
+      "active_number_label": "Formatted Contact Number",
+      "no_number": "No number configured",
+      "url_label": "WhatsApp Click-to-Chat URL",
+      "no_url": "URL will be generated once phone number is entered",
+      "test_link": "Test WhatsApp Link",
+      "icon_preview_title": "Floating Button Preview",
+      "preview_hidden_notice": "Floating icon is currently disabled or unconfigured",
+      "preview_footnote": "The button is positioned at the bottom right corner, ergonomically placed above the scroll-to-top button so they never overlap."
     }
   },
   "footer": {
@@ -522,7 +554,8 @@
     "inactive": "Inactive",
     "created_at": "Created At",
     "days": "days",
-    "day": "day"
+    "day": "day",
+    "chat_whatsapp": "Chat with us on WhatsApp"
   },
   "NAV_HOME": "Home",
   "NAV_EVENTS": "Events",
@@ -542,5 +575,6 @@
   "ADMIN_NAV_USERS": "Registered Users",
   "ADMIN_NAV_EVENTS": "Events",
   "ADMIN_NAV_CATEGORIES": "Categories",
-  "ADMIN_NAV_SUPPORT": "Support Messages"
+  "ADMIN_NAV_SUPPORT": "Support Messages",
+  "ADMIN_NAV_WHATSAPP_SETTINGS": "WhatsApp Settings"
 }

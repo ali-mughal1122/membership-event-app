@@ -44,6 +44,8 @@ export const routes: Routes = [
           { path: 'categories', loadComponent: () => import('./pages/admin/categories').then(m => m.AdminCategories) },
           { path: 'support', loadComponent: () => import('./pages/admin/support-messages').then(m => m.AdminSupportMessages) },
           { path: 'support/:id', loadComponent: () => import('./pages/admin/support-conversation/support-conversation').then(m => m.AdminSupportConversation) },
+          { path: 'whatsapp-settings', loadComponent: () => import('./pages/admin/whatsapp-settings').then(m => m.AdminWhatsAppSettings) },
+          { path: 'settings', redirectTo: 'whatsapp-settings', pathMatch: 'full' },
         ]
       }
     ]

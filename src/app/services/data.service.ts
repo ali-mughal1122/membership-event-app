@@ -109,6 +109,28 @@ export interface SupportConversation {
   messages?: SupportMessage[];
 }
 
+export interface PublicWhatsAppSettings {
+  isEnabled: boolean;
+  whatsappUrl?: string | null;
+  formattedNumber?: string | null;
+}
+
+export interface AdminWhatsAppSettings {
+  id: string;
+  countryCode: string;
+  phoneNumber: string;
+  isEnabled: boolean;
+  whatsappUrl?: string | null;
+  formattedNumber?: string | null;
+  updatedAt?: string;
+}
+
+export interface UpdateWhatsAppSettingsPayload {
+  countryCode: string;
+  phoneNumber: string;
+  isEnabled: boolean;
+}
+
 export interface PendingMember {
   id?: string;
   name: string;
@@ -489,5 +511,17 @@ export class DataService {
 
   updateReview(review: { rating: number; comment: string }): Observable<any> {
     return this.http.put<any>(AppEndpointsMapping.UpdateReview, review);
+  }
+
+  getPublicWhatsAppSettings(): Observable<PublicWhatsAppSettings> {
+    return this.http.get<PublicWhatsAppSettings>(AppEndpointsMapping.GetPublicWhatsAppSettings);
+  }
+
+  getAdminWhatsAppSettings(): Observable<AdminWhatsAppSettings> {
+    return this.http.get<AdminWhatsAppSettings>(AppEndpointsMapping.GetAdminWhatsAppSettings);
+  }
+
+  updateWhatsAppSettings(payload: UpdateWhatsAppSettingsPayload): Observable<AdminWhatsAppSettings> {
+    return this.http.put<AdminWhatsAppSettings>(AppEndpointsMapping.UpdateWhatsAppSettings, payload);
   }
 }

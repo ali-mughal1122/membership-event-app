@@ -1,0 +1,289 @@
+<div class="max-w-6xl mx-auto space-y-6">
+  <!-- Page Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2">
+    <div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+            {{ 'admin.whatsapp.title' | translate }}
+          </h1>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            {{ 'admin.whatsapp.subtitle' | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Status Badge -->
+    <div class="flex items-center gap-3">
+      @if (originalSettings()?.isEnabled && originalSettings()?.whatsappUrl) {
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          {{ 'admin.whatsapp.status_active' | translate }}
+        </span>
+      } @else {
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 dark:bg-zinc-800 dark:text-gray-300 border border-gray-200 dark:border-zinc-700">
+          <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+          {{ 'admin.whatsapp.status_disabled' | translate }}
+        </span>
+      }
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="bg-white dark:bg-zinc-900/60 rounded-2xl border border-gray-100 dark:border-white/5 p-12 flex flex-col items-center justify-center space-y-4 shadow-sm">
+      <div class="w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
+      <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">{{ 'common.loading' | translate }}</p>
+    </div>
+  } @else {
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Left Column: Settings Form (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="bg-white dark:bg-zinc-900/60 rounded-2xl border border-gray-100 dark:border-white/5 p-6 sm:p-8 shadow-sm space-y-6">
+          
+          <!-- Enable/Disable Switch -->
+          <div class="flex items-start justify-between pb-6 border-b border-gray-100 dark:border-white/5 gap-4">
+            <div class="space-y-1">
+              <label for="enableWhatsAppToggle" class="text-base font-semibold text-gray-900 dark:text-white cursor-pointer select-none">
+                {{ 'admin.whatsapp.enable_label' | translate }}
+              </label>
+              <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                {{ 'admin.whatsapp.enable_desc' | translate }}
+              </p>
+            </div>
+            
+            <button
+              id="enableWhatsAppToggle"
+              type="button"
+              role="switch"
+              [attr.aria-checked]="isEnabled()"
+              (click)="isEnabled.set(!isEnabled())"
+              class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900"
+              [ngClass]="isEnabled() ? 'bg-emerald-500' : 'bg-gray-200 dark:bg-zinc-700'">
+              <span
+                class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out"
+                [ngClass]="isEnabled() ? 'translate-x-5' : 'translate-x-0'"></span>
+            </button>
+          </div>
+
+          <!-- Country Code Selector & Input -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                {{ 'admin.whatsapp.country_code_label' | translate }}
+              </label>
+              <span class="text-xs text-gray-400 dark:text-gray-500">
+                {{ 'admin.whatsapp.country_code_hint' | translate }}
+              </span>
+            </div>
+
+            <!-- Country Quick Presets -->
+            <div class="flex flex-wrap gap-2">
+              @for (preset of countryPresets; track preset.code) {
+                <button
+                  type="button"
+                  (click)="selectCountryPreset(preset)"
+                  class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-lg border transition-all"
+                  [ngClass]="countryCode() === preset.code 
+                    ? 'border-emerald-500 bg-emerald-50/50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-300 font-semibold shadow-xs' 
+                    : 'border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5'">
+                  <span>{{ preset.flag }}</span>
+                  <span>{{ preset.name }} ({{ preset.code }})</span>
+                </button>
+              }
+            </div>
+
+            <div class="relative rounded-xl shadow-xs">
+              <input
+                type="text"
+                [ngModel]="countryCode()"
+                (ngModelChange)="countryCode.set($event)"
+                placeholder="+45"
+                maxlength="6"
+                class="block w-full px-4 py-3 text-sm bg-gray-50 dark:bg-zinc-800/80 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all" />
+            </div>
+          </div>
+
+          <!-- Phone Number Input -->
+          <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+              {{ 'admin.whatsapp.phone_number_label' | translate }}
+            </label>
+            <div class="relative rounded-xl shadow-xs">
+              <input
+                type="tel"
+                [ngModel]="phoneNumber()"
+                (ngModelChange)="phoneNumber.set($event)"
+                placeholder="20 12 34 56"
+                class="block w-full px-4 py-3 text-sm bg-gray-50 dark:bg-zinc-800/80 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all" />
+            </div>
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              {{ 'admin.whatsapp.phone_number_hint' | translate }}
+            </p>
+
+            @if (isEnabled() && !isValid()) {
+              <p class="text-xs text-amber-600 dark:text-amber-400 flex items-center gap-1.5 pt-1">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <span>{{ 'admin.whatsapp.validation_error' | translate }}</span>
+              </p>
+            }
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between gap-3">
+            <button
+              type="button"
+              (click)="reset()"
+              [disabled]="!hasChanges() || isSaving()"
+              class="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+              {{ 'admin.whatsapp.reset_btn' | translate }}
+            </button>
+
+            <button
+              type="button"
+              (click)="save()"
+              [disabled]="(isEnabled() && !isValid()) || isSaving()"
+              class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold shadow-md shadow-emerald-600/20 hover:shadow-lg hover:shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+              @if (isSaving()) {
+                <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                </svg>
+                <span>{{ 'admin.whatsapp.saving' | translate }}</span>
+              } @else {
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span>{{ 'admin.whatsapp.save_btn' | translate }}</span>
+              }
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Live Preview & Details (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- Live Click-to-Chat URL Card -->
+        <div class="bg-white dark:bg-zinc-900/60 rounded-2xl border border-gray-100 dark:border-white/5 p-6 shadow-sm space-y-4">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+            {{ 'admin.whatsapp.preview_title' | translate }}
+          </h3>
+
+          <!-- Formatted Display -->
+          <div class="p-4 rounded-xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-white/5 space-y-2">
+            <span class="text-xs font-medium text-gray-400 dark:text-gray-500">
+              {{ 'admin.whatsapp.active_number_label' | translate }}
+            </span>
+            <div class="text-lg font-mono font-bold text-gray-900 dark:text-white">
+              {{ formattedDisplayNumber() || ('admin.whatsapp.no_number' | translate) }}
+            </div>
+          </div>
+
+          <!-- Click-to-Chat URL -->
+          <div class="space-y-1.5">
+            <span class="text-xs font-medium text-gray-400 dark:text-gray-500">
+              {{ 'admin.whatsapp.url_label' | translate }}
+            </span>
+            <div class="p-3 rounded-xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-100 dark:border-white/5 flex items-center justify-between gap-2 overflow-hidden">
+              <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 truncate">
+                {{ whatsappUrl() || ('admin.whatsapp.no_url' | translate) }}
+              </span>
+              @if (whatsappUrl()) {
+                <button
+                  type="button"
+                  (click)="copyLink()"
+                  class="shrink-0 p-1.5 rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-white hover:bg-white dark:hover:bg-zinc-700 transition-colors"
+                  title="Copy link">
+                  @if (copiedUrl()) {
+                    <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                  } @else {
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                    </svg>
+                  }
+                </button>
+              }
+            </div>
+          </div>
+
+          <!-- Test WhatsApp Link Action -->
+          @if (whatsappUrl()) {
+            <a
+              [href]="whatsappUrl()"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-gray-800 dark:text-white text-xs font-semibold transition-colors">
+              <svg class="w-4 h-4 text-emerald-500 fill-current" viewBox="0 0 24 24">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/>
+              </svg>
+              <span>{{ 'admin.whatsapp.test_link' | translate }}</span>
+              <svg class="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          }
+        </div>
+
+        <!-- Floating Button Mockup Preview -->
+        <div class="bg-white dark:bg-zinc-900/60 rounded-2xl border border-gray-100 dark:border-white/5 p-6 shadow-sm space-y-4">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+            {{ 'admin.whatsapp.icon_preview_title' | translate }}
+          </h3>
+
+          <div class="relative h-44 rounded-xl bg-gray-100 dark:bg-zinc-950 border border-gray-200 dark:border-white/5 overflow-hidden flex flex-col justify-end p-4">
+            <!-- Simulated website background elements -->
+            <div class="absolute inset-x-4 top-4 space-y-2 opacity-30 pointer-events-none">
+              <div class="h-3 w-1/3 bg-gray-400 dark:bg-zinc-700 rounded-sm"></div>
+              <div class="h-2 w-2/3 bg-gray-300 dark:bg-zinc-800 rounded-sm"></div>
+            </div>
+
+            <!-- Simulated Scroll-to-top button in preview -->
+            <div class="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-gray-900 text-white flex items-center justify-center opacity-70 shadow-sm pointer-events-none">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+              </svg>
+            </div>
+
+            <!-- Simulated WhatsApp Button directly above scroll to top -->
+            @if (isEnabled() && whatsappUrl()) {
+              <div class="absolute bottom-16 right-4 flex items-center gap-2 transition-all">
+                <div class="px-2.5 py-1 bg-gray-900/90 text-white text-[10px] font-semibold rounded-full shadow-sm">
+                  {{ 'common.chat_whatsapp' | translate }}
+                </div>
+                <div class="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-md shadow-emerald-500/30">
+                  <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.76-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/>
+                  </svg>
+                </div>
+              </div>
+            } @else {
+              <div class="absolute inset-0 flex items-center justify-center bg-gray-50/80 dark:bg-zinc-900/80 backdrop-blur-xs text-xs text-gray-400 font-medium">
+                {{ 'admin.whatsapp.preview_hidden_notice' | translate }}
+              </div>
+            }
+          </div>
+
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+            {{ 'admin.whatsapp.preview_footnote' | translate }}
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  }
+</div>
+
