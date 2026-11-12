@@ -72,20 +72,18 @@
         </div>
 
         <div class="hidden lg:flex items-center pl-2 border-l border-gray-200/80">
-          <!-- <app-language-switcher></app-language-switcher> -->
+          <app-language-switcher></app-language-switcher>
         </div>
         <!-- Mobile Menu Button -->
         <div class="lg:hidden flex items-center gap-2 ml-auto">
-          <!-- <app-language-switcher></app-language-switcher> -->
+          <app-language-switcher></app-language-switcher>
           <button (click)="isMobileMenuOpen.set(!isMobileMenuOpen())"
             class="w-10 h-10 rounded-full bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none flex items-center justify-center transition-colors">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               @if (!isMobileMenuOpen()) {
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               } @else {
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M6 18L18 6M6 6l12 12" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               }
             </svg>
           </button>
