@@ -19,6 +19,12 @@ export const routes: Routes = [
       { path: 'events/:slug', loadComponent: () => import('./pages/event-details/event-details').then(m => m.EventDetails) },
       { path: 'about', loadComponent: () => import('./pages/about-us/about-us').then(m => m.AboutUs) },
       { path: 'contact', loadComponent: () => import('./pages/contact-us/contact-us').then(m => m.ContactUs) },
+      { path: 'news', loadComponent: () => import('./pages/news/news').then(m => m.NewsPage) },
+      { path: 'news/:slug', loadComponent: () => import('./pages/news-detail/news-detail').then(m => m.NewsDetailPage) },
+      { path: '404', loadComponent: () => import('./pages/not-found/not-found').then(m => m.NotFoundPage) },
+      { path: 'news', loadComponent: () => import('./pages/news/news').then(m => m.NewsPage) },
+      { path: 'news/:slug', loadComponent: () => import('./pages/news-detail/news-detail').then(m => m.NewsDetailPage) },
+      { path: '404', loadComponent: () => import('./pages/not-found/not-found').then(m => m.NotFoundPage) },
     ]
   },
   {
@@ -45,9 +51,15 @@ export const routes: Routes = [
           { path: 'support', loadComponent: () => import('./pages/admin/support-messages').then(m => m.AdminSupportMessages) },
           { path: 'support/:id', loadComponent: () => import('./pages/admin/support-conversation/support-conversation').then(m => m.AdminSupportConversation) },
           { path: 'whatsapp-settings', loadComponent: () => import('./pages/admin/whatsapp-settings').then(m => m.AdminWhatsAppSettings) },
+          { path: 'news', loadComponent: () => import('./pages/admin/manage-news/manage-news').then(m => m.AdminNews) },
           { path: 'settings', redirectTo: 'whatsapp-settings', pathMatch: 'full' },
+          { path: '**', redirectTo: '/404' },
         ]
       }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: '/404'
   }
 ];

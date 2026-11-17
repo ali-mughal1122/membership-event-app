@@ -1,0 +1,356 @@
+<div class="space-y-6">
+  <!-- Header / Action Bar -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+        {{ 'news.admin.title' | translate }}
+      </h1>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        {{ 'news.admin.subtitle' | translate }}
+      </p>
+    </div>
+    <div>
+      <button (click)="openCreateModal()"
+        class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-sm hover:shadow transition-all duration-200 active:scale-95">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span>{{ 'news.admin.create_btn' | translate }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Filters & Search Bar -->
+  <div
+    class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm flex flex-col md:flex-row gap-4">
+    <!-- Search Input -->
+    <div class="relative flex-1">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+      <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()"
+        [placeholder]="'news.admin.search_placeholder' | translate"
+        class="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white" />
+    </div>
+
+    <!-- Status Filter -->
+    <div class="w-full md:w-48">
+      <select [(ngModel)]="statusFilter" (ngModelChange)="onFilterChange()"
+        class="w-full px-3 py-2 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white">
+        <option value="">{{ 'news.admin.filter_status' | translate }}</option>
+        <option value="published">{{ 'news.admin.status_published' | translate }}</option>
+        <option value="draft">{{ 'news.admin.status_draft' | translate }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Table Card -->
+  <div
+    class="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm overflow-hidden">
+    @if (isLoading()) {
+    <div class="p-12 text-center text-gray-500 dark:text-gray-400">
+      <div class="inline-block animate-spin w-8 h-8 border-3 border-emerald-500 border-t-transparent rounded-full mb-3">
+      </div>
+      <p class="text-sm">{{ 'common.loading' | translate }}</p>
+    </div>
+    } @else if (news().length === 0) {
+    <div class="p-12 text-center text-gray-500 dark:text-gray-400">
+      <svg class="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-3" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z">
+        </path>
+      </svg>
+      <p class="font-medium text-gray-900 dark:text-white">{{ 'news.no_news_found' | translate }}</p>
+      <p class="text-xs text-gray-400 mt-1">{{ 'news.no_news_found_desc' | translate }}</p>
+    </div>
+    } @else {
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr
+            class="border-b border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-zinc-800/50 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+            <th class="py-3.5 px-6">{{ 'news.admin.col_title' | translate }}</th>
+            <th class="py-3.5 px-6">{{ 'news.admin.col_category' | translate }}</th>
+            <th class="py-3.5 px-6">{{ 'news.admin.col_status' | translate }}</th>
+            <th class="py-3.5 px-6">{{ 'news.admin.col_published' | translate }}</th>
+            <th class="py-3.5 px-6 text-right">{{ 'news.admin.col_actions' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-white/5 text-sm">
+          @for (item of news(); track item.id) {
+          <tr class="hover:bg-gray-50/50 dark:hover:bg-white/[0.02] transition-colors">
+            <!-- Title & Summary -->
+            <td class="py-4 px-6">
+              <div class="max-w-md">
+                <p class="font-bold text-gray-900 dark:text-white line-clamp-1 hover:text-emerald-600 cursor-pointer"
+                  (click)="openEditModal(item)">
+                  {{ item.title }}
+                </p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-1 mt-0.5">
+                  {{ item.summary }}
+                </p>
+                <span class="text-[10px] text-gray-400 font-mono">/news/{{ item.slug }}</span>
+              </div>
+            </td>
+
+            <!-- Category -->
+            <td class="py-4 px-6 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-800/40">
+                {{ item.category }}
+              </span>
+            </td>
+
+            <!-- Status Pill (Clickable toggle) -->
+            <td class="py-4 px-6 whitespace-nowrap">
+              <button (click)="togglePublish(item, $event)" title="Click to toggle publish status"
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-all"
+                [ngClass]="item.isPublished
+                      ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-200'
+                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200'">
+                <span class="w-1.5 h-1.5 rounded-full"
+                  [ngClass]="item.isPublished ? 'bg-emerald-500 animate-pulse' : 'bg-zinc-400'"></span>
+                <span>{{ item.isPublished ? ('news.admin.status_published' | translate) : ('news.admin.status_draft' |
+                  translate) }}</span>
+              </button>
+            </td>
+
+            <!-- Published At -->
+            <td class="py-4 px-6 whitespace-nowrap text-xs text-gray-500 dark:text-gray-400">
+              {{ item.publishedAt ? (item.publishedAt | date:'mediumDate') : '—' }}
+            </td>
+
+            <!-- Actions -->
+            <td class="py-4 px-6 whitespace-nowrap text-right text-xs">
+              <div class="inline-flex items-center gap-2">
+                <button (click)="openEditModal(item)"
+                  class="p-1.5 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 rounded-lg transition-colors"
+                  title="Edit article">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                    </path>
+                  </svg>
+                </button>
+                <button (click)="confirmDelete(item)"
+                  class="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-lg transition-colors"
+                  title="Delete article">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="p-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
+      <app-pagination [page]="page()" [totalPages]="totalPages()" [total]="total()" [limit]="limit()"
+        (pageChange)="onPageChange($event)">
+      </app-pagination>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- Create / Edit Modal -->
+<app-modal
+  [isOpen]="isModalOpen()"
+  [title]="isEditing() ? ('news.admin.edit_title' | translate) : ('news.admin.new_title' | translate)"
+  [subtitle]="'news.admin.subtitle' | translate"
+  [confirmText]="'news.admin.save_btn' | translate"
+  size="xl"
+  (closeEvent)="isModalOpen.set(false)"
+  (confirmEvent)="saveArticle()"
+  [isConfirming]="isSaving()">
+
+  <!-- Edit / Preview Mode Switcher -->
+  <div class="flex items-center justify-between pb-3 mb-4 border-b border-gray-100 dark:border-white/10">
+    <div class="inline-flex p-1 rounded-xl bg-gray-100 dark:bg-zinc-800 text-xs font-semibold">
+      <button
+        type="button"
+        (click)="activeModalTab.set('edit')"
+        class="px-4 py-1.5 rounded-lg transition-all flex items-center gap-1.5"
+        [ngClass]="activeModalTab() === 'edit'
+          ? 'bg-white dark:bg-zinc-700 text-gray-900 dark:text-white shadow-sm font-bold'
+          : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+        </svg>
+        <span>Edit Mode</span>
+      </button>
+
+      <button
+        type="button"
+        (click)="activeModalTab.set('preview')"
+        class="px-4 py-1.5 rounded-lg transition-all flex items-center gap-1.5"
+        [ngClass]="activeModalTab() === 'preview'
+          ? 'bg-emerald-600 text-white shadow-sm font-bold'
+          : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+        </svg>
+        <span>Live Preview</span>
+      </button>
+    </div>
+
+    <span class="text-xs text-gray-400 font-medium hidden sm:inline">
+      {{ activeModalTab() === 'edit' ? 'Drafting article content' : 'Previewing reader layout' }}
+    </span>
+  </div>
+
+  @if (activeModalTab() === 'edit') {
+    <div class="space-y-4">
+      <!-- Title -->
+      <div>
+        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          {{ 'news.admin.form_title' | translate }} <span class="text-red-500">*</span>
+        </label>
+        <input type="text" [(ngModel)]="currentArticle.title" placeholder="e.g. Ny fælles el-aftale reducerer ladepriser"
+          class="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white" />
+      </div>
+
+      <!-- Category & Custom Slug -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+            {{ 'news.admin.form_category' | translate }}
+          </label>
+          <input type="text" [(ngModel)]="currentArticle.category"
+            placeholder="e.g. Aftaler & Fordele, Regulering, Begivenheder"
+            class="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+            {{ 'news.admin.form_slug' | translate }}
+          </label>
+          <input type="text" [(ngModel)]="currentArticle.slug" placeholder="auto-generated-if-empty"
+            class="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white font-mono text-xs" />
+        </div>
+      </div>
+
+      <!-- Summary (Teaser) -->
+      <div>
+        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          {{ 'news.admin.form_summary' | translate }} <span class="text-red-500">*</span>
+        </label>
+        <textarea [(ngModel)]="currentArticle.summary" rows="2"
+          placeholder="Short headline teaser for cards and preview lists (1-3 sentences)..."
+          class="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white"></textarea>
+      </div>
+
+      <!-- Cover Image URL -->
+      <div>
+        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          {{ 'news.admin.form_cover' | translate }}
+        </label>
+        <input type="text" [(ngModel)]="currentArticle.coverImage" placeholder="https://images.unsplash.com/..."
+          class="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white" />
+      </div>
+
+      <!-- Content (Rich Text Editor) -->
+      <div>
+        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          {{ 'news.admin.form_content' | translate }} <span class="text-red-500">*</span>
+        </label>
+        <app-rich-text-editor
+          [(ngModel)]="currentArticle.content"
+          placeholder="Write the full article content here. Use the toolbar for bold, headings, lists, quotes, and links...">
+        </app-rich-text-editor>
+      </div>
+
+      <!-- Publication Settings -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-gray-100 dark:border-white/5 items-center">
+        <div class="flex items-center gap-3">
+          <input id="isPublishedCheck" type="checkbox" [(ngModel)]="currentArticle.isPublished"
+            class="w-4 h-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500" />
+          <label for="isPublishedCheck" class="text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+            {{ 'news.admin.form_published' | translate }}
+          </label>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+            {{ 'news.admin.form_publish_date' | translate }}
+          </label>
+          <input type="date" [(ngModel)]="currentPublishDateString"
+            class="w-full px-3.5 py-2 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white" />
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Live Preview Tab (Matches Reader Appearance) -->
+    <div class="bg-white dark:bg-zinc-900 rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-white/10 space-y-6">
+      <!-- Article Header -->
+      <header>
+        <div class="flex items-center gap-2 text-xs font-bold tracking-wider uppercase mb-3">
+          <span class="text-[#059669] px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/50">
+            {{ currentArticle.category || 'General' }}
+          </span>
+          <span class="text-gray-300">•</span>
+          <span class="text-gray-400 font-semibold lowercase">
+            {{ (currentPublishDateString ? (currentPublishDateString | date:'longDate') : ('Today' | date:'longDate')) }}
+          </span>
+          <span class="text-gray-300">•</span>
+          <span class="text-xs font-medium" [ngClass]="currentArticle.isPublished ? 'text-emerald-600' : 'text-amber-500'">
+            {{ currentArticle.isPublished ? 'Published' : 'Draft' }}
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl font-black text-[#0F172A] dark:text-white tracking-tight leading-snug mb-4">
+          {{ currentArticle.title || 'Untitled Article Headline' }}
+        </h1>
+
+        <p class="text-base text-gray-600 dark:text-gray-300 font-medium leading-relaxed border-l-4 border-[#059669] pl-3 py-1 bg-gray-50/50 dark:bg-zinc-800/40 rounded-r-xl">
+          {{ currentArticle.summary || 'Article summary preview will appear here...' }}
+        </p>
+      </header>
+
+      <!-- Cover Image Preview -->
+      @if (currentArticle.coverImage) {
+        <div class="rounded-xl overflow-hidden shadow border border-gray-100 dark:border-white/10 max-h-72">
+          <img
+            [src]="currentArticle.coverImage"
+            alt="Cover preview"
+            class="w-full h-full object-cover" />
+        </div>
+      }
+
+      <!-- Body Content Rendered -->
+      <div
+        class="prose prose-emerald max-w-none dark:prose-invert pt-4 border-t border-gray-100 dark:border-white/10 text-sm leading-relaxed"
+        [innerHTML]="currentArticle.content || '<p class=\'text-gray-400 italic\'>Article content body is empty. Switch back to Edit Mode to add content.</p>'">
+      </div>
+    </div>
+  }
+</app-modal>
+
+<!-- Delete Confirmation Modal -->
+<app-modal
+  [isOpen]="isDeleteModalOpen()"
+  title="Delete News Article"
+  confirmText="Delete"
+  size="md"
+  (closeEvent)="isDeleteModalOpen.set(false)"
+  (confirmEvent)="deleteConfirmed()">
+  <div class="p-2 text-sm text-gray-600 dark:text-gray-300">
+    <p>{{ 'news.admin.delete_confirm' | translate }}</p>
+    @if (articleToDelete) {
+    <p class="font-bold text-gray-900 dark:text-white mt-2 p-3 bg-gray-50 dark:bg-zinc-800 rounded-xl">
+      {{ articleToDelete.title }}
+    </p>
+    }
+  </div>
+</app-modal>

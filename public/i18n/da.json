@@ -2,6 +2,7 @@
   "nav": {
     "home": "Hjem",
     "events": "Begivenheder",
+    "news": "Nyheder",
     "memberships": "Medlemskaber",
     "contact_us": "Kontakt os",
     "about_us": "Om os",
@@ -576,5 +577,54 @@
   "ADMIN_NAV_EVENTS": "Begivenheder",
   "ADMIN_NAV_CATEGORIES": "Kategorier",
   "ADMIN_NAV_SUPPORT": "Supportbeskeder",
-  "ADMIN_NAV_WHATSAPP_SETTINGS": "WhatsApp Indstillinger"
+  "ADMIN_NAV_WHATSAPP_SETTINGS": "WhatsApp Indstillinger",
+  "ADMIN_NAV_NEWS": "Nyheder & Meddelelser",
+  "news": {
+    "latest_news": "Seneste Nyheder",
+    "home_subtitle": "Hold dig opdateret med de nyeste aftaler, lovændringer og vigtige meddelelser for taxibranchen.",
+    "view_all": "Se alle nyheder",
+    "all_news_title": "Nyheder & Meddelelser",
+    "all_news_subtitle": "Få indsigt, brancheopdateringer og eksklusive fordele for Taxiterminalens medlemmer.",
+    "search_placeholder": "Søg i nyheder og meddelelser...",
+    "all_categories": "Alle kategorier",
+    "read_more": "Læs mere",
+    "back_to_news": "Tilbage til nyheder",
+    "published_on": "Udgivet den",
+    "share": "Del artikel",
+    "no_news_found": "Ingen nyheder fundet",
+    "no_news_found_desc": "Der er ingen artikler, der matcher dine søgekriterier i øjeblikket.",
+    "admin": {
+      "title": "Administrer Nyheder",
+      "subtitle": "Opret, rediger og administrer artikler og meddelelser for Taxiterminalen.",
+      "create_btn": "Opret Nyhed",
+      "edit_title": "Rediger Nyhed",
+      "new_title": "Opret Nyhed",
+      "search_placeholder": "Søg i artikler...",
+      "filter_status": "Alle statusser",
+      "status_published": "Udgivet",
+      "status_draft": "Kladde",
+      "col_title": "Titel",
+      "col_category": "Kategori",
+      "col_status": "Status",
+      "col_published": "Udgivet dato",
+      "col_actions": "Handlinger",
+      "form_title": "Artikeltitel",
+      "form_slug": "URL-slug (valgfrit)",
+      "form_category": "Kategori",
+      "form_summary": "Kort resumé",
+      "form_content": "Indhold (Rich Text / HTML)",
+      "form_cover": "Billed-URL (valgfrit)",
+      "form_published": "Udgiv med det samme",
+      "form_publish_date": "Udgivelsesdato",
+      "save_btn": "Gem artikel",
+      "delete_confirm": "Er du sikker på, at du vil slette denne nyhed?",
+      "delete_btn": "Slet",
+      "cancel_btn": "Annuller"
+    }
+  },
+  "not_found": {
+    "title": "Siden blev ikke fundet",
+    "desc": "Beklager, vi kunne ikke finde den side, du leder efter. Den kan være blevet flyttet eller slettet.",
+    "back_home": "Gå til forsiden"
+  }
 }

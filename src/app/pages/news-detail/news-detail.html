@@ -1,0 +1,91 @@
+<div class="min-h-screen bg-white">
+  <!-- Top Navigation Bar -->
+  <div class="border-b border-gray-100 bg-gray-50/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <a
+        routerLink="/news"
+        class="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#059669] transition-colors group">
+        <span class="text-base group-hover:-translate-x-0.5 transition-transform">←</span>
+        <span>{{ 'news.back_to_news' | translate }}</span>
+      </a>
+
+      <button
+        (click)="shareArticle()"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+        </svg>
+        <span>{{ 'news.share' | translate }}</span>
+      </button>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="max-w-4xl mx-auto px-4 py-24 text-center">
+      <div class="inline-block animate-spin w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full mb-4"></div>
+      <p class="text-sm text-gray-500">{{ 'common.loading' | translate }}</p>
+    </div>
+  } @else if (error() || !article()) {
+    <div class="max-w-4xl mx-auto px-4 py-24 text-center">
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ 'news.no_news_found' | translate }}</h2>
+      <p class="text-gray-500 text-sm mb-6">{{ 'news.no_news_found_desc' | translate }}</p>
+      <a routerLink="/news" class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl font-semibold text-sm hover:bg-emerald-700 transition-colors">
+        {{ 'news.back_to_news' | translate }}
+      </a>
+    </div>
+  } @else {
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+      <!-- Article Header -->
+      <header class="mb-8">
+        <!-- Metadata -->
+        <div class="flex items-center gap-2 text-xs font-bold tracking-wider uppercase mb-4">
+          <span class="text-[#059669] px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/50">
+            {{ article()?.category }}
+          </span>
+          <span class="text-gray-300">•</span>
+          <span class="text-gray-500 font-semibold lowercase">
+            {{ article()?.publishedAt | date:'longDate' }}
+          </span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight leading-[1.15] mb-6">
+          {{ article()?.title }}
+        </h1>
+
+        <!-- Teaser / Summary -->
+        <p class="text-lg sm:text-xl text-gray-600 font-medium leading-relaxed border-l-4 border-[#059669] pl-4 py-1">
+          {{ article()?.summary }}
+        </p>
+      </header>
+
+      <!-- Optional Cover Image -->
+      @if (article()?.coverImage) {
+        <div class="mb-10 rounded-2xl overflow-hidden shadow-lg border border-gray-100 max-h-[460px]">
+          <img
+            [src]="article()?.coverImage"
+            [alt]="article()?.title"
+            class="w-full h-full object-cover" />
+        </div>
+      }
+
+      <!-- Body Content (HTML rendered) -->
+      <div
+        class="prose prose-lg max-w-none prose-emerald prose-headings:font-bold prose-headings:text-[#0F172A] prose-p:text-gray-700 prose-p:leading-relaxed prose-li:text-gray-700 pt-4 border-t border-gray-100"
+        [innerHTML]="article()?.content">
+      </div>
+
+      <!-- Footer navigation -->
+      <div class="mt-14 pt-8 border-t border-gray-100 flex items-center justify-between">
+        <a
+          routerLink="/news"
+          class="inline-flex items-center gap-2 text-sm font-bold text-[#059669] hover:text-emerald-700 transition-colors">
+          <span>←</span>
+          <span>{{ 'news.back_to_news' | translate }}</span>
+        </a>
+      </div>
+    </article>
+  }
+</div>
+

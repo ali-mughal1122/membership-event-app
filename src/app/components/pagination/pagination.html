@@ -5,6 +5,12 @@
   <div class="flex items-center gap-2">
     <select [ngModel]="limit" (ngModelChange)="onLimitChange($event)"
       class="border border-gray-300 dark:border-white/10 rounded-lg text-sm px-2 py-1.5 bg-white dark:bg-black/20 text-gray-900 dark:text-white">
+      @if (limit !== 9 && limit !== 10 && limit !== 25 && limit !== 50) {
+        <option [ngValue]="limit">{{ limit }}</option>
+      }
+      @if (limit === 9) {
+        <option [ngValue]="9">9</option>
+      }
       <option [ngValue]="10">10</option>
       <option [ngValue]="25">25</option>
       <option [ngValue]="50">50</option>

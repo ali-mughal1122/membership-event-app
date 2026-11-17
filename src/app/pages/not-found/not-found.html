@@ -1,0 +1,44 @@
+<div class="min-h-[75vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 bg-white relative overflow-hidden">
+  <!-- Subtle Background Accents -->
+  <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-xl w-full text-center relative z-10">
+    <!-- Big 404 Badge -->
+    <div class="inline-flex items-center justify-center mb-6">
+      <span
+        class="text-8xl sm:text-9xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400">
+        404
+      </span>
+    </div>
+
+    <!-- Headline in Deep Nordic Slate -->
+    <h1 class="text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight mb-4">
+      {{ 'not_found.title' | translate }}
+    </h1>
+
+    <!-- Description -->
+    <p class="text-base sm:text-lg text-gray-500 font-normal leading-relaxed mb-8 max-w-md mx-auto">
+      {{ 'not_found.desc' | translate }}
+    </p>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <a routerLink="/"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+          </path>
+        </svg>
+        <span>{{ 'not_found.back_home' | translate }}</span>
+      </a>
+
+      <!-- <a
+        routerLink="/news"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold rounded-xl transition-all duration-200 text-sm">
+        <span>{{ 'news.all_news_title' | translate }}</span>
+      </a> -->
+    </div>
+  </div>
+</div>

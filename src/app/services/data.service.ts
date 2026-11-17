@@ -131,6 +131,33 @@ export interface UpdateWhatsAppSettingsPayload {
   isEnabled: boolean;
 }
 
+export interface NewsItem {
+  id: string;
+  title: string;
+  slug: string;
+  category: string;
+  summary: string;
+  content: string;
+  coverImage?: string | null;
+  isPublished: boolean;
+  publishedAt?: string | null;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface CreateNewsPayload {
+  title: string;
+  slug?: string;
+  category?: string;
+  summary: string;
+  content: string;
+  coverImage?: string;
+  isPublished?: boolean;
+  publishedAt?: string | Date | null;
+}
+
+export interface UpdateNewsPayload extends Partial<CreateNewsPayload> {}
+
 export interface PendingMember {
   id?: string;
   name: string;
@@ -523,5 +550,47 @@ export class DataService {
 
   updateWhatsAppSettings(payload: UpdateWhatsAppSettingsPayload): Observable<AdminWhatsAppSettings> {
     return this.http.put<AdminWhatsAppSettings>(AppEndpointsMapping.UpdateWhatsAppSettings, payload);
+  }
+
+  // --- News Endpoints ---
+  getPublishedNews(params?: {
+    page?: number | string;
+    limit?: number | string;
+    category?: string;
+    search?: string;
+  }): Observable<PaginatedResult<NewsItem>> {
+    return this.http.get<PaginatedResult<NewsItem>>(
+      `${AppEndpointsMapping.GetPublishedNews}${toQueryString(params || {})}`
+    );
+  }
+
+  getNewsBySlug(slug: string): Observable<NewsItem> {
+    return this.http.get<NewsItem>(`${AppEndpointsMapping.GetNewsBySlug}/${slug}`);
+  }
+
+  getAdminNews(params?: {
+    page?: number | string;
+    limit?: number | string;
+    category?: string;
+    search?: string;
+    isPublished?: string | boolean;
+  }): Observable<PaginatedResult<NewsItem>> {
+    return this.http.get<PaginatedResult<NewsItem>>(
+      `${AppEndpointsMapping.GetAdminNews}${toQueryString(params || {})}`
+    );
+  }
+
+  createNews(payload: CreateNewsPayload): Observable<NewsItem> {
+    return this.http.post<NewsItem>(AppEndpointsMapping.CreateNews, payload);
+  }
+
+  updateNews(id: string, payload: UpdateNewsPayload): Observable<NewsItem> {
+    return this.http.patch<NewsItem>(`${AppEndpointsMapping.UpdateNews}/${id}`, payload);
+  }
+
+  deleteNews(id: string): Observable<{ success: boolean; message: string }> {
+    return this.http.delete<{ success: boolean; message: string }>(
+      `${AppEndpointsMapping.DeleteNews}/${id}`
+    );
   }
 }

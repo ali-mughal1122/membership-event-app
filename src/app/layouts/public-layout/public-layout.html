@@ -9,27 +9,30 @@
         </a>
 
         <!-- Desktop Nav -->
-        <nav class="hidden lg:flex items-center gap-6 xl:gap-8 h-20 absolute left-1/2 -translate-x-1/2">
+        <nav class="hidden lg:flex items-center gap-4 xl:gap-6 h-20 absolute left-1/2 -translate-x-1/2">
           <a routerLink="/" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
             [routerLinkActiveOptions]="{exact: true}"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600 text-sm xl:text-base">{{
             'nav.home' | translate }}</a>
 
           <a routerLink="/events" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600 text-sm xl:text-base">{{
             'nav.events' | translate }}</a>
+          <a routerLink="/news" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600 text-sm xl:text-base">{{
+            'nav.news' | translate }}</a>
           <a routerLink="/memberships" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600 text-sm xl:text-base">{{
             'nav.memberships' | translate }}</a>
           <a routerLink="/contact" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600 text-sm xl:text-base">{{
             'nav.contact_us' | translate }}</a>
           <a routerLink="/about" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600 text-sm xl:text-base">{{
             'nav.about_us' | translate }}</a>
           @if (authService.getUserType() === 'ADMIN') {
           <a routerLink="/admin" routerLinkActive="!text-blue-600 !font-bold !border-blue-600"
-            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600">{{
+            class="inline-flex items-center pb-0.5 text-gray-500 hover:text-blue-600 transition-colors font-semibold whitespace-nowrap border-b-2 border-transparent hover:border-blue-600 text-sm xl:text-base">{{
             'nav.admin_panel' | translate }}</a>
           }
         </nav>
@@ -108,6 +111,10 @@
           (click)="isMobileMenuOpen.set(false)"
           class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">{{
           'nav.events' | translate }}</a>
+        <a routerLink="/news" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
+          (click)="isMobileMenuOpen.set(false)"
+          class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">{{
+          'nav.news' | translate }}</a>
         <a routerLink="/memberships" routerLinkActive="!bg-blue-600 !text-white !font-bold shadow-md shadow-blue-500/25"
           (click)="isMobileMenuOpen.set(false)"
           class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50/60 rounded-xl transition-all">{{
@@ -201,6 +208,10 @@
             <li><a routerLink="/events" class="hover:text-blue-400 transition-colors flex items-center gap-2"><span
                   class="w-1.5 h-1.5 rounded-full bg-blue-500/0 hover:bg-blue-500 transition-colors"></span>{{
                 'nav.events' | translate }}</a>
+            </li>
+            <li><a routerLink="/news" class="hover:text-blue-400 transition-colors flex items-center gap-2"><span
+                  class="w-1.5 h-1.5 rounded-full bg-blue-500/0 hover:bg-blue-500 transition-colors"></span>{{
+                'nav.news' | translate }}</a>
             </li>
             <li><a routerLink="/memberships" class="hover:text-blue-400 transition-colors flex items-center gap-2"><span
                   class="w-1.5 h-1.5 rounded-full bg-blue-500/0 hover:bg-blue-500 transition-colors"></span>{{

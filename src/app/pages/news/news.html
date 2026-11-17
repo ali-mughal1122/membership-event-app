@@ -1,0 +1,130 @@
+<div class="min-h-screen bg-white">
+  <!-- Hero Section -->
+  <div class="relative bg-gradient-to-b from-gray-900 to-gray-950 text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute -top-40 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold tracking-wide uppercase mb-5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Taxiterminalen Nyheder
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-4">
+        {{ 'news.all_news_title' | translate }}
+      </h1>
+      <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto font-normal">
+        {{ 'news.all_news_subtitle' | translate }}
+      </p>
+
+      <!-- Search Input within hero -->
+      <div class="mt-8 max-w-xl mx-auto">
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (ngModelChange)="onSearchChange()"
+            [placeholder]="'news.search_placeholder' | translate"
+            class="w-full pl-11 pr-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-white/15 transition-all shadow-xl" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Category Tabs -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-none border-b border-gray-100">
+      @for (cat of categories; track cat.key) {
+        <button
+          (click)="setCategory(cat.key)"
+          class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap"
+          [ngClass]="selectedCategory() === cat.key
+            ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900'">
+          {{ cat.label || (cat.labelKey ? (cat.labelKey | translate) : cat.key) }}
+        </button>
+      }
+    </div>
+
+    <!-- Articles Grid -->
+    @if (isLoading()) {
+      <div class="py-24 text-center">
+        <div class="inline-block animate-spin w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full mb-4"></div>
+        <p class="text-sm text-gray-500">{{ 'common.loading' | translate }}</p>
+      </div>
+    } @else if (newsList().length === 0) {
+      <div class="py-24 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900">{{ 'news.no_news_found' | translate }}</h3>
+        <p class="text-sm text-gray-500 mt-1 max-w-sm mx-auto">{{ 'news.no_news_found_desc' | translate }}</p>
+      </div>
+    } @else {
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @for (article of newsList(); track article.id) {
+          <a
+            [routerLink]="['/news', article.slug]"
+            class="group bg-[#F8FAFC] rounded-2xl p-6 sm:p-7 border border-gray-100 hover:border-emerald-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col justify-between">
+            <div>
+              <!-- Top Metadata Row: Category + Date & Arrow Icon -->
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <div class="flex items-center gap-2 text-xs font-bold tracking-wider uppercase">
+                  <span class="text-[#059669]">{{ article.category }}</span>
+                  <span class="text-gray-300">•</span>
+                  <span class="text-gray-400 font-semibold lowercase">
+                    {{ article.publishedAt | date:'MMMM yyyy' }}
+                  </span>
+                </div>
+                <!-- Diagonal Top-Right Arrow -->
+                <span class="text-gray-400 group-hover:text-[#059669] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H9M17 7V15"></path>
+                  </svg>
+                </span>
+              </div>
+
+              <!-- Headline -->
+              <h3 class="text-xl font-bold text-[#0F172A] leading-snug line-clamp-3 group-hover:underline decoration-[#059669] decoration-2 underline-offset-4 transition-all">
+                {{ article.title }}
+              </h3>
+
+              <!-- Summary -->
+              <p class="text-sm text-gray-600 font-normal leading-relaxed line-clamp-3 mt-3">
+                {{ article.summary }}
+              </p>
+            </div>
+
+            <!-- Read More Indicator -->
+            <div class="pt-6 mt-6 border-t border-gray-200/60 flex items-center justify-between text-xs font-bold text-gray-400 group-hover:text-[#059669] transition-colors">
+              <span>{{ 'news.read_more' | translate }}</span>
+              <span class="text-sm">→</span>
+            </div>
+          </a>
+        }
+      </div>
+
+      <!-- Pagination -->
+      <div class="mt-12 pt-6 border-t border-gray-100">
+        <app-pagination
+          [page]="page()"
+          [totalPages]="totalPages()"
+          [total]="total()"
+          [limit]="limit()"
+          (pageChange)="onPageChange($event)"
+          (limitChange)="onLimitChange($event)">
+        </app-pagination>
+      </div>
+    }
+  </div>
+</div>

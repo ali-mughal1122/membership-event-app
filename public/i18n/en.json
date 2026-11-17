@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "events": "Events",
+    "news": "News",
     "memberships": "Memberships",
     "contact_us": "Contact Us",
     "about_us": "About Us",
@@ -576,5 +577,54 @@
   "ADMIN_NAV_EVENTS": "Events",
   "ADMIN_NAV_CATEGORIES": "Categories",
   "ADMIN_NAV_SUPPORT": "Support Messages",
-  "ADMIN_NAV_WHATSAPP_SETTINGS": "WhatsApp Settings"
+  "ADMIN_NAV_WHATSAPP_SETTINGS": "WhatsApp Settings",
+  "ADMIN_NAV_NEWS": "News & Announcements",
+  "news": {
+    "latest_news": "Latest News",
+    "home_subtitle": "Stay informed with the latest agreements, regulatory updates, and key announcements for the taxi trade.",
+    "view_all": "View All News",
+    "all_news_title": "News & Announcements",
+    "all_news_subtitle": "Insights, industry updates, and exclusive advantages for members of Taxiterminalen.",
+    "search_placeholder": "Search news and announcements...",
+    "all_categories": "All Categories",
+    "read_more": "Read More",
+    "back_to_news": "Back to News",
+    "published_on": "Published on",
+    "share": "Share Article",
+    "no_news_found": "No News Found",
+    "no_news_found_desc": "There are currently no articles matching your filter criteria.",
+    "admin": {
+      "title": "Manage News",
+      "subtitle": "Create, edit, and organize announcements and articles for Taxiterminalen.",
+      "create_btn": "Create News Article",
+      "edit_title": "Edit News Article",
+      "new_title": "Create News Article",
+      "search_placeholder": "Search articles...",
+      "filter_status": "All Statuses",
+      "status_published": "Published",
+      "status_draft": "Draft",
+      "col_title": "Title",
+      "col_category": "Category",
+      "col_status": "Status",
+      "col_published": "Published Date",
+      "col_actions": "Actions",
+      "form_title": "Article Title",
+      "form_slug": "URL Slug (optional)",
+      "form_category": "Category",
+      "form_summary": "Short Summary",
+      "form_content": "Content (Rich Text / HTML)",
+      "form_cover": "Cover Image URL (optional)",
+      "form_published": "Publish immediately",
+      "form_publish_date": "Publish Date",
+      "save_btn": "Save Article",
+      "delete_confirm": "Are you sure you want to delete this news article?",
+      "delete_btn": "Delete",
+      "cancel_btn": "Cancel"
+    }
+  },
+  "not_found": {
+    "title": "Page Not Found",
+    "desc": "Sorry, we could not find the page you are looking for. It may have been moved, deleted, or does not exist.",
+    "back_home": "Back to Home"
+  }
 }

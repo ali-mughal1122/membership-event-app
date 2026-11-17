@@ -175,6 +175,90 @@
   </div>
 </div>
 
+<!-- Latest News Section (Asymmetric Reference Layout) -->
+<section class="py-24 bg-white relative overflow-hidden border-t border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      
+      <!-- Left Column: Title, Subtitle, and Pill CTA with Circular Mint/Emerald Accent -->
+      <div class="lg:col-span-5 flex flex-col justify-between h-full pt-2">
+        <div>
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0F172A] tracking-tight leading-[1.05] mb-6">
+            {{ 'news.latest_news' | translate }}
+          </h2>
+          <p class="text-base sm:text-lg text-gray-500 font-normal leading-relaxed max-w-md">
+            {{ 'news.home_subtitle' | translate }}
+          </p>
+        </div>
+
+        <!-- CTA Button matching All services -->
+        <div class="mt-10 lg:mt-16">
+          <a
+            routerLink="/news"
+            class="inline-flex items-center text-emerald-600 font-bold text-lg hover:text-emerald-700 transition-colors group">
+            {{ 'news.view_all' | translate }}
+            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Vertical Stack of 3-4 News Cards -->
+      <div class="lg:col-span-7 flex flex-col space-y-4">
+        @if (isLoadingNews()) {
+          <!-- Skeleton Loading Placeholders -->
+          @for (i of [1, 2, 3]; track i) {
+            <div class="bg-[#F8FAFC] rounded-2xl p-6 sm:p-7 border border-gray-100 animate-pulse">
+              <div class="h-3 w-36 bg-gray-200 rounded mb-4"></div>
+              <div class="h-5 w-5/6 bg-gray-200 rounded mb-2"></div>
+              <div class="h-5 w-2/3 bg-gray-200 rounded"></div>
+            </div>
+          }
+        } @else if (latestNews().length === 0) {
+          <div class="bg-[#F8FAFC] rounded-2xl p-8 text-center border border-gray-100 text-gray-400">
+            <p class="text-sm font-medium">{{ 'news.no_news_found' | translate }}</p>
+          </div>
+        } @else {
+          @for (item of latestNews(); track item.id) {
+            <a
+              [routerLink]="['/news', item.slug]"
+              class="group block bg-[#F8FAFC] hover:bg-white rounded-2xl p-6 sm:p-7 border border-gray-100 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-900/5 transition-all duration-300 relative">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex-1 pr-2">
+                  <!-- Category tag & Published date metadata row -->
+                  <div class="flex items-center gap-2 text-xs font-bold tracking-wider uppercase mb-3">
+                    <span class="text-[#059669]">{{ item.category }}</span>
+                    <span class="text-gray-300">•</span>
+                    <span class="text-gray-400 font-semibold lowercase">
+                      {{ item.publishedAt | date:'MMMM yyyy' }}
+                    </span>
+                  </div>
+
+                  <!-- 2-3 Line Headline: Underline on hover -->
+                  <h3 class="text-lg sm:text-xl font-bold text-[#0F172A] leading-snug line-clamp-2 group-hover:underline decoration-[#059669] decoration-2 underline-offset-4 transition-all">
+                    {{ item.title }}
+                  </h3>
+                </div>
+
+                <!-- Top-Right Diagonal Arrow (↗): highlights in Emerald Green on card hover -->
+                <div class="shrink-0 pt-0.5">
+                  <span class="inline-flex items-center justify-center w-8 h-8 rounded-full text-gray-400 group-hover:text-[#059669] group-hover:bg-emerald-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H9M17 7V15"></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </a>
+          }
+        }
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- Customer Reviews Section -->
 <div class="py-24 bg-gray-50 relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

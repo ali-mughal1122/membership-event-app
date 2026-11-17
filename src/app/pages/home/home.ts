@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DataService } from '../../services/data.service';
+import { DataService, NewsItem } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
 import { ModalComponent } from '../../components/modal/modal';
@@ -26,10 +26,14 @@ export class Home implements OnInit, OnDestroy {
 
   eventsState = createApiState<any[]>([]);
   pastEvents: any[] = [];
-  
+
   reviews = signal<any[]>([]);
   isLoadingReviews = signal(true);
   loadingReviewsError = signal(false);
+
+  // Latest News (Home section)
+  latestNews = signal<NewsItem[]>([]);
+  isLoadingNews = signal(true);
 
   // Modal State
   isReviewModalOpen = signal(false);
@@ -43,7 +47,8 @@ export class Home implements OnInit, OnDestroy {
   ngOnInit() {
     this.fetchEvents();
     this.fetchReviews();
-    
+    this.fetchLatestNews();
+
     // Check if we returned from login to write a review
     this.querySub = this.route.queryParams.subscribe(params => {
       if (params['action'] === 'review' && this.authService.isLoggedIn()) {
@@ -65,11 +70,11 @@ export class Home implements OnInit, OnDestroy {
           const published = events.filter(e => e.status === 'Published');
           const today = new Date();
           today.setHours(0, 0, 0, 0);
-          
+
           this.pastEvents = published.filter(e => {
             if (!e.date) return false;
             const eventDate = new Date(e.date);
-            eventDate.setHours(0,0,0,0);
+            eventDate.setHours(0, 0, 0, 0);
             return eventDate < today;
           }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
 
@@ -95,6 +100,20 @@ export class Home implements OnInit, OnDestroy {
     });
   }
 
+  fetchLatestNews() {
+    this.isLoadingNews.set(true);
+    this.dataService.getPublishedNews({ limit: 4 }).subscribe({
+      next: (res) => {
+        this.latestNews.set(res.data || []);
+        this.isLoadingNews.set(false);
+      },
+      error: (err) => {
+        console.error('Failed to load latest news for home', err);
+        this.isLoadingNews.set(false);
+      },
+    });
+  }
+
   toggleReviewExpansion(reviewId: string) {
     this.expandedReviews.update(map => ({
       ...map,
@@ -114,7 +133,7 @@ export class Home implements OnInit, OnDestroy {
   openReviewModal() {
     this.isReviewModalOpen.set(true);
     this.isSubmittingReview.set(true); // Temporary loading state while checking
-    
+
     this.dataService.getMyReview().subscribe({
       next: (myReview) => {
         this.isSubmittingReview.set(false);
@@ -150,13 +169,13 @@ export class Home implements OnInit, OnDestroy {
       this.toastService.error('Please provide a comment of at least 10 characters.');
       return;
     }
-    
+
     this.isSubmittingReview.set(true);
-    
-    const request = this.isEditMode() 
+
+    const request = this.isEditMode()
       ? this.dataService.updateReview(this.reviewForm)
       : this.dataService.submitReview(this.reviewForm);
-      
+
     request.subscribe({
       next: () => {
         this.isSubmittingReview.set(false);
