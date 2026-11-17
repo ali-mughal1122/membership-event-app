@@ -1,455 +1,744 @@
-key,value,danish
-nav.home,"Home","Hjem"
-nav.events,"Events","Begivenheder"
-nav.memberships,"Memberships","Medlemskaber"
-nav.contact_us,"Contact Us","Kontakt os"
-nav.about_us,"About Us","Om os"
-nav.admin_panel,"Admin Panel","Adminpanel"
-nav.sign_in,"Sign In","Log ind"
-nav.join_now,"Join Now","Bliv medlem"
-nav.my_profile,"My Profile","Min profil"
-nav.logout,"Logout","Log ud"
-home.hero.badge,"The Taxi Terminal","Taxiterminalen"
-home.hero.title_part1,"Together we create","Sammen skaber vi"
-home.hero.title_part2,"better taxi services","bedre taxitjenester"
-home.hero.desc,"Welcome to Taxiterminalen - your preferred platform for taxi services, where we bring together taxi drivers and offer advice as well as the creation of cheap electricity contracts, insurance and pension agreements to ensure the best terms for our customers.","Velkommen til Taxiterminalen - din foretrukne platform for taxitjenester, hvor vi samler taxachauffører og tilbyder rådgivning samt etablering af billige elaftaler, forsikrings- og pensionsaftaler for at sikre de bedste vilkår for vores kunder."
-home.hero.contact_btn,"Contact us","Kontakt os"
-home.about.title,"About the Taxi Terminal","Om Taxiterminalen"
+﻿key,val.english,val.da
+common.actions,Actions,Handlinger
+common.active,Active,Aktiv
+common.address,Address,Adresse
+common.all,All,Alle
+common.anonymous,Anonymous,Anonym
+common.archive,Archive,Arkiver
+common.cancel,Cancel,Annuller
+common.cards,Cards,Kort
+common.chat_whatsapp,Chat with us on WhatsApp,Chat med os på WhatsApp
+common.close,Close,Luk
+common.confirm,Confirm,Bekræft
+common.copy_link,Copy link,Kopier link
+common.created_at,Created At,Oprettet
+common.date,Date,Dato
+common.day,day,dag
+common.day_ago,1 day ago,1 dag siden
+common.days,days,dage
+common.days_ago,{{count}} days ago,{{count}} dage siden
+common.delete,Delete,Slet
+common.description,Description,Beskrivelse
+common.details,Details,Detaljer
+common.duration,Duration,Varighed
+common.edit,Edit,Rediger
+common.email,Email,E-mail
+common.error,Error,Fejl
+common.export_csv,Export CSV,Eksporter CSV
+common.filter,Filter,Filtrer
+common.hour_ago,1 hour ago,1 time siden
+common.hours_ago,{{count}} hours ago,{{count}} timer siden
+common.inactive,Inactive,Inaktiv
+common.just_now,Just now,Lige nu
+common.loading,Loading...,Indlæser...
+common.min_ago,1 min ago,1 min. siden
+common.mins_ago,{{count}} mins ago,{{count}} min. siden
+common.more,+{{count}} more,+{{count}} flere
+common.name,Name,Navn
+common.no_data,No data available,Ingen data tilgængelig
+common.none,None,Ingen
+common.pagination.next,Next,Næste
+common.pagination.previous,Previous,Forrige
+common.pagination.showing,Showing {{from}} to {{to}} of {{total}},Viser {{from}} til {{to}} af {{total}}
+common.phone,Phone,Telefon
+common.price,Price,Pris
+common.reopen,Reopen,Genåbn
+common.save,Save,Gem
+common.scroll_to_top,Scroll to top,Rul til toppen
+common.search,Search...,Søg...
+common.status,Status,Status
+common.submit,Submit,Indsend
+common.success,Success,Succes
+common.switch_to_da,Skift til dansk,Skift til dansk
+common.switch_to_en,Switch to English,Skift til engelsk
+common.table,Table,Tabel
+common.time,Time,Tidspunkt
+common.uncategorized,Uncategorized,Ukategoriseret
+common.urgency,Urgency,Prioritet
+common.view,View,Vis
+common.whatsapp_contact,WhatsApp Contact,WhatsApp-kontakt
+nav.about_us,About Us,Om os
+nav.admin_panel,Admin Panel,Adminpanel
+nav.contact_us,Contact Us,Kontakt os
+nav.events,Events,Begivenheder
+nav.home,Home,Hjem
+nav.join_now,Join Now,Bliv medlem
+nav.logout,Logout,Log ud
+nav.memberships,Memberships,Medlemskaber
+nav.my_profile,My Profile,Min profil
+nav.sign_in,Sign In,Log ind
+home.about.btn,About us,Om os
 home.about.desc,"We are a taxi association that offers advice and the creation of cheap electricity contracts, cheaper insurance and better pension agreements for our members. We also work to bring taxi drivers together to strengthen the industry.","Vi er en taxiforening, der tilbyder rådgivning og oprettelse af billige elaftaler, billigere forsikringer og bedre pensionsaftaler for vores medlemmer. Vi arbejder også for at samle taxachauffører for at styrke branchen."
-home.about.btn,"About us","Om os"
-home.features.feature1_title,"Cheap electricity deals","Billige elaftaler"
-home.features.feature1_desc,"Value is an expression of something or someone that is considered significant or important.","Værdi er et udtryk for noget eller nogen, der anses for væsentlig eller vigtig."
-home.features.feature2_title,"Better pension agreement","Bedre pensionsaftale"
-home.features.feature2_desc,"Value is a subjective and individual perception of something, which can be based on various factors such as morality, culture and","Værdi er en individuel opfattelse af noget, som kan baseres på faktorer som moral og kultur"
-home.features.feature3_title,"Gathered the taxi drivers together","Samler taxachaufførerne"
-home.features.feature3_desc,"Value is a subjective perception of something that is considered important or significant.","Værdi er en subjektiv opfattelse af noget, der anses for vigtigt eller væsentligt."
-home.services.headline,"Welcome to Taxiterminalen - your association for taxi drivers and advice on cheap electricity contracts, insurance and pension agreements. We specialize in bringing taxi drivers together and ensuring better conditions for our members.","Velkommen til Taxiterminalen - din forening for taxachauffører og rådgivning om billige elaftaler, forsikrings- og pensionsaftaler. Vi er specialiserede i at samle taxachauffører og sikre bedre vilkår for vores medlemmer."
-home.services.sub,"We offer professional advice and assistance in setting up a taxi business, as well as advantages on electricity contracts, insurance and pension agreements for our members. We bring taxi drivers together and ensure better conditions for the entire industry.","Vi tilbyder professionel rådgivning og bistand til etablering af taxavirksomhed samt fordele på elaftaler, forsikring og pension for vores medlemmer. Vi samler taxachauffører og sikrer bedre vilkår for branchen."
-home.services.item1,"Advice on taxi legislation","Rådgivning om taxilovgivning"
-home.services.item2,"Setting up a taxi business","Etablering af taxavirksomhed"
-home.services.item3,"Better pension agreements for truckers and drivers","Bedre pensionsaftaler for vognmænd og chauffører"
-home.services.all_btn,"All services","Alle ydelser"
-home.benefits.title,"Empowering Professionals","Styrker fagfolk"
-home.benefits.title_accent,"Worldwide","I hele landet"
-home.benefits.desc,"We are a leading organization dedicated to fostering growth, networking, and innovation. Through our membership programs and dynamic events, we provide the platform you need to succeed.","Vi er en førende organisation dedikeret til at fremme vækst, netværk og innovation. Gennem vores medlemskabsprogrammer og dynamiske arrangementer giver vi dig platformen til succes."
-home.benefits.card1_title,"Vibrant Community","Levende fællesskab"
-home.benefits.card1_desc,"Connect with like-minded individuals and industry leaders in our exclusive network.","Få kontakt med ligesindede og brancheledere i vores eksklusive netværk."
-home.benefits.card2_title,"Exclusive Resources","Eksklusive ressourcer"
+home.about.title,About the Taxi Terminal,Om Taxiterminalen
+home.benefits.card1_desc,Connect with like-minded individuals and industry leaders in our exclusive network.,Få kontakt med ligesindede og brancheledere i vores eksklusive netværk.
+home.benefits.card1_title,Vibrant Community,Levende fællesskab
 home.benefits.card2_desc,"Gain access to premium content, curated tools, and actionable insights.","Få adgang til førsteklasses indhold, udvalgte værktøjer og handlingsorienteret viden."
-home.benefits.card3_title,"Premier Events","Førsteklasses begivenheder"
+home.benefits.card2_title,Exclusive Resources,Eksklusive ressourcer
 home.benefits.card3_desc,"Attend interactive workshops, global conferences, and VIP networking mixers.","Deltag i interaktive workshops, konferencer og netværksmøder."
-home.events.title,"Upcoming & Past Events","Kommende & tidligere begivenheder"
+home.benefits.card3_title,Premier Events,Førsteklasses begivenheder
+home.benefits.desc,"We are a leading organization dedicated to fostering growth, networking, and innovation. Through our membership programs and dynamic events, we provide the platform you need to succeed.","Vi er en førende organisation dedikeret til at fremme vækst, netværk og innovation. Gennem vores medlemskabsprogrammer og dynamiske arrangementer giver vi dig platformen til succes."
+home.benefits.title,Empowering Professionals,Styrker fagfolk
+home.benefits.title_accent,Worldwide,I hele landet
+home.events.past_events,Past Events,Tidligere begivenheder
 home.events.sub,"Join our community workshops, networking nights, and special industry events.","Deltag i vores workshops, netværksaftener og særlige branchebegivenheder."
-home.events.view_all,"View all events","Se alle begivenheder"
-home.events.past_events,"Past Events","Tidligere begivenheder"
-home.reviews.title,"What Taxi Drivers Say About Us","Hvad taxachauffører siger om os"
-home.reviews.sub,"Read how Taxiterminalen has helped drivers across Denmark get better deals and stronger support.","Læs hvordan Taxiterminalen har hjulpet chauffører i hele Danmark med bedre aftaler og stærkere opbakning."
-home.reviews.customer_reviews,"Customer reviews","Kundeanmeldelser"
-home.reviews.share_experience,"Share Your Experience","Del din oplevelse"
-home.reviews.leave_review,"Leave a Review","Skriv en anmeldelse"
-home.reviews.write_review,"Write a Review","Skriv en anmeldelse"
-home.reviews.no_reviews_title,"No reviews yet","Ingen anmeldelser endnu"
-home.reviews.no_reviews_desc,"Be the first to share your experience and help others learn about our platform!","Vær den første til at dele din oplevelse og hjælpe andre med at lære om vores platform!"
-home.reviews.error_title,"Oops! Something went wrong","Ups! Noget gik galt"
-home.reviews.error_desc,"We couldn't load the reviews at this time. Please try again later.","Vi kunne ikke indlæse anmeldelserne i øjeblikket. Prøv venligst igen senere."
-home.reviews.try_again,"Try Again","Prøv igen"
-home.reviews.read_more,"Read more","Læs mere"
-home.reviews.read_less,"Read less","Læs mindre"
-home.reviews.show_less,"Show Less","Vis mindre"
-home.reviews.your_rating,"Your Rating","Din bedømmelse"
-home.reviews.your_feedback,"Your Feedback","Din feedback"
-home.reviews.feedback_placeholder,"Tell us what you liked (or didn't like)...","Fortæl os hvad du syntes om (eller ikke brød dig om)..."
-home.reviews.min_chars,"Minimum 10 characters","Mindst 10 tegn"
-home.reviews.update_title,"Update Your Review","Opdater din anmeldelse"
-home.reviews.update_btn,"Update","Opdater"
-home.reviews.submit_btn,"Submit","Indsend"
-events.hero.badge,"Live & Upcoming","Live & Kommende"
-events.hero.title_part1,"Discover","Opdag"
-events.hero.title_accent,"Incredible","Fantastiske"
-events.hero.title_part2,"Events.","Begivenheder."
-events.hero.subtitle,"Join the world's leading minds. Register for exclusive conferences, workshops, and high-impact meetups.","Mød branchens skarpeste profiler. Tilmeld dig eksklusive konferencer, workshops og arrangementer."
-events.hero.search_placeholder,"Search events...","Søg begivenheder..."
-events.section.upcoming_title,"Upcoming Events","Kommende begivenheder"
-events.section.past_title,"Past Events","Tidligere begivenheder"
-events.section.loading,"Loading events...","Indlæser begivenheder..."
-events.section.failed_load,"Failed to load events","Kunne ikke hente begivenheder"
-events.section.open_to_all,"Open to all","Åben for alle"
-events.section.members_only,"Members only","Kun for medlemmer"
-events.section.registered_badge,"Registered","Tilmeldt"
-events.section.membership_required_note,"An active membership is required to register for this event.","Et aktivt medlemskab er påkrævet for at tilmelde sig denne begivenhed."
-events.section.view_plans_btn,"View Membership Plans","Se medlemskabsplaner"
-events.section.register_btn,"Register","Tilmeld"
-events.section.registering_btn,"Registering...","Tilmelder..."
-events.section.completed_badge,"Completed","Afsluttet"
-events.section.no_matching,"No matching events","Ingen matchende begivenheder"
-events.section.no_matching_sub,"Try a different search term.","Prøv et andet søgeord."
-events.section.no_upcoming,"No upcoming events","Ingen kommende begivenheder"
-events.section.no_upcoming_sub,"Check back later for new and upcoming events.","Kom tilbage senere for nye og kommende begivenheder."
-events.details.back_to_events,"Back to Events","Tilbage til begivenheder"
-events.details.open_status,"Open","Åben"
-events.details.event_completed,"Event Completed","Begivenhed afsluttet"
-events.details.registered,"Registered","Tilmeldt"
-events.details.membership_required,"An active membership is required to register for this event.","Et aktivt medlemskab er påkrævet for at deltage i denne begivenhed."
-events.details.view_plans,"View Membership Plans / Buy Membership","Se medlemskabsplaner / Køb medlemskab"
-events.details.registration_closed,"Registration Closed","Tilmelding lukket"
-events.details.register_now,"Register Now","Tilmeld nu"
-events.details.registering,"Registering...","Tilmelder..."
-events.details.about_event,"About This Event","Om denne begivenhed"
-events.details.no_description,"No description provided.","Ingen beskrivelse angivet."
-events.details.agenda,"Agenda","Program"
-events.details.no_agenda,"No agenda available for this event yet.","Intet program tilgængeligt endnu for denne begivenhed."
-events.details.event_details_title,"Event Details","Detaljer om begivenheden"
-events.details.date,"Date","Dato"
-events.details.time,"Time","Tidspunkt"
-events.details.venue,"Venue","Sted"
-events.details.view_on_map,"View on Map","Vis på kort"
-events.details.event_not_found,"Event Not Found","Begivenhed ikke fundet"
-events.details.event_not_found_desc,"The event you are looking for does not exist or has been removed from our platform.","Begivenheden du leder efter findes ikke eller er blevet fjernet."
-events.details.browse_all,"Browse All Events","Se alle begivenheder"
-events.details.confirmed_title,"Registration Confirmed","Tilmelding bekræftet"
-events.details.confirmed_msg,"Your registration for this event has been confirmed.","Din tilmelding til denne begivenhed er blevet bekræftet."
-events.details.done_btn,"Done","Færdig"
-memberships.hero.badge,"Premium Access","Premium adgang"
-memberships.hero.title_part1,"Membership","Medlemskabs"
-memberships.hero.title_accent,"Plans.","Planer."
-memberships.hero.subtitle,"Choose the perfect plan for your professional journey. Unlock exclusive benefits and join our community today.","Vælg den perfekte plan for din virksomhed. Få adgang til eksklusive fordele og bliv en del af fællesskabet i dag."
-memberships.card.premium_badge,"Premium","Premium"
-memberships.card.subscribe_now,"Subscribe Now","Tilmeld nu"
-memberships.card.loading_plans,"Loading plans...","Indlæser planer..."
-memberships.card.failed_load,"Failed to load plans","Kunne ikke indlæse planer"
-memberships.modal.subscribe_to,"Subscribe to","Tilmeld dig"
-memberships.modal.complete_subscription,"Complete Subscription","Gennemfør medlemskab"
-memberships.modal.account_required,"You need an account to subscribe. Please fill out your details below:","Du skal have en konto for at tilmelde dig. Udfyld venligst dine oplysninger nedenfor:"
-memberships.modal.full_name,"Full Name","Fulde navn"
-memberships.modal.email_address,"Email Address","E-mailadresse"
-memberships.modal.password,"Password","Adgangskode"
-memberships.modal.phone_number,"Phone Number","Telefonnummer"
-memberships.modal.address,"Address","Adresse"
-memberships.modal.logged_in_msg,"You are logged in and ready to subscribe to the plan!","Du er logget ind og klar til at tilmelde dig planen!"
-memberships.modal.activation_note,"By clicking confirm, your subscription will be activated immediately.","Ved at bekræfte aktiveres dit medlemskab med det samme."
-about.hero.badge,"Our Story","Vores historie"
-about.hero.title,"About","Om"
-about.hero.title_accent,"Us.","os."
+home.events.title,Upcoming & Past Events,Kommende & tidligere begivenheder
+home.events.view_all,View all events,Se alle begivenheder
+home.features.feature1_desc,Value is an expression of something or someone that is considered significant or important.,"Værdi er et udtryk for noget eller nogen, der anses for væsentlig eller vigtig."
+home.features.feature1_title,Cheap electricity deals,Billige elaftaler
+home.features.feature2_desc,"Value is a subjective and individual perception of something, which can be based on various factors such as morality, culture and","Værdi er en individuel opfattelse af noget, som kan baseres på faktorer som moral og kultur"
+home.features.feature2_title,Better pension agreement,Bedre pensionsaftale
+home.features.feature3_desc,Value is a subjective perception of something that is considered important or significant.,"Værdi er en subjektiv opfattelse af noget, der anses for vigtigt eller væsentligt."
+home.features.feature3_title,Gathered the taxi drivers together,Samler taxachaufførerne
+home.hero.badge,The Taxi Terminal,Taxiterminalen
+home.hero.contact_btn,Contact us,Kontakt os
+home.hero.desc,"Welcome to Taxiterminalen - your preferred platform for taxi services, where we bring together taxi drivers and offer advice as well as the creation of cheap electricity contracts, insurance and pension agreements to ensure the best terms for our customers.","Velkommen til Taxiterminalen - din foretrukne platform for taxitjenester, hvor vi samler taxachauffører og tilbyder rådgivning samt etablering af billige elaftaler, forsikrings- og pensionsaftaler for at sikre de bedste vilkår for vores kunder."
+home.hero.title_part1,Together we create,Sammen skaber vi
+home.hero.title_part2,better taxi services,bedre taxitjenester
+home.reviews.customer_reviews,Customer reviews,Kundeanmeldelser
+home.reviews.error_desc,We couldn't load the reviews at this time. Please try again later.,Vi kunne ikke indlæse anmeldelserne i øjeblikket. Prøv venligst igen senere.
+home.reviews.error_title,Oops! Something went wrong,Ups! Noget gik galt
+home.reviews.feedback_placeholder,Tell us what you liked (or didn't like)...,Fortæl os hvad du syntes om (eller ikke brød dig om)...
+home.reviews.leave_review,Leave a Review,Skriv en anmeldelse
+home.reviews.min_chars,Minimum 10 characters,Mindst 10 tegn
+home.reviews.no_reviews_desc,Be the first to share your experience and help others learn about our platform!,Vær den første til at dele din oplevelse og hjælpe andre med at lære om vores platform!
+home.reviews.no_reviews_title,No reviews yet,Ingen anmeldelser endnu
+home.reviews.read_less,Read less,Læs mindre
+home.reviews.read_more,Read more,Læs mere
+home.reviews.share_experience,Share Your Experience,Del din oplevelse
+home.reviews.show_less,Show Less,Vis mindre
+home.reviews.sub,Read how Taxiterminalen has helped drivers across Denmark get better deals and stronger support.,Læs hvordan Taxiterminalen har hjulpet chauffører i hele Danmark med bedre aftaler og stærkere opbakning.
+home.reviews.submit_btn,Submit,Indsend
+home.reviews.title,What Taxi Drivers Say About Us,Hvad taxachauffører siger om os
+home.reviews.try_again,Try Again,Prøv igen
+home.reviews.update_btn,Update,Opdater
+home.reviews.update_title,Update Your Review,Opdater din anmeldelse
+home.reviews.write_review,Write a Review,Skriv en anmeldelse
+home.reviews.your_feedback,Your Feedback,Din feedback
+home.reviews.your_rating,Your Rating,Din bedømmelse
+home.services.all_btn,All services,Alle ydelser
+home.services.headline,"Welcome to Taxiterminalen - your association for taxi drivers and advice on cheap electricity contracts, insurance and pension agreements. We specialize in bringing taxi drivers together and ensuring better conditions for our members.","Velkommen til Taxiterminalen - din forening for taxachauffører og rådgivning om billige elaftaler, forsikrings- og pensionsaftaler. Vi er specialiserede i at samle taxachauffører og sikre bedre vilkår for vores medlemmer."
+home.services.item1,Advice on taxi legislation,Rådgivning om taxilovgivning
+home.services.item2,Setting up a taxi business,Etablering af taxavirksomhed
+home.services.item3,Better pension agreements for truckers and drivers,Bedre pensionsaftaler for vognmænd og chauffører
+home.services.sub,"We offer professional advice and assistance in setting up a taxi business, as well as advantages on electricity contracts, insurance and pension agreements for our members. We bring taxi drivers together and ensure better conditions for the entire industry.","Vi tilbyder professionel rådgivning og bistand til etablering af taxavirksomhed samt fordele på elaftaler, forsikring og pension for vores medlemmer. Vi samler taxachauffører og sikrer bedre vilkår for branchen."
+about.hero.badge,Our Story,Vores historie
 about.hero.subtitle,"Strengthening the taxi industry, one driver at a time.","Styrker taxabranchen, én chauffør ad gangen."
+about.hero.title,About,Om
+about.hero.title_accent,Us.,os.
 about.intro.col1,"We are a professional taxi association that offers advice and the creation of cheap electricity contracts, cheaper insurance and better pension agreements for our members. We also work to bring taxi drivers together to strengthen the industry.","Vi er en professionel taxiforening, der tilbyder rådgivning og oprettelse af billige elaftaler, billigere forsikringer og bedre pensionsaftaler for vores medlemmer. Vi arbejder også for at samle taxachauffører for at styrke branchen."
 about.intro.col2,"We are a taxi association that specializes in helping taxi drivers achieve better agreements and savings on electricity and insurance, as well as bringing them together to strengthen their business.","Vi er en taxiforening, der specialiserer sig i at hjælpe taxachauffører med at opnå bedre aftaler og besparelser på el og forsikring, samt bringe dem sammen for at styrke deres virksomhed."
-about.terminal.title,"About the Taxi Terminal","Om Taxiterminalen"
 about.terminal.desc,"Dear customers, Are you tired of having to pay a fortune for your taxi rides? Do you miss a better pension agreement and cheaper insurance as a taxi driver? Then read on! We are proud to present Taxiterminalen.dk - your new and improved solution for all your taxi needs.","Kære kunder, Er I trætte af at skulle betale en formue for jeres taxature? Savner du en bedre pensionsaftale og billigere forsikring som taxachauffør? Så læs videre! Vi er stolte af at præsentere Taxiterminalen.dk - din nye og forbedrede løsning til alle dine taxibehov."
-contact.hero.badge,"Get In Touch","Kontakt os"
-contact.hero.title,"Contact","Kontakt"
-contact.hero.title_accent,"Us.","Os."
+about.terminal.title,About the Taxi Terminal,Om Taxiterminalen
+contact.form.email_label,Email,E-mail
+contact.form.email_placeholder,john@example.com,jens@eksempel.dk
+contact.form.message_label,Your Message,Din besked
+contact.form.message_placeholder,How can we help you?,Hvordan kan vi hjælpe dig?
+contact.form.name_label,Name,Navn
+contact.form.name_placeholder,John Doe,Jens Hansen
+contact.form.phone_label,Phone,Telefon
+contact.form.phone_placeholder,(555) 000-0000,77 33 65 12
+contact.form.send_btn,Send Message,Send besked
+contact.form.sending_btn,Sending...,Sender...
+contact.form.title,Get in touch,Kontakt os
+contact.hero.badge,Get In Touch,Kontakt os
 contact.hero.subtitle,"If you have any questions, please feel free to get in touch with us via phone, text, email, the form below, or even on social media!","Hvis du har spørgsmål, er du velkommen til at kontakte os via telefon, sms, e-mail, formularen nedenfor eller på sociale medier!"
-contact.form.title,"Get in touch","Kontakt os"
-contact.form.name_label,"Name","Navn"
-contact.form.name_placeholder,"John Doe","Jens Hansen"
-contact.form.phone_label,"Phone","Telefon"
-contact.form.phone_placeholder,"(555) 000-0000","77 33 65 12"
-contact.form.email_label,"Email","E-mail"
-contact.form.email_placeholder,"john@example.com","jens@eksempel.dk"
-contact.form.message_label,"Your Message","Din besked"
-contact.form.message_placeholder,"How can we help you?","Hvordan kan vi hjælpe dig?"
-contact.form.send_btn,"Send Message","Send besked"
-contact.form.sending_btn,"Sending...","Sender..."
-contact.info.title,"Contact Info","Kontaktoplysninger"
-contact.info.phone,"Phone","Telefon"
-contact.info.address,"Address","Adresse"
+contact.hero.title,Contact,Kontakt
+contact.hero.title_accent,Us.,Os.
+contact.hours.mon_fri,Mon - Fri,Man - Fre
+contact.hours.mon_fri_val,9:00 AM - 8:00 PM,09:00 - 20:00
+contact.hours.saturday,Saturday,Lørdag
+contact.hours.saturday_val,9:00 AM - 6:00 PM,09:00 - 18:00
+contact.hours.sunday,Sunday,Søndag
+contact.hours.sunday_val,9:00 AM - 5:00 PM,09:00 - 17:00
+contact.hours.title,Business Hours,Åbningstider
+contact.info.address,Address,Adresse
 contact.info.address_val,"1425 N McLean Blvd.
 Elgin, IL","1425 N McLean Blvd.
 Elgin, IL"
-contact.info.email,"Email","E-mail"
-contact.hours.title,"Business Hours","Åbningstider"
-contact.hours.mon_fri,"Mon - Fri","Man - Fre"
-contact.hours.mon_fri_val,"9:00 AM - 8:00 PM","09:00 - 20:00"
-contact.hours.saturday,"Saturday","Lørdag"
-contact.hours.saturday_val,"9:00 AM - 6:00 PM","09:00 - 18:00"
-contact.hours.sunday,"Sunday","Søndag"
-contact.hours.sunday_val,"9:00 AM - 5:00 PM","09:00 - 17:00"
-auth.login.title,"Welcome Back","Velkommen tilbage"
-auth.login.subtitle,"Sign in to access your Taxiterminalen account","Log ind for at få adgang til din Taxiterminalen konto"
-auth.login.email,"Email Address","E-mailadresse"
-auth.login.password,"Password","Adgangskode"
-auth.login.forgot_password,"Forgot password?","Glemt adgangskode?"
-auth.login.sign_in_btn,"Sign In","Log ind"
-auth.login.signing_in,"Signing in...","Logger ind..."
-auth.login.dont_have_account,"Don't have an account?","Har du ikke en konto?"
-auth.login.sign_up,"Sign Up","Opret konto"
-auth.forgot_password,"Forgot password?","Glemt adgangskode?"
-auth.reset_password.title,"Set New Password","Opret ny adgangskode"
-auth.reset_password.new_password,"New Password","Ny adgangskode"
-auth.reset_password.confirm_password,"Confirm Password","Bekræft adgangskode"
-auth.reset_password.update_btn,"Update Password","Opdater adgangskode"
-auth.verify_email.title,"Verify Your Email","Bekræft din e-mail"
-auth.verify_email.desc,"We sent a verification code to your email. Enter it below to complete your registration.","Vi har sendt en bekræftelseskode til din e-mail. Indtast den nedenfor for at fuldføre."
-auth.verify_email.verify_btn,"Verify Email","Bekræft e-mail"
-auth.verify_email.resend_code,"Resend Code","Gensend kode"
-auth.exclusive_network,"Exclusive Network","Eksklusive Netværk"
-auth.active_members,"Active Members","Aktive Medlemmer"
-auth.annual_events,"Annual Events","Årlige Begivenheder"
-auth.email_verification_required,"Email Verification Required","E-mailbekræftelse påkrævet"
-auth.didnt_receive_email,"Didn't receive the email?","Modtog du ikke e-mailen?"
-auth.full_name,"Full Name","Fulde navn"
-auth.phone_number,"Phone Number","Telefonnummer"
-auth.address,"Address","Adresse"
-auth.pw_requirements,"Password Requirements:","Krav til adgangskode:"
-auth.req_8_chars,"At least 8 characters","Mindst 8 tegn"
-auth.req_uppercase,"Uppercase letter","Stort bogstav"
-auth.req_lowercase,"Lowercase letter","Lille bogstav"
-auth.req_number,"At least 1 number","Mindst 1 tal"
-auth.req_special,"Special character (@$!%*?&#^)","Specialtegn (@$!%*?&#^)"
-auth.req_no_spaces,"No spaces","Ingen mellemrum"
-auth.passwords_match,"Passwords match","Adgangskoderne matcher"
-auth.check_inbox,"Check Your Inbox","Tjek din indbakke"
-auth.verifying_email,"Verifying your email...","Bekræfter din e-mail..."
-auth.email_verified_success,"Email Verified Successfully!","E-mail bekræftet!"
-auth.already_verified,"Already Verified","Allerede bekræftet"
-auth.resend_verification_email,"Resend Verification Email","Gensend bekræftelses-e-mail"
-auth.welcome_back,"Welcome back","Velkommen tilbage"
-auth.create_account,"Create an account","Opret en konto"
-auth.already_have_account,"Already have an account?","Har du allerede en konto?"
-auth.dont_have_account,"Don't have an account?","Har du ikke en konto?"
-auth.sign_in_link,"Sign in","Log ind"
-auth.sign_up_link,"Sign up for free","Opret gratis konto"
-auth.email,"Email Address","E-mailadresse"
-auth.password,"Password","Adgangskode"
-auth.create_account_btn,"Create Account","Opret konto"
-auth.sign_in_btn,"Sign In","Log ind"
-auth.processing_btn,"Processing...","Behandler..."
-auth.welcome_to_network,"Welcome to the","Velkommen til det"
+contact.info.email,Email,E-mail
+contact.info.phone,Phone,Telefon
+contact.info.title,Contact Info,Kontaktoplysninger
+auth.account_activation,Account Activation,Kontoaktivering
+auth.account_activation_desc,"Fast, simple, and secure authentication.","Hurtig, enkel og sikker godkendelse."
+auth.account_recovery,Account Recovery,Gendannelse af konto
+auth.active_members,Active Members,Aktive Medlemmer
+auth.address,Address,Adresse
+auth.address_placeholder,"Street name, City","Gadenavn, By"
+auth.already_have_account,Already have an account?,Har du allerede en konto?
+auth.already_verified,Already Verified,Allerede bekræftet
+auth.annual_events,Annual Events,Årlige Begivenheder
+auth.check_inbox,Check Your Inbox,Tjek din indbakke
+auth.check_inbox_desc,The reset link will expire in 60 minutes. Be sure to check your spam or junk folder if you don't see it within a few minutes.,"Nulstillingslinket udløber om 60 minutter. Tjek venligst din spammappe, hvis du ikke modtager den inden for få minutter."
+auth.create_account,Create an account,Opret en konto
+auth.create_account_btn,Create Account,Opret konto
+auth.create_strong_password_placeholder,Create a strong password,Opret en stærk adgangskode
+auth.didnt_receive_email,Didn't receive the email?,Modtog du ikke e-mailen?
+auth.dont_have_account,Don't have an account?,Har du ikke en konto?
+auth.email,Email Address,E-mailadresse
+auth.email_placeholder,name@example.com,navn@eksempel.dk
+auth.email_verification_branding_desc,Verifying your email ensures that your membership and event registrations are secure and accessible only to you.,"Bekræftelse af din e-mail sikrer, at dit medlemskab og dine begivenhedstilmeldinger er sikre og kun tilgængelige for dig."
+auth.email_verification_required,Email Verification Required,E-mailbekræftelse påkrævet
+auth.email_verification_title,Email Verification,E-mailbekræftelse
+auth.email_verified_success,Email Verified Successfully!,E-mail bekræftet!
+auth.enter_new_password,Enter new password,Indtast ny adgangskode
+auth.enter_password_placeholder,Enter your password,Indtast din adgangskode
+auth.exclusive_network,Exclusive Network,Eksklusive Netværk
+auth.forgot_password,Forgot password?,Glemt adgangskode?
+auth.forgot_password.back_to_login,Back to Sign In,Tilbage til login
+auth.forgot_password.desc,Enter the email address associated with your account and we'll send you a password reset link.,"Indtast den e-mailadresse, der er tilknyttet din konto, så sender vi dig et link til at nulstille din adgangskode."
+auth.forgot_password.send_link,Send Reset Link,Send nulstillingslink
+auth.forgot_password.subtitle,Remember your password?,Husker du din adgangskode?
+auth.forgot_password.title,Forgot password?,Glemt adgangskode?
+auth.full_name,Full Name,Fulde navn
+auth.go_to_signin,Go to Sign In,Gå til login
+auth.link_invalid_title,Link Invalid or Expired,Linket er ugyldigt eller udløbet
+auth.link_required_title,Verification Link Required,Bekræftelseslink påkrævet
+auth.login.dont_have_account,Don't have an account?,Har du ikke en konto?
+auth.login.email,Email Address,E-mailadresse
+auth.login.forgot_password,Forgot password?,Glemt adgangskode?
+auth.login.password,Password,Adgangskode
+auth.login.sign_in_btn,Sign In,Log ind
+auth.login.sign_up,Sign Up,Opret konto
+auth.login.signing_in,Signing in...,Logger ind...
+auth.login.subtitle,Sign in to access your Taxiterminalen account,Log ind for at få adgang til din Taxiterminalen konto
+auth.login.title,Welcome Back,Velkommen tilbage
+auth.name_placeholder,Jane Doe,Jane Doe
 auth.network_desc,"Join thousands of professionals already connecting, growing, and experiencing world-class events.","Bliv en del af tusindvis af fagfolk, der allerede netværker, vokser og oplever arrangementer i verdensklasse."
-profile.title,"My Profile & Account","Min profil & konto"
-profile.tabs.overview,"Overview","Oversigt"
-profile.tabs.membership,"My Membership","Mit medlemskab"
-profile.tabs.events,"My Events","Mine begivenheder"
-profile.tabs.support,"Support","Support"
-profile.tabs.security,"Security","Sikkerhed"
-profile.personal_info,"Personal Information","Personlige oplysninger"
-profile.full_name,"Full Name","Fulde navn"
-profile.phone_number,"Phone Number","Telefonnummer"
-profile.save_changes,"Save Changes","Gem ændringer"
-profile.saving,"Saving...","Gemmer..."
-profile.cancel_membership,"Cancel Membership","Opsig medlemskab"
-profile.subtitle,"Manage your account settings and security preferences.","Administrer dine kontoindstillinger og sikkerhedspræferencer."
-profile.photo_title,"Profile Photo","Profilbillede"
+auth.password,Password,Adgangskode
+auth.password_reset_success_desc,Your password has been changed. You can now use your new password to sign in to your taxiterminalen account.,Din adgangskode er blevet ændret. Du kan nu logge ind på din Taxiterminalen-konto med din nye adgangskode.
+auth.password_reset_success_title,Password Reset Successfully,Adgangskode nulstillet
+auth.password_updated_subtitle,Your credentials have been securely updated.,Dine loginoplysninger er blevet sikkert opdateret.
+auth.password_updated_title,Password Updated!,Adgangskode opdateret!
+auth.passwords_match,Passwords match,Adgangskoderne matcher
+auth.phone_number,Phone Number,Telefonnummer
+auth.phone_placeholder,+45 12 34 56 78,+45 12 34 56 78
+auth.processing_btn,Processing...,Behandler...
+auth.pw_requirements,Password Requirements:,Krav til adgangskode:
+auth.recovery_desc,Forgot your password? No problem. Enter your email and we'll send you instructions to safely reset it.,"Glemt din adgangskode? Intet problem. Indtast din e-mailadresse, så sender vi instruktioner til sikkert at nulstille den."
+auth.reenter_new_password,Re-enter new password,Gentag ny adgangskode
+auth.req_8_chars,At least 8 characters,Mindst 8 tegn
+auth.req_lowercase,Lowercase letter,Lille bogstav
+auth.req_no_spaces,No spaces,Ingen mellemrum
+auth.req_number,At least 1 number,Mindst 1 tal
+auth.req_special,Special character (@$!%*?&#^),Specialtegn (@$!%*?&#^)
+auth.req_uppercase,Uppercase letter,Stort bogstav
+auth.request_new_link,Request a new password reset link →,Anmod om et nyt nulstillingslink →
+auth.resend_card_desc,Enter your email address to receive a fresh verification link (valid for 24 hours).,Indtast din e-mailadresse for at modtage et nyt bekræftelseslink (gyldigt i 24 timer).
+auth.resend_card_title,Resend Verification Email,Gensend bekræftelses-e-mail
+auth.resend_verification_email,Resend Verification Email,Gensend bekræftelses-e-mail
+auth.reset_password.confirm_password,Confirm Password,Bekræft adgangskode
+auth.reset_password.new_password,New Password,Ny adgangskode
+auth.reset_password.title,Set New Password,Opret ny adgangskode
+auth.reset_password.update_btn,Update Password,Opdater adgangskode
+auth.return_to_signin,Return to Sign In,Tilbage til login
+auth.security_desc,"Create a strong, unique password to safeguard your account, membership benefits, and event registrations.","Opret en stærk, unik adgangskode for at beskytte din konto, medlemsfordele og tilmeldinger."
+auth.security_first,Security First,Sikkerhed først
+auth.send_to_different_email,Send to a different email,Send til en anden e-mailadresse
+auth.sending_link,Sending link...,Sender link...
+auth.set_new_password_subtitle,Choose a strong password for your account.,Vælg en stærk adgangskode til din konto.
+auth.set_new_password_title,Set new password,Opret ny adgangskode
+auth.sign_in_btn,Sign In,Log ind
+auth.sign_in_link,Sign in,Log ind
+auth.sign_up_link,Sign up for free,Opret gratis konto
+auth.updating_password,Updating password...,Opdaterer adgangskode...
+auth.validating_token,Please wait while we validate your verification token.,"Vent venligst, mens vi bekræfter dit bekræftelsestoken."
+auth.verify_email.desc,We sent a verification code to your email. Enter it below to complete your registration.,Vi har sendt en bekræftelseskode til din e-mail. Indtast den nedenfor for at fuldføre.
+auth.verify_email.resend_code,Resend Code,Gensend kode
+auth.verify_email.title,Verify Your Email,Bekræft din e-mail
+auth.verify_email.verify_btn,Verify Email,Bekræft e-mail
+auth.verifying_email,Verifying your email...,Bekræfter din e-mail...
+auth.welcome_back,Welcome back,Velkommen tilbage
+auth.welcome_to_network,Welcome to the,Velkommen til det
+events.details.about_event,About This Event,Om denne begivenhed
+events.details.agenda,Agenda,Program
+events.details.back_to_events,Back to Events,Tilbage til begivenheder
+events.details.browse_all,Browse All Events,Se alle begivenheder
+events.details.confirmed_msg,Your registration for this event has been confirmed.,Din tilmelding til denne begivenhed er blevet bekræftet.
+events.details.confirmed_title,Registration Confirmed,Tilmelding bekræftet
+events.details.date,Date,Dato
+events.details.done_btn,Done,Færdig
+events.details.event_completed,Event Completed,Begivenhed afsluttet
+events.details.event_details_title,Event Details,Detaljer om begivenheden
+events.details.event_not_found,Event Not Found,Begivenhed ikke fundet
+events.details.event_not_found_desc,The event you are looking for does not exist or has been removed from our platform.,Begivenheden du leder efter findes ikke eller er blevet fjernet.
+events.details.membership_required,An active membership is required to register for this event.,Et aktivt medlemskab er påkrævet for at deltage i denne begivenhed.
+events.details.no_agenda,No agenda available for this event yet.,Intet program tilgængeligt endnu for denne begivenhed.
+events.details.no_description,No description provided.,Ingen beskrivelse angivet.
+events.details.open_status,Open,Åben
+events.details.register_now,Register Now,Tilmeld nu
+events.details.registered,Registered,Tilmeldt
+events.details.registering,Registering...,Tilmelder...
+events.details.registration_closed,Registration Closed,Tilmelding lukket
+events.details.time,Time,Tidspunkt
+events.details.venue,Venue,Sted
+events.details.view_on_map,View on Map,Vis på kort
+events.details.view_plans,View Membership Plans / Buy Membership,Se medlemskabsplaner / Køb medlemskab
+events.hero.badge,Live & Upcoming,Live & Kommende
+events.hero.search_placeholder,Search events...,Søg begivenheder...
+events.hero.subtitle,"Join the world's leading minds. Register for exclusive conferences, workshops, and high-impact meetups.","Mød branchens skarpeste profiler. Tilmeld dig eksklusive konferencer, workshops og arrangementer."
+events.hero.title_accent,Incredible,Fantastiske
+events.hero.title_part1,Discover,Opdag
+events.hero.title_part2,Events.,Begivenheder.
+events.section.completed_badge,Completed,Afsluttet
+events.section.failed_load,Failed to load events,Kunne ikke hente begivenheder
+events.section.loading,Loading events...,Indlæser begivenheder...
+events.section.members_only,Members only,Kun for medlemmer
+events.section.membership_required_note,An active membership is required to register for this event.,Et aktivt medlemskab er påkrævet for at tilmelde sig denne begivenhed.
+events.section.no_matching,No matching events,Ingen matchende begivenheder
+events.section.no_matching_sub,Try a different search term.,Prøv et andet søgeord.
+events.section.no_upcoming,No upcoming events,Ingen kommende begivenheder
+events.section.no_upcoming_sub,Check back later for new and upcoming events.,Kom tilbage senere for nye og kommende begivenheder.
+events.section.open_to_all,Open to all,Åben for alle
+events.section.past_title,Past Events,Tidligere begivenheder
+events.section.register_btn,Register,Tilmeld
+events.section.registered_badge,Registered,Tilmeldt
+events.section.registering_btn,Registering...,Tilmelder...
+events.section.upcoming_title,Upcoming Events,Kommende begivenheder
+events.section.view_plans_btn,View Membership Plans,Se medlemskabsplaner
+memberships.card.failed_load,Failed to load plans,Kunne ikke indlæse planer
+memberships.card.loading_plans,Loading plans...,Indlæser planer...
+memberships.card.premium_badge,Premium,Premium
+memberships.card.subscribe_now,Subscribe Now,Tilmeld nu
+memberships.hero.badge,Premium Access,Premium adgang
+memberships.hero.subtitle,Choose the perfect plan for your professional journey. Unlock exclusive benefits and join our community today.,Vælg den perfekte plan for din virksomhed. Få adgang til eksklusive fordele og bliv en del af fællesskabet i dag.
+memberships.hero.title_accent,Plans.,Planer.
+memberships.hero.title_part1,Membership,Medlemskabs
+memberships.modal.account_required,You need an account to subscribe. Please fill out your details below:,Du skal have en konto for at tilmelde dig. Udfyld venligst dine oplysninger nedenfor:
+memberships.modal.activation_note,"By clicking confirm, your subscription will be activated immediately.",Ved at bekræfte aktiveres dit medlemskab med det samme.
+memberships.modal.address,Address,Adresse
+memberships.modal.complete_subscription,Complete Subscription,Gennemfør medlemskab
+memberships.modal.email_address,Email Address,E-mailadresse
+memberships.modal.full_name,Full Name,Fulde navn
+memberships.modal.logged_in_msg,You are logged in and ready to subscribe to the plan!,Du er logget ind og klar til at tilmelde dig planen!
+memberships.modal.password,Password,Adgangskode
+memberships.modal.phone_number,Phone Number,Telefonnummer
+memberships.modal.subscribe_to,Subscribe to,Tilmeld dig
+profile.account_details,Account Details,Kontooplysninger
+profile.ask_question_btn,Ask a Question / Get Help,Stil et spørgsmål / Få hjælp
+profile.cancel_membership,Cancel Membership,Opsig medlemskab
+profile.category_label,Category,Kategori
+profile.change_password,Change Password,Skift adgangskode
+profile.change_photo,Change Photo,Skift billede
+profile.confirm_new_password,Confirm New Password,Bekræft ny adgangskode
+profile.current_password,Current Password,Nuværende adgangskode
+profile.current_plan,Current Plan,Nuværende plan
+profile.day_remaining,1 day remaining,1 dag tilbage
+profile.days_remaining,{{count}} days remaining,{{count}} dage tilbage
+profile.email_address,Email Address,E-mailadresse
+profile.expired_badge,Expired,Udløbet
+profile.expired_on,Expired on:,Udløb den:
+profile.expires_today,Expires today,Udløber i dag
+profile.failed_membership,Failed to load membership.,Kunne ikke indlæse medlemskab.
+profile.full_name,Full Name,Fulde navn
+profile.help_subtitle,Ask a question or follow up on an existing request.,Stil et spørgsmål eller følg op på en eksisterende henvendelse.
+profile.help_support,Help & Support,Hjælp & Support
+profile.manage_renew,Manage / Renew,Administrer / Forny
+profile.membership_plan,Membership Plan,Medlemskabsplan
+profile.message_label,Message,Besked
+profile.new_password,New Password,Ny adgangskode
+profile.next_renewal,Next renewal:,Næste fornyelse:
+profile.no_active_membership,No Active Membership,Intet aktivt medlemskab
+profile.no_conversations,No support conversations yet. Ask a question to get help from the admin team.,Ingen supportsamtaler endnu. Stil et spørgsmål for at få hjælp fra admin-teamet.
+profile.passwords_do_not_match,Passwords do not match.,Adgangskoderne stemmer ikke overens.
+profile.per_month,month,måned
+profile.per_year,year,år
+profile.personal_info,Personal Information,Personlige oplysninger
+profile.phone_number,Phone Number,Telefonnummer
 profile.photo_hint,"JPG, PNG or WebP under 2MB.","JPG, PNG eller WebP under 2MB."
-profile.current_plan,"Current Plan","Nuværende plan"
-profile.failed_membership,"Failed to load membership.","Kunne ikke indlæse medlemskab."
-profile.plan_unavailable,"Plan details unavailable","Plandetaljer ikke tilgængelige"
-profile.next_renewal,"Next renewal:","Næste fornyelse:"
-profile.expired_on,"Expired on:","Udløb den:"
-profile.no_active_membership,"No Active Membership","Intet aktivt medlemskab"
-profile.account_details,"Account Details","Kontooplysninger"
-profile.email_address,"Email Address","E-mailadresse"
-profile.change_password,"Change Password","Skift adgangskode"
-profile.strong_pw_hint,"Ensure your account is using a strong password.","Sørg for, at din konto anvender en stærk adgangskode."
-profile.current_password,"Current Password","Nuværende adgangskode"
-profile.new_password,"New Password","Ny adgangskode"
-profile.confirm_new_password,"Confirm New Password","Bekræft ny adgangskode"
-profile.update_password,"Update Password","Opdater adgangskode"
-profile.help_support,"Help & Support","Hjælp & Support"
-profile.help_subtitle,"Ask a question or follow up on an existing request.","Stil et spørgsmål eller følg op på en eksisterende henvendelse."
-profile.no_conversations,"No support conversations yet. Ask a question to get help from the admin team.","Ingen supportsamtaler endnu. Stil et spørgsmål for at få hjælp fra admin-teamet."
-profile.sign_out_title,"Sign Out of taxiterminalen","Log ud af taxiterminalen"
-profile.sign_out_hint,"You will need to log back in to access your profile and tickets.","Du skal logge ind igen for at få adgang til din profil og sager."
-profile.category_label,"Category","Kategori"
-profile.select_category,"Select a category","Vælg en kategori"
-profile.subject_label,"Subject","Emne"
-profile.message_label,"Message","Besked"
-profile.unread_reply,"Unread reply","Ulæst svar"
-profile.ask_question_btn,"Ask a Question / Get Help","Stil et spørgsmål / Få hjælp"
-profile.write_reply,"Write a reply...","Skriv et svar..."
-admin.nav.dashboard,"Dashboard","Dashboard"
-admin.nav.members,"Members","Medlemmer"
-admin.nav.plans,"Plans","Planer"
-admin.nav.registered_users,"Registered Users","Registrerede brugere"
-admin.nav.events,"Events","Begivenheder"
-admin.nav.categories,"Categories","Kategorier"
-admin.nav.support,"Support Messages","Supportbeskeder"
-admin.dashboard.title,"Dashboard Overview","Dashboard oversigt"
-admin.dashboard.total_members,"Total members","Samlede medlemmer"
-admin.dashboard.total_revenue,"Total Revenue","Samlet omsætning"
-admin.dashboard.active_events,"Active Events","Aktive begivenheder"
-admin.dashboard.open_tickets,"Open Support Tickets","Åbne henvendelser"
-admin.dashboard.recent_members,"Recent Members","Seneste medlemmer"
-admin.dashboard.view_all,"View all members","Se alle medlemmer"
-admin.dashboard.overview_subtitle,"Review memberships, publish events, and view registrations from one place.","Gennemgå medlemskaber, opret begivenheder og administrer tilmeldinger ét sted."
+profile.photo_title,Profile Photo,Profilbillede
+profile.plan_unavailable,Plan details unavailable,Plandetaljer ikke tilgængelige
+profile.remove_photo,Remove Photo,Fjern billede
+profile.req_different_from_current,Different from current,Forskellig fra nuværende
+profile.req_no_leading_trailing_spaces,No leading/trailing spaces,Ingen mellemrum i start eller slutning
+profile.save_changes,Save Changes,Gem ændringer
+profile.saving,Saving...,Gemmer...
+profile.select_category,Select a category,Vælg en kategori
+profile.sign_out_btn,Sign Out,Log ud
+profile.sign_out_hint,You will need to log back in to access your profile and tickets.,Du skal logge ind igen for at få adgang til din profil og sager.
+profile.sign_out_title,Sign Out of taxiterminalen,Log ud af taxiterminalen
+profile.started_date,Started: {{date}},Startede: {{date}}
+profile.strong_pw_hint,Ensure your account is using a strong password.,"Sørg for, at din konto anvender en stærk adgangskode."
+profile.subject_label,Subject,Emne
+profile.subtitle,Manage your account settings and security preferences.,Administrer dine kontoindstillinger og sikkerhedspræferencer.
+profile.tabs.events,My Events,Mine begivenheder
+profile.tabs.membership,My Membership,Mit medlemskab
+profile.tabs.overview,Overview,Oversigt
+profile.tabs.security,Security,Sikkerhed
+profile.tabs.support,Support,Support
+profile.title,My Profile & Account,Min profil & konto
+profile.unread_reply,Unread reply,Ulæst svar
+profile.update_password,Update Password,Opdater adgangskode
+profile.updating_btn,Updating...,Opdaterer...
+profile.view_plans_btn,View Membership Plans,Se medlemskabsplaner
+profile.write_reply,Write a reply...,Skriv et svar...
+profile.your_profile,Your Profile,Din profil
+admin.categories.add_category,Add Category,Tilføj kategori
+admin.categories.all_urgencies,All urgencies,Alle prioriteter
+admin.categories.col_actions,Actions,Handlinger
+admin.categories.col_created_date,Created Date,Oprettet dato
+admin.categories.col_description,Description,Beskrivelse
+admin.categories.col_name,Category Name,Kategorinavn
+admin.categories.col_urgency,Urgency,Prioritet
+admin.categories.create_subtitle,Create a request type and set how urgently it should be handled.,"Opret en henvendelsestype og angiv, hvor hurtigt den skal håndteres."
+admin.categories.create_title,Add Category,Tilføj kategori
+admin.categories.delete_category,Delete category,Slet kategori
+admin.categories.delete_confirm,Delete {{name}}? This cannot be undone.,Slet {{name}}? Dette kan ikke fortrydes.
+admin.categories.desc_placeholder,Short explanation of this category,Kort forklaring af denne kategori
+admin.categories.details,Category details,Kategoridetaljer
+admin.categories.edit_subtitle,Update how this request type should be handled.,Opdater hvordan denne henvendelsestype skal håndteres.
+admin.categories.edit_title,Edit Category,Rediger kategori
+admin.categories.hint_critical,Must be handled first,Skal håndteres først
+admin.categories.hint_high,Handle quickly,Håndteres hurtigt
+admin.categories.hint_low,Can be handled later,Kan håndteres senere
+admin.categories.hint_medium,Normal priority,Normal prioritet
+admin.categories.name_placeholder,e.g. Vehicle breakdown,f.eks. Nedbrud af køretøj
+admin.categories.no_data,No categories yet. Add one to get started.,Ingen kategorier endnu. Opret en for at komme i gang.
+admin.categories.no_matching,No categories match your filters.,Ingen kategorier matcher dine filtre.
+admin.categories.search_placeholder,Search categories...,Søg kategorier...
+admin.categories.subtitle,Define request types and which ones should be handled first.,Definer henvendelsestyper og prioriteter.
+admin.categories.title,Categories,Kategorier
+admin.categories.urgency_critical,Critical,Kritisk
+admin.categories.urgency_high,High,Høj
+admin.categories.urgency_label,Urgency / Priority,Hastegrad / Prioritet
+admin.categories.urgency_low,Low,Lav
+admin.categories.urgency_medium,Medium,Mellem
+admin.dashboard.active_events,Active Events,Aktive begivenheder
+admin.dashboard.admin_overview,Admin overview,Admin oversigt
+admin.dashboard.all_caught_up,All caught up,Alt er ajour
 admin.dashboard.hello_admin,"Hello, Admin","Hej, Admin"
-admin.dashboard.admin_overview,"Admin overview","Admin oversigt"
-admin.dashboard.loading_dashboard,"Loading dashboard...","Indlæser dashboard..."
-admin.dashboard.stats,"Stats","Statistik"
-admin.dashboard.published_events,"Published events","Offentliggjorte begivenheder"
-admin.dashboard.upcoming_events,"Upcoming events","Kommende begivenheder"
-admin.dashboard.manage_events,"Manage events","Administrer begivenheder"
-admin.dashboard.manage_members,"Manage members","Administrer medlemmer"
-admin.dashboard.recent_registrations,"Recent registrations","Seneste tilmeldinger"
-admin.dashboard.latest_10,"Latest 10","Seneste 10"
-admin.dashboard.registered,"Registered","Tilmeldt"
-admin.dashboard.all_caught_up,"All caught up","Alt er ajour"
-admin.dashboard.no_new_registrations,"No new event registrations yet.","Ingen nye tilmeldinger endnu."
-admin.members.title,"Members","Medlemmer"
-admin.members.search_placeholder,"Search members...","Søg medlemmer..."
-admin.members.subtitle,"View and manage active membership accounts.","Se og administrer aktive medlemskonti."
-admin.members.all_durations,"All Durations","Alle varigheder"
-admin.members.dur_1m,"1 Month","1 Måned"
-admin.members.dur_3m,"3 Months","3 Måneder"
-admin.members.dur_6m,"6 Months","6 Måneder"
-admin.members.dur_1y,"1 Year","1 År"
-admin.members.all_statuses,"All Statuses","Alle statuser"
-admin.members.status_active,"Active","Aktiv"
-admin.members.status_expired,"Expired","Udløbet"
-admin.members.col_member_info,"Member Info","Medlemsinfo"
-admin.members.col_plan,"Plan","Plan"
-admin.members.col_join_date,"Join Date","Oprettet dato"
-admin.members.col_expiry,"Expiry","Udløbsdato"
-admin.members.col_remaining,"Remaining","Tilbageværende"
-admin.members.col_status,"Status","Status"
-admin.members.col_actions,"Actions","Handlinger"
-admin.members.remove_member,"Remove Member","Fjern medlem"
-admin.plans.title,"Plans","Planer"
-admin.plans.add_plan,"Add Plan","Tilføj plan"
-admin.plans.subtitle,"Create and manage membership plans.","Opret og administrer medlemskabsplaner."
-admin.plans.plan_name,"Plan Name","Plannavn"
-admin.plans.price_billing,"Price / Billing","Pris / Fakturering"
-admin.plans.duration,"Duration","Varighed"
-admin.plans.subscribers,"Subscribers","Abonnenter"
-admin.plans.features_included,"Features Included","Inkluderede fordele"
-admin.plans.actions,"Actions","Handlinger"
-admin.plans.no_features,"No features specified","Ingen fordele angivet"
-admin.plans.description,"Description","Beskrivelse"
-admin.plans.price,"Price","Pris"
-admin.plans.features_per_line,"Features (one per line)","Fordele (én pr. linje)"
-admin.plans.search_placeholder,"Search plans...","Søg planer..."
-admin.plans.edit_plan,"Edit Plan","Rediger plan"
-admin.plans.delete_plan,"Delete Plan","Slet plan"
-admin.categories.title,"Categories","Kategorier"
-admin.categories.add_category,"Add Category","Tilføj kategori"
-admin.categories.subtitle,"Define request types and which ones should be handled first.","Definer henvendelsestyper og prioriteter."
-admin.categories.all_urgencies,"All urgencies","Alle prioriteter"
-admin.categories.urgency_critical,"Critical","Kritisk"
-admin.categories.urgency_high,"High","Høj"
-admin.categories.urgency_medium,"Medium","Mellem"
-admin.categories.urgency_low,"Low","Lav"
-admin.categories.col_name,"Category Name","Kategorinavn"
-admin.categories.col_description,"Description","Beskrivelse"
-admin.categories.col_urgency,"Urgency","Prioritet"
-admin.categories.col_created_date,"Created Date","Oprettet dato"
-admin.categories.col_actions,"Actions","Handlinger"
-admin.categories.search_placeholder,"Search categories...","Søg kategorier..."
-admin.categories.details,"Category details","Kategoridetaljer"
-admin.categories.delete_category,"Delete category","Slet kategori"
-admin.events.title,"Events Management","Begivenhedsadministration"
-admin.events.add_event,"Add Event","Tilføj begivenhed"
-admin.registered_users.title,"Registered Users","Registrerede brugere"
-admin.registered_users.subtitle,"Accounts that signed up on the website.","Brugere der har oprettet en konto på siden."
-admin.registered_users.col_user_info,"User Info","Brugerinfo"
-admin.registered_users.col_phone,"Phone","Telefon"
-admin.registered_users.col_membership,"Membership","Medlemskab"
-admin.registered_users.col_joined,"Joined","Oprettet"
-admin.registered_users.col_actions,"Actions","Handlinger"
-admin.registered_users.search_placeholder,"Search registered users...","Søg registrerede brugere..."
-admin.registered_users.delete_user,"Delete user","Slet bruger"
-admin.header.back_to_website,"Back to Website","Tilbage til hjemmesiden"
-admin.header.administration,"Administration","Administration"
-admin.header.light_theme,"Light Theme","Lyst tema"
-admin.header.dark_theme,"Dark Theme","Mørkt tema"
-admin.header.system_default,"System Default","Systemstandard"
-admin.header.admin_user,"Admin User","Administrator"
-admin.header.toggle_theme,"Toggle Theme","Skift tema"
-admin.manage_memberships.title,"Manage Memberships","Administrer medlemskaber"
-admin.manage_memberships.active_members,"Active Members","Aktive medlemmer"
-admin.manage_memberships.membership_plans,"Membership Plans","Medlemskabsplaner"
-admin.manage_memberships.pending_approvals,"Pending Approvals","Afventende godkendelser"
-admin.manage_memberships.approve,"Approve","Godkend"
-admin.manage_memberships.reject,"Reject","Afvis"
-admin.manage_memberships.no_pending,"No pending requests found.","Ingen afventende anmodninger fundet."
-admin.manage_events.title,"Manage Events","Administrer begivenheder"
-admin.manage_events.subtitle,"Open Registrations to approve event requests. The member is emailed when approved.","Gennemgå og godkend tilmeldinger til begivenheder."
-admin.manage_events.add_event,"Add Event","Tilføj begivenhed"
-admin.manage_events.all_statuses,"All Statuses","Alle statuser"
-admin.manage_events.status_published,"Published","Offentliggjort"
-admin.manage_events.status_draft,"Draft","Kladde"
-admin.manage_events.status_completed,"Completed","Afsluttet"
-admin.manage_events.col_name,"Event Name","Navn på begivenhed"
-admin.manage_events.col_date,"Date","Dato"
-admin.manage_events.col_registrations,"Registrations","Tilmeldinger"
-admin.manage_events.col_status,"Status","Status"
-admin.manage_events.col_actions,"Actions","Handlinger"
-admin.manage_events.view_registrations,"View registrations","Se tilmeldinger"
-admin.manage_events.event_details,"Details","Detaljer"
-admin.manage_events.event_title,"Event title","Titel på begivenhed"
-admin.manage_events.location,"Location","Sted"
-admin.manage_events.banner_url,"Banner URL","Banner URL"
-admin.manage_events.schedule,"Schedule","Tidsplan"
-admin.manage_events.time,"Time","Tidspunkt"
-admin.manage_events.deadline,"Registration deadline","Tilmeldingsfrist"
-admin.manage_events.deadline_hint,"Optional. Leave empty to keep registration open until the event.","Valgfrit. Efterlad tomt for at holde tilmelding åben indtil start."
-admin.manage_events.agenda,"Agenda","Program"
-admin.manage_events.agenda_hint,"Optional timeline shown on the event page","Valgfri tidsplan vist på begivenhedssiden"
-admin.support.title,"Support Messages","Supportbeskeder"
-admin.support.subtitle,"Prioritized by category urgency. Older unanswered requests appear first.","Prioriteret efter kategori. Ældre ubesvarede henvendelser vises først."
-admin.support.all_categories,"All categories","Alle kategorier"
-admin.support.all_urgencies,"All urgencies","Alle prioriteter"
-admin.support.critical,"Critical","Kritisk"
-admin.support.high,"High","Høj"
-admin.support.medium,"Medium","Mellem"
-admin.support.low,"Low","Lav"
-admin.support.all_statuses,"All statuses","Alle statuser"
-admin.support.open,"Open","Åben"
-admin.support.resolved,"Resolved","Løst"
-admin.support.col_member,"Member","Medlem"
-admin.support.col_subject,"Subject","Emne"
-admin.support.col_category,"Category","Kategori"
-admin.support.col_urgency,"Urgency","Prioritet"
-admin.support.col_status,"Status","Status"
-admin.support.col_last_msg,"Last message","Sidste besked"
-admin.support.col_last_activity,"Last activity","Sidste aktivitet"
-admin.support.col_actions,"Actions","Handlinger"
+admin.dashboard.latest_10,Latest 10,Seneste 10
+admin.dashboard.loading_dashboard,Loading dashboard...,Indlæser dashboard...
+admin.dashboard.manage_events,Manage events,Administrer begivenheder
+admin.dashboard.manage_members,Manage members,Administrer medlemmer
+admin.dashboard.no_new_registrations,No new event registrations yet.,Ingen nye tilmeldinger endnu.
+admin.dashboard.open_tickets,Open Support Tickets,Åbne henvendelser
+admin.dashboard.overview_subtitle,"Review memberships, publish events, and view registrations from one place.","Gennemgå medlemskaber, opret begivenheder og administrer tilmeldinger ét sted."
+admin.dashboard.published_events,Published events,Offentliggjorte begivenheder
+admin.dashboard.recent_members,Recent Members,Seneste medlemmer
+admin.dashboard.recent_registrations,Recent registrations,Seneste tilmeldinger
+admin.dashboard.registered,Registered,Tilmeldt
+admin.dashboard.registered_badge,Registered,Tilmeldt
+admin.dashboard.stats,Stats,Statistik
+admin.dashboard.title,Dashboard Overview,Dashboard oversigt
+admin.dashboard.total_members,Total members,Samlede medlemmer
+admin.dashboard.total_revenue,Total Revenue,Samlet omsætning
+admin.dashboard.upcoming_events,Upcoming events,Kommende begivenheder
+admin.dashboard.view_all,View all members,Se alle medlemmer
+admin.events.add_event,Add Event,Tilføj begivenhed
+admin.events.title,Events Management,Begivenhedsadministration
+admin.header.admin_user,Admin User,Administrator
+admin.header.administration,Administration,Administration
+admin.header.back_to_website,Back to Website,Tilbage til hjemmesiden
+admin.header.dark_theme,Dark Theme,Mørkt tema
+admin.header.light_theme,Light Theme,Lyst tema
+admin.header.system_default,System Default,Systemstandard
+admin.header.toggle_theme,Toggle Theme,Skift tema
+admin.login.back_to_website,Back to Main Website,Tilbage til hovedsiden
+admin.login.email_address,Email address,E-mailadresse
+admin.login.password,Password,Adgangskode
+admin.login.portal_subtitle,Sign in to manage memberships and events,Log ind for at administrere medlemskaber og begivenheder
+admin.login.portal_title,Admin Portal,Adminportal
+admin.login.remember_me,Remember me,Husk mig
+admin.login.sign_in_btn,Sign in,Log ind
+admin.login.signing_in,Signing in...,Logger ind...
+admin.manage_events.add_agenda_item,Add item,Tilføj punkt
+admin.manage_events.add_event,Add Event,Tilføj begivenhed
+admin.manage_events.agenda,Agenda,Program
+admin.manage_events.agenda_hint,Optional timeline shown on the event page,Valgfri tidsplan vist på begivenhedssiden
+admin.manage_events.agenda_notes_placeholder,Speaker or extra detail,Taler eller yderligere detaljer
+admin.manage_events.agenda_title_placeholder,e.g. Board report,f.eks. Bestyrelsens beretning
+admin.manage_events.all_statuses,All Statuses,Alle statuser
+admin.manage_events.banner_url,Banner URL,Banner URL
+admin.manage_events.col_actions,Actions,Handlinger
+admin.manage_events.col_date,Date,Dato
+admin.manage_events.col_name,Event Name,Navn på begivenhed
+admin.manage_events.col_registrations,Registrations,Tilmeldinger
+admin.manage_events.col_status,Status,Status
+admin.manage_events.cover_image,Cover image,Forsidebillede
+admin.manage_events.create_event,Create Event,Opret begivenhed
+admin.manage_events.create_subtitle,"Add a public event with schedule, access rules, and agenda.","Opret en offentlig begivenhed med tidsplan, adgangsregler og program."
+admin.manage_events.create_title,Create New Event,Opret ny begivenhed
+admin.manage_events.date_passed,Passed,Passeret
+admin.manage_events.date_upcoming,Upcoming,Kommende
+admin.manage_events.deadline,Registration deadline,Tilmeldingsfrist
+admin.manage_events.deadline_hint,Optional. Leave empty to keep registration open until the event.,Valgfrit. Efterlad tomt for at holde tilmelding åben indtil start.
+admin.manage_events.desc_placeholder,What members should know about this event,Hvad medlemmerne bør vide om denne begivenhed
+admin.manage_events.edit_subtitle,"Update the listing, schedule, and registration settings.","Opdater beskrivelse, tidsplan og tilmeldingsindstillinger."
+admin.manage_events.edit_title,Edit Event,Rediger begivenhed
+admin.manage_events.event_details,Details,Detaljer
+admin.manage_events.event_title,Event title,Titel på begivenhed
+admin.manage_events.image_preview_placeholder,Preview appears here,Forhåndsvisning vises her
+admin.manage_events.location,Location,Sted
+admin.manage_events.location_placeholder,"e.g. Tivoli Congress Center, København","f.eks. Tivoli Congress Center, København"
+admin.manage_events.members_only_btn,Members only,Kun for medlemmer
+admin.manage_events.no_agenda_desc,Add a first segment to the timeline.,Tilføj det første punkt til tidsplanen.
+admin.manage_events.no_agenda_title,No agenda yet,Intet program endnu
+admin.manage_events.no_events,No events found.,Ingen begivenheder fundet.
+admin.manage_events.no_match,No events match your filters.,Ingen begivenheder matcher dine filtre.
+admin.manage_events.no_registrations,No one has registered for this event yet.,Ingen har tilmeldt sig denne begivenhed endnu.
+admin.manage_events.open_to_all_btn,Open to everyone,Åben for alle
+admin.manage_events.passed_date,Passed Date,Dato passeret
+admin.manage_events.publishing,Publishing,Offentliggørelse
+admin.manage_events.registrations_modal_title,Registrations for {{name}},Tilmeldinger til {{name}}
+admin.manage_events.remove_segment,Remove segment,Fjern punkt
+admin.manage_events.schedule,Schedule,Tidsplan
+admin.manage_events.status_completed,Completed,Afsluttet
+admin.manage_events.status_draft,Draft,Kladde
+admin.manage_events.status_published,Published,Offentliggjort
+admin.manage_events.subtitle,Open Registrations to approve event requests. The member is emailed when approved.,Gennemgå og godkend tilmeldinger til begivenheder.
+admin.manage_events.time,Time,Tidspunkt
+admin.manage_events.title,Manage Events,Administrer begivenheder
+admin.manage_events.title_placeholder,e.g. Årsmøde 2027,f.eks. Årsmøde 2027
+admin.manage_events.view_registrants_tooltip,View Registrants,Se tilmeldte
+admin.manage_events.view_registrations,View registrations,Se tilmeldinger
+admin.manage_events.who_can_register,Who can register,Hvem kan tilmelde sig
+admin.manage_memberships.active_members,Active Members,Aktive medlemmer
+admin.manage_memberships.applicant_info,Applicant Info,Ansøgerinfo
+admin.manage_memberships.approve,Approve,Godkend
+admin.manage_memberships.membership_plans,Membership Plans,Medlemskabsplaner
+admin.manage_memberships.no_match,No members match your filters.,Ingen medlemmer matcher dine filtre.
+admin.manage_memberships.no_members,No members found.,Ingen medlemmer fundet.
+admin.manage_memberships.no_pending,No pending requests found.,Ingen afventende anmodninger fundet.
+admin.manage_memberships.pending_approvals,Pending Approvals,Afventende godkendelser
+admin.manage_memberships.reject,Reject,Afvis
+admin.manage_memberships.request_date,Request Date,Ansøgningsdato
+admin.manage_memberships.requested_plan,Requested Plan,Ønsket plan
+admin.manage_memberships.showing_count,Showing {{from}} of {{total}} members,Viser {{from}} af {{total}} medlemmer
+admin.manage_memberships.title,Manage Memberships,Administrer medlemskaber
+admin.members.all_durations,All Durations,Alle varigheder
+admin.members.all_statuses,All Statuses,Alle statuser
+admin.members.col_actions,Actions,Handlinger
+admin.members.col_expiry,Expiry,Udløbsdato
+admin.members.col_join_date,Join Date,Oprettet dato
+admin.members.col_member_info,Member Info,Medlemsinfo
+admin.members.col_plan,Plan,Plan
+admin.members.col_remaining,Remaining,Tilbageværende
+admin.members.col_status,Status,Status
+admin.members.dur_1m,1 Month,1 Måned
+admin.members.dur_1y,1 Year,1 År
+admin.members.dur_3m,3 Months,3 Måneder
+admin.members.dur_6m,6 Months,6 Måneder
+admin.members.no_matching,No members match your filters.,Ingen medlemmer matcher dine filtre.
+admin.members.no_members_found,No members found.,Ingen medlemmer fundet.
+admin.members.remove_member,Remove Member,Fjern medlem
+admin.members.search_placeholder,Search members...,Søg medlemmer...
+admin.members.status_active,Active,Aktiv
+admin.members.status_expired,Expired,Udløbet
+admin.members.subtitle,View and manage active membership accounts.,Se og administrer aktive medlemskonti.
+admin.members.title,Members,Medlemmer
+admin.nav.categories,Categories,Kategorier
+admin.nav.dashboard,Dashboard,Dashboard
+admin.nav.events,Events,Begivenheder
+admin.nav.members,Members,Medlemmer
+admin.nav.plans,Plans,Planer
+admin.nav.registered_users,Registered Users,Registrerede brugere
+admin.nav.support,Support Messages,Supportbeskeder
+admin.nav.whatsapp_settings,WhatsApp Settings,WhatsApp Indstillinger
+admin.plans.actions,Actions,Handlinger
+admin.plans.active_badge,{{count}} active,{{count}} aktive
+admin.plans.active_subscribers_count,{{count}} active subscribers,{{count}} aktive abonnenter
+admin.plans.add_plan,Add Plan,Tilføj plan
+admin.plans.adjust_search,Try adjusting your search terms.,Prøv at tilpasse dine søgeord.
+admin.plans.create_prompt,Create a membership plan to get started.,Opret en medlemskabsplan for at komme i gang.
+admin.plans.create_title,Create New Plan,Opret ny plan
+admin.plans.delete_plan,Delete Plan,Slet plan
+admin.plans.desc_placeholder,e.g. Best value plan,f.eks. Den mest fordelagtige plan
+admin.plans.description,Description,Beskrivelse
+admin.plans.dur_months,{{count}} Months,{{count}} Måneder
+admin.plans.duration,Duration,Varighed
+admin.plans.edit_plan,Edit Plan,Rediger plan
+admin.plans.edit_title,Edit Plan,Rediger plan
+admin.plans.features_included,Features Included,Inkluderede fordele
+admin.plans.features_per_line,Features (one per line),Fordele (én pr. linje)
+admin.plans.name_placeholder,e.g. Diamond,f.eks. Diamant
+admin.plans.new_plan,New Plan,Ny plan
+admin.plans.no_features,No features specified,Ingen fordele angivet
+admin.plans.no_features_listed,No features listed,Ingen fordele angivet
+admin.plans.no_matching,No plans match your search.,Ingen planer matcher din søgning.
+admin.plans.no_plans_found,No plans found.,Ingen planer fundet.
+admin.plans.plan_name,Plan Name,Plannavn
+admin.plans.price,Price,Pris
+admin.plans.price_billing,Price / Billing,Pris / Fakturering
+admin.plans.price_placeholder,99,99
+admin.plans.search_placeholder,Search plans...,Søg planer...
+admin.plans.subscribers,Subscribers,Abonnenter
+admin.plans.subtitle,Create and manage membership plans.,Opret og administrer medlemskabsplaner.
+admin.plans.title,Plans,Planer
+admin.registered_users.col_actions,Actions,Handlinger
+admin.registered_users.col_joined,Joined,Oprettet
+admin.registered_users.col_membership,Membership,Medlemskab
+admin.registered_users.col_phone,Phone,Telefon
+admin.registered_users.col_user_info,User Info,Brugerinfo
+admin.registered_users.delete_user,Delete user,Slet bruger
+admin.registered_users.no_data,No registered users yet.,Ingen registrerede brugere endnu.
+admin.registered_users.no_match,No registered users match your search.,Ingen registrerede brugere matcher din søgning.
+admin.registered_users.search_placeholder,Search registered users...,Søg registrerede brugere...
+admin.registered_users.status_active,Active,Aktiv
+admin.registered_users.status_expired,Expired,Udløbet
+admin.registered_users.status_none,None,Ingen
+admin.registered_users.status_pending,Pending,Afventer
+admin.registered_users.subtitle,Accounts that signed up on the website.,Brugere der har oprettet en konto på siden.
+admin.registered_users.title,Registered Users,Registrerede brugere
+admin.support.all_categories,All categories,Alle kategorier
+admin.support.all_statuses,All statuses,Alle statuser
+admin.support.all_urgencies,All urgencies,Alle prioriteter
+admin.support.col_actions,Actions,Handlinger
+admin.support.col_category,Category,Kategori
+admin.support.col_last_activity,Last activity,Sidste aktivitet
+admin.support.col_last_msg,Last message,Sidste besked
+admin.support.col_member,Member,Medlem
+admin.support.col_status,Status,Status
+admin.support.col_subject,Subject,Emne
+admin.support.col_urgency,Urgency,Prioritet
+admin.support.critical,Critical,Kritisk
+admin.support.high,High,Høj
+admin.support.low,Low,Lav
+admin.support.mark_resolved,Mark as resolved,Marker som løst
+admin.support.medium,Medium,Mellem
+admin.support.open,Open,Åben
+admin.support.reply_placeholder,Reply to the member...,Skriv et svar til medlemmet...
+admin.support.resolved,Resolved,Løst
 admin.support.search_placeholder,"Search name, email, or subject...","Søg navn, e-mail eller emne..."
-admin.support.unread,"Unread","Ulæst"
-admin.support.reply_placeholder,"Reply to the member...","Skriv et svar til medlemmet..."
-admin.support.mark_resolved,"Mark as resolved","Marker som løst"
+admin.support.subtitle,Prioritized by category urgency. Older unanswered requests appear first.,Prioriteret efter kategori. Ældre ubesvarede henvendelser vises først.
+admin.support.title,Support Messages,Supportbeskeder
+admin.support.unread,Unread,Ulæst
+admin.whatsapp.active_number_label,Formatted Contact Number,Formateret kontaktnummer
+admin.whatsapp.country_code_hint,e.g. +45 for Denmark,f.eks. +45 for Danmark
+admin.whatsapp.country_code_label,Country Calling Code,Landekode
+admin.whatsapp.enable_desc,Display a floating WhatsApp chat button in the bottom right on public-facing pages.,Vis en flydende WhatsApp-chatknap i nederste højre hjørne på offentlige sider.
+admin.whatsapp.enable_label,Enable WhatsApp Floating Icon,Aktiver flydende WhatsApp-ikon
+admin.whatsapp.icon_preview_title,Floating Button Preview,Forhåndsvisning af flydende knap
+admin.whatsapp.no_number,No number configured,Intet nummer konfigureret
+admin.whatsapp.no_url,URL will be generated once phone number is entered,URL genereres så snart telefonnummer er indtastet
+admin.whatsapp.phone_number_hint,Enter digits only without country code or leading 0 (e.g. 20 12 34 56).,Indtast kun cifre uden landekode eller foranstillet 0 (f.eks. 20 12 34 56).
+admin.whatsapp.phone_number_label,WhatsApp Phone Number,WhatsApp Telefonnummer
+admin.whatsapp.preview_footnote,"The button is positioned at the bottom right corner, ergonomically placed above the scroll-to-top button so they never overlap.","Knappen er placeret i nederste højre hjørne over rul-til-top-knappen, så de aldrig overlapper hinanden."
+admin.whatsapp.preview_hidden_notice,Floating icon is currently disabled or unconfigured,Det flydende ikon er i øjeblikket deaktiveret eller ikke konfigureret
+admin.whatsapp.preview_title,Configuration Overview,Konfigurationsoversigt
+admin.whatsapp.reset_btn,Reset,Nulstil
+admin.whatsapp.save_btn,Save Changes,Gem ændringer
+admin.whatsapp.saving,Saving...,Gemmer...
+admin.whatsapp.status_active,Live & Active,Aktiv & Synlig
+admin.whatsapp.status_disabled,Disabled,Deaktiveret
+admin.whatsapp.subtitle,Configure the floating WhatsApp contact button displayed to website visitors.,"Konfigurer den flydende WhatsApp-kontaktknap, der vises for besøgende på hjemmesiden."
+admin.whatsapp.test_link,Test WhatsApp Link,Test WhatsApp-link
+admin.whatsapp.title,WhatsApp Configuration,WhatsApp Konfiguration
+admin.whatsapp.url_label,WhatsApp Click-to-Chat URL,WhatsApp Click-to-Chat URL
+admin.whatsapp.validation_error,Please provide a valid phone number with 7 to 15 digits including country code.,Angiv venligst et gyldigt telefonnummer med 7 til 15 cifre inklusiv landekode.
+support.back_to_help,Back to Help & Support,Tilbage til Hjælp & Support
+support.back_to_messages,Back to Support Messages,Tilbage til supportbeskeder
+support.created_at_time,Created {{date}},Oprettet {{date}}
+support.message_placeholder,Describe the issue or question,Beskriv dit problem eller spørgsmål
+support.modal_subtitle,Choose a category. Urgency is set by the category and cannot be changed.,Vælg en kategori. Prioriteten bestemmes af kategorien og kan ikke ændres.
+support.modal_title,Ask a Question / Get Help,Stil et spørgsmål / Få hjælp
+support.no_conversations_match,No support requests match your filters.,Ingen supporthenvendelser matcher dine filtre.
+support.no_conversations_yet,No support requests yet.,Ingen supporthenvendelser endnu.
+support.priority_hint,Priority: {{urgency}} — {{hint}}. Set by this category.,Prioritet: {{urgency}} — {{hint}}. Bestemt af denne kategori.
+support.resolve_confirm_btn,Resolve,Løs
+support.resolve_confirm_prompt,Mark this conversation as resolved? You can reopen it later if the member still needs help.,"Marker denne samtale som løst? Du kan altid genåbne den senere, hvis medlemmet fortsat har brug for hjælp."
+support.resolve_confirm_title,Mark as resolved,Marker som løst
+support.send_reply,Send reply,Send svar
+support.sending_reply,Sending…,Sender…
+support.subject_placeholder,What do you need help with?,Hvad har du brug for hjælp til?
+support.submit_request,Submit request,Indsend henvendelse
+support.thread.no_messages,No messages yet.,Ingen beskeder endnu.
+support.thread.sender_admin,Admin,Administrator
+support.thread.sender_member,Member,Medlem
+validation.category_required,"Name, description, and urgency are required.","Navn, beskrivelse og prioritet er påkrævet."
+validation.email_invalid,Please enter a valid email address.,Indtast venligst en gyldig e-mailadresse.
+validation.email_required,Please enter your email address.,Indtast venligst din e-mailadresse.
+validation.event_name_date_required,Event Name and Date are required.,Navn og dato for begivenheden er påkrævet.
+validation.file_read_error,Failed to read file.,Kunne ikke indlæse filen.
+validation.image_size_invalid,Image size must be less than 2MB.,Billedstørrelsen skal være under 2 MB.
+validation.image_type_invalid,"Invalid file type. Please upload a JPG, PNG, or WebP image.","Ugyldig filtype. Upload venligst et JPG-, PNG- eller WebP-billede."
+validation.password_requirements,Please ensure your password meets all requirements.,"Sørg venligst for, at din adgangskode opfylder alle krav."
+validation.passwords_match,Please make sure your password meets all requirements and that both fields match.,"Sørg venligst for, at din adgangskode opfylder alle krav, og at begge felter matcher."
+validation.reset_token_required,A valid reset token is required.,Et gyldigt nulstillingstoken er påkrævet.
+validation.review_min_chars,Please provide a comment of at least 10 characters.,Skriv venligst en anmeldelse på mindst 10 tegn.
+validation.support_request_required,"Category, subject, and message are required.","Kategori, emne og besked er påkrævet."
+validation.whatsapp_phone_invalid,Please provide a valid phone number and country code.,Angiv venligst et gyldigt telefonnummer og landekode.
+notifications.already_verified,Your email address is already verified. You can log in directly.,Din e-mailadresse er allerede bekræftet. Du kan logge direkte ind.
+notifications.category_created_success,Category created.,Kategori oprettet.
+notifications.category_delete_error,Failed to delete category.,Kunne ikke slette kategorien.
+notifications.category_deleted_success,Category deleted.,Kategori slettet.
+notifications.category_save_error,Failed to save category.,Kunne ikke gemme kategorien.
+notifications.category_updated_success,Category updated.,Kategori opdateret.
+notifications.email_verified_success,Email verified successfully! You can now log in to your account.,E-mail bekræftet! Du kan nu logge ind på din konto.
+notifications.event_save_error,Failed to save event.,Kunne ikke gemme begivenheden.
+notifications.forgot_password_error,Failed to request password reset. Please try again.,Kunne ikke anmode om nulstilling af adgangskode. Prøv venligst igen.
+notifications.forgot_password_success,"If an account exists with this email, you will receive a password reset link shortly.","Hvis der findes en konto med denne e-mailadresse, modtager du et nulstillingslink inden længe."
+notifications.invalid_credentials,Invalid email or password.,Ugyldig e-mailadresse eller adgangskode.
+notifications.no_reset_token,No password reset token was provided. Please check the link from your email or request a new one.,"Der blev ikke angivet noget nulstillingstoken. Tjek venligst linket i din e-mail, eller anmod om et nyt."
+notifications.no_verification_token,No verification token was found. Please check your verification link or request a new one below.,Der blev ikke fundet noget bekræftelsestoken. Tjek venligst dit bekræftelseslink eller anmod om et nyt nedenfor.
+notifications.password_change_success,Password changed successfully,Adgangskoden blev ændret
+notifications.password_reset_success,Password reset successfully! You can now log in.,Adgangskoden er nulstillet! Du kan nu logge ind.
+notifications.profile_photo_error,Failed to save profile photo,Kunne ikke gemme profilbilledet
+notifications.profile_photo_success,Profile photo updated successfully,Profilbilledet blev opdateret
+notifications.registration_failed,Registration failed. Please try again.,Registrering mislykkedes. Prøv venligst igen.
+notifications.registration_success_verify,Registration successful! We have sent a verification link to your email. Please verify your email before signing in.,"Registrering gennemført! Vi har sendt et bekræftelseslink til din e-mail. Bekræft venligst din e-mail, før du logger ind."
+notifications.resend_verification_error,Failed to resend verification email.,Kunne ikke gensende bekræftelses-e-mail.
+notifications.reset_password_failed,Failed to reset password. This link may have expired or already been used.,Kunne ikke nulstille adgangskoden. Dette link kan være udløbet eller allerede brugt.
+notifications.review_status_fetch_error,Failed to fetch your review status,Kunne ikke hente din anmeldelsesstatus
+notifications.review_submit_error,Failed to submit review,Kunne ikke indsende anmeldelsen
+notifications.review_submit_success,Review submitted successfully,Anmeldelsen blev indsendt
+notifications.review_update_success,Review updated successfully,Anmeldelsen blev opdateret
+notifications.session_invalid,User session is invalid. Please log in again.,Brugerens session er ugyldig. Log venligst ind igen.
+notifications.signup_error,Failed to sign up: {{error}},Kunne ikke oprette konto: {{error}}
+notifications.signup_subscribed_success,Account created and subscribed!,Konto oprettet og medlemskab aktiveret!
+notifications.subscription_error,Failed to activate subscription: {{error}},Kunne ikke aktivere medlemskabet: {{error}}
+notifications.subscription_success,Successfully subscribed!,Tilmeldt medlemskab!
+notifications.support_reopened_error,Failed to reopen conversation.,Kunne ikke genåbne henvendelsen.
+notifications.support_reopened_success,Conversation reopened.,Henvendelsen er genåbnet.
+notifications.support_reply_error,Failed to send reply.,Kunne ikke sende svaret.
+notifications.support_reply_sent,Reply sent.,Svar sendt.
+notifications.support_request_create_error,Failed to create support request.,Kunne ikke oprette supporthenvendelse.
+notifications.support_request_sent_success,Support request sent.,Supporthenvendelse sendt.
+notifications.support_resolved_error,Failed to resolve conversation.,Kunne ikke markere henvendelsen som løst.
+notifications.support_resolved_success,Conversation marked as resolved.,Henvendelsen er markeret som løst.
+notifications.support_send_message_error,Failed to send message.,Kunne ikke sende beskeden.
+notifications.verification_link_invalid,"This verification link is invalid, has expired, or has already been used.","Dette bekræftelseslink er ugyldigt, udløbet eller allerede brugt."
+notifications.verification_link_sent,Verification link sent to your email.,Bekræftelseslink er sendt til din e-mail.
+notifications.verification_resend_failed,Failed to send verification email. Please try again.,Kunne ikke sende bekræftelses-e-mail. Prøv venligst igen.
+notifications.verification_resend_success,A new verification link has been sent to your email address.,Et nyt bekræftelseslink er blevet sendt til din e-mailadresse.
+notifications.verify_email_before_signin,Please verify your email address before signing in.,"Bekræft venligst din e-mailadresse, før du logger ind."
+notifications.whatsapp_clipboard_success,WhatsApp link copied to clipboard.,WhatsApp-link kopieret til udklipsholderen.
+notifications.whatsapp_settings_load_error,Failed to load WhatsApp settings.,Kunne ikke indlæse WhatsApp-indstillinger.
+notifications.whatsapp_settings_save_success,WhatsApp settings updated successfully.,WhatsApp-indstillingerne blev opdateret.
+dialogs.confirm.archive_plan,Are you sure you want to archive this plan?,"Er du sikker på, at du vil arkivere denne plan?"
+dialogs.confirm.delete_event,Are you sure you want to delete this event?,"Er du sikker på, at du vil slette denne begivenhed?"
+dialogs.confirm.delete_user,Are you sure you want to delete this user?,"Er du sikker på, at du vil slette denne bruger?"
+dialogs.confirm.reject_applicant,Are you sure you want to reject this applicant?,"Er du sikker på, at du vil afvise denne ansøger?"
+dialogs.confirm.remove_member,Are you sure you want to remove this member?,"Er du sikker på, at du vil fjerne dette medlem?"
+dialogs.confirm.sign_out,Are you sure you want to sign out?,"Er du sikker på, at du vil logge ud?"
+interceptor.errors.client_error,Error: {{message}},Fejl: {{message}}
+interceptor.errors.forbidden,Forbidden: You do not have permission to perform this action.,Adgang nægtet: Du har ikke tilladelse til at udføre denne handling.
+interceptor.errors.invalid_credentials,Invalid email or password.,Ugyldig e-mailadresse eller adgangskode.
+interceptor.errors.server_error,Server Error ({{status}}): {{message}},Serverfejl ({{status}}): {{message}}
+interceptor.errors.unauthorized,Unauthorized: Session expired or invalid token. Please log in again.,Uautoriseret: Sessionen er udløbet eller ugyldig token. Log venligst ind igen.
+interceptor.errors.unknown,An unknown error occurred!,Der opstod en ukendt fejl!
+footer.company,Company,Virksomhed
 footer.desc,"The premier membership and event management platform. We connect professionals, foster growth, and deliver unforgettable experiences.","Den førende platform for medlemskab og begivenhedsadministration. Vi forbinder fagfolk, fremmer vækst og leverer uforglemmelige oplevelser."
-footer.platform,"Platform","Platform"
-footer.company,"Company","Virksomhed"
-footer.rights_reserved,"All rights reserved.","Alle rettigheder forbeholdes."
-footer.designed_with,"Designed with love for Professionals","Designet med omhu for fagfolk"
-footer.privacy_policy,"Privacy Policy","Privatlivspolitik"
-common.search,"Search...","Søg..."
-common.filter,"Filter","Filtrer"
-common.all,"All","Alle"
-common.actions,"Actions","Handlinger"
-common.edit,"Edit","Rediger"
-common.delete,"Delete","Slet"
-common.save,"Save","Gem"
-common.cancel,"Cancel","Annuller"
-common.close,"Close","Luk"
-common.confirm,"Confirm","Bekræft"
-common.submit,"Submit","Indsend"
-common.loading,"Loading...","Indlæser..."
-common.success,"Success","Succes"
-common.error,"Error","Fejl"
-common.no_data,"No data available","Ingen data tilgængelig"
-common.status,"Status","Status"
-common.active,"Active","Aktiv"
-common.inactive,"Inactive","Inaktiv"
-common.created_at,"Created At","Oprettet"
-common.days,"days","dage"
-common.day,"day","dag"
-NAV_HOME,"Home","Hjem"
-NAV_EVENTS,"Events","Begivenheder"
-NAV_MEMBERSHIPS,"Memberships","Medlemskaber"
-NAV_CONTACT_US,"Contact Us","Kontakt os"
-FOOTER_PRIVACY_POLICY,"Privacy Policy","Privatlivspolitik"
-FOOTER_ALL_RIGHTS_RESERVED,"All rights reserved.","Alle rettigheder forbeholdes."
-CONTACT_PHONE_LABEL,"Phone","Telefon"
-CONTACT_MESSAGE_LABEL,"Your Message","Din besked"
-CONTACT_SEND_BTN,"Send Message","Send besked"
-AUTH_EMAIL_LABEL,"Email Address","E-mailadresse"
-AUTH_PASSWORD_LABEL,"Password","Adgangskode"
-AUTH_FORGOT_PASSWORD_LINK,"Forgot password?","Glemt adgangskode?"
-ADMIN_NAV_DASHBOARD,"Dashboard","Dashboard"
-ADMIN_NAV_MEMBERS,"Members","Medlemmer"
-ADMIN_NAV_PLANS,"Plans","Planer"
-ADMIN_NAV_USERS,"Registered Users","Registrerede brugere"
-ADMIN_NAV_EVENTS,"Events","Begivenheder"
-ADMIN_NAV_CATEGORIES,"Categories","Kategorier"
-ADMIN_NAV_SUPPORT,"Support Messages","Supportbeskeder"
+footer.designed_with,Designed with love for Professionals,Designet med omhu for fagfolk
+footer.platform,Platform,Platform
+footer.privacy_policy,Privacy Policy,Privatlivspolitik
+footer.rights_reserved,All rights reserved.,Alle rettigheder forbeholdes.
+ADMIN_NAV_CATEGORIES,Categories,Kategorier
+ADMIN_NAV_DASHBOARD,Dashboard,Dashboard
+ADMIN_NAV_EVENTS,Events,Begivenheder
+ADMIN_NAV_MEMBERS,Members,Medlemmer
+ADMIN_NAV_PLANS,Plans,Planer
+ADMIN_NAV_SUPPORT,Support Messages,Supportbeskeder
+ADMIN_NAV_USERS,Registered Users,Registrerede brugere
+ADMIN_NAV_WHATSAPP_SETTINGS,WhatsApp Settings,WhatsApp Indstillinger
+AUTH_EMAIL_LABEL,Email Address,E-mailadresse
+AUTH_FORGOT_PASSWORD_LINK,Forgot password?,Glemt adgangskode?
+AUTH_PASSWORD_LABEL,Password,Adgangskode
+CONTACT_MESSAGE_LABEL,Your Message,Din besked
+CONTACT_PHONE_LABEL,Phone,Telefon
+CONTACT_SEND_BTN,Send Message,Send besked
+FOOTER_ALL_RIGHTS_RESERVED,All rights reserved.,Alle rettigheder forbeholdes.
+FOOTER_PRIVACY_POLICY,Privacy Policy,Privatlivspolitik
+NAV_CONTACT_US,Contact Us,Kontakt os
+NAV_EVENTS,Events,Begivenheder
+NAV_HOME,Home,Hjem
+NAV_MEMBERSHIPS,Memberships,Medlemskaber
